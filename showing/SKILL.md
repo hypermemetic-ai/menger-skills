@@ -3,7 +3,7 @@ name: showing
 description: Use for any body a person will look at, and always for a frontend. Produces the right picture in the right place — a diagram for a shape, a figure beside the epitome, a walk for a path, a playable for a mechanism, the component itself for a frontend, a mockup for a page, a before/after for a change, and a screenshot where none of those can be built into the frame — with the mermaid layouts that render, the SVG that follows the theme, and the attention mechanics that stay honest.
 ---
 
-<m-summary ticket="SKILL-13">
+<m-summary>
 
 <m-answer data-field="answer">**Lead with the picture a stranger could rebuild the design from, play the mechanism where there is one, render the frontend as itself, and screenshot only what cannot be built in.**</m-answer>
 
@@ -52,23 +52,19 @@ menger draws a mermaid fence in the theme's palette and checks it on write. What
 
 <m-field data-field="detail" label="Figures">
 
-An inline SVG in a beat: `viewBox`, `role="img"`, `aria-label`, and only the theme's tokens — `style="fill:var(--accent)"`, `stroke:var(--ink)`, `var(--muted)`, `var(--line)`, `var(--live)`, `var(--err-fg)` — so it reads in both themes and in any project's theme. A fat-marker sketch (KILN-1, stroke-width 6, round joins) says *this is a shape, not a design*. A figure carries one idea: the seven cars that cannot plug in, the three plots that are empty, the curve climbing to first crack.
-
-<m-cite ref="BREW-1" field="problem"></m-cite>
+An inline SVG in a beat: `viewBox`, `role="img"`, `aria-label`, and only the theme's tokens — `style="fill:var(--accent)"`, `stroke:var(--ink)`, `var(--muted)`, `var(--line)`, `var(--live)`, `var(--err-fg)` — so it reads in both themes and in any project's theme. A fat-marker sketch (the [pitch example](../ticketing/examples/pitch.md)'s, stroke-width 6, round joins) says *this is a shape, not a design*. A figure carries one idea: the seven cars that cannot plug in, the three plots that are empty, the curve climbing to first crack — the feed example's `problem`, [examples/feed.md](examples/feed.md) (`shots/feed.dark.png`).
 
 </m-field>
 
 <m-field data-field="detail" label="Walks">
 
-`m-walk` lights a step as it scrolls into view. One real thing followed through every wire — a tap, a plug, a bean — and at each step the lines that prove it, from the file that owns them (`path=`), with `why=` saying what to look for. Not a tutorial: a walk is the shortest true path through the system, and the reader has seen it work before they reach the tables. <m-ticket ref="VOLT-2" full></m-ticket> is one.
+`m-walk` lights a step as it scrolls into view. One real thing followed through every wire — a tap, a plug, a bean — and at each step the lines that prove it, from the file that owns them (`path=`), with `why=` saying what to look for. Not a tutorial: a walk is the shortest true path through the system, and the reader has seen it work before they reach the tables. The execution example, [../ticketing/examples/execution.md](../ticketing/examples/execution.md), is one.
 
 </m-field>
 
 <m-field data-field="detail" label="Playables">
 
-A component that simulates the mechanism in the body: one evening of homecomings under three policies (<m-ticket ref="VOLT-4"></m-ticket>), a poll interval slider against a stream (<m-ticket ref="VOLT-3"></m-ticket>). The rules: **it is a field**, not decoration — the cases table, the lens or the intended usage *is* the playable, and a table beside it pins what the reader just saw; **predict before reveal** — ask for a guess, then run, say whether the guess was right, and a guess records nothing; **it calls nothing and records nothing**, only the theme's tokens, and reduced motion runs it to the end at once; **its numbers are the ticket's** — the simulation's outcome is in the acceptance list, and the real system is tested against it.
-
-<m-cite ref="VOLT-3" field="lens"></m-cite>
+A component that simulates the mechanism in the body: one evening of homecomings under three policies ([the build example](../ticketing/examples/build.md)), a poll interval slider against a stream ([the spike example](../ticketing/examples/spike.md)). The rules: **it is a field**, not decoration — the cases table, the lens or the intended usage *is* the playable, and a table beside it pins what the reader just saw; **predict before reveal** — ask for a guess, then run, say whether the guess was right, and a guess records nothing; **it calls nothing and records nothing**, only the theme's tokens, and reduced motion runs it to the end at once; **its numbers are the ticket's** — the simulation's outcome is in the acceptance list, and the real system is tested against it.
 
 </m-field>
 
@@ -82,9 +78,7 @@ A component that simulates the mechanism in the body: one evening of homecomings
 
 </m-cases>
 
-A frontend ticket with none of the three is not finished. <m-ticket ref="KILN-1"></m-ticket>'s stretch throttle and hill are the components the ticket is about, running in the scope that asks for them, reading the real tracker:
-
-<m-cite ref="KILN-1" field="status"></m-cite>
+A frontend ticket with none of the three is not finished. The pitch example's stretch throttle and hill, [../ticketing/examples/pitch.md](../ticketing/examples/pitch.md), are the components the ticket is about, running in the scope that asks for them, reading the tracker (drawn by `bin/build`, they read the example's own `tracker:` rows: `shots/pitch.png`).
 
 <m-field data-field="detail" label="Progress, live">A picture of where the work stands reads the tracker and follows `watch`: a dot per build on a hill, placed by status unless the owner placed it (and the hover says which); a dial of a scope; a feed of what changed. Every number is the tracker's; a dot that cannot be placed is a list that wants splitting.</m-field>
 
@@ -105,11 +99,11 @@ A frontend ticket with none of the three is not finished. <m-ticket ref="KILN-1"
 <m-code lang="bash" why="before saying a body is done: read it as the owner, both themes">
 
 ```bash
-../menger/scripts/shot.mjs '#/ticket/VOLT-4' --env prod --theme both --width 1100 --out shots
+../menger/scripts/shot.mjs '#/ticket/AMP-4' --env prod --theme both --width 1100 --out shots
 ```
 
 </m-code>
 
 The first screen, the diagram drawn, no literal colour, no duplicated badge, the playable's controls visible, the fold lines where they should be. A body on the test environment shoots with `--env test`.
 
-<m-field data-field="execution">The markup: <m-ticket ref="SKILL-2" full></m-ticket>. Where each picture sits in a ticket: <m-ticket ref="SKILL-3" full></m-ticket>. Themes and tokens: <m-ticket ref="SKILL-15" full></m-ticket>.</m-field>
+<m-field data-field="execution">The markup: <a href="../surface/SKILL.md">surface — what a body on menger can show, ask, cite and wear</a>. Where each picture sits in a ticket: <a href="../ticketing/SKILL.md">ticketing — one ticket worth a look</a>. Themes and tokens: <a href="../theming/SKILL.md">theming — a project's look is a ticket</a>.</m-field>

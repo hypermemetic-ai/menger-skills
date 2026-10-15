@@ -1,4 +1,4 @@
-<m-summary ticket="SKILL-6">
+<m-summary>
 
 <m-answer data-field="answer">**The build — *what does it do, and how do I call it?* — is one diff one agent can make from the ticket alone: the problem as a beat, then the thing working (a playable, the component itself, a walk down one call) before any table, then the cases that pin it, the contract the next ticket reads, and its own history as a timeline.**</m-answer>
 
@@ -10,23 +10,21 @@
 
 The problem as a beat — *"Two plugs. Nine cars. The plug doesn't know whose turn it is."* — then, before any table, **the thing working**: a playable of the mechanism, the component itself if the build is a frontend, or a walk down one call. The cases table comes after, pinning what the reader just saw.
 
-<m-cite ref="VOLT-4" field="problem"></m-cite>
-
-<m-cite ref="VOLT-4" field="intended-usage"></m-cite>
+The build example opens so — its `problem`, then its `intended-usage`, the playable: [examples/build.md](examples/build.md) (`shots/build.png`).
 
 </m-field>
 
 <m-field data-field="detail" label="Skeleton">
 
 `````markdown
-<m-summary ticket="VOLT-4">
+<m-summary ticket="AMP-4">
 
 <m-field data-field="standing">**`volt.queue` decides who gets the next free plug, and tells every phone the moment it changes.**</m-field>
 
 <m-stat value="3">policies to play</m-stat>
 <m-stat value="6" tone="info">behaviours pinned</m-stat>
 
-<m-field data-field="confidence"><m-badge confidence="high"></m-badge> <m-ticket ref="VOLT-3"></m-ticket> pinned the stream; the queue is a sort and a watch.</m-field>
+<m-field data-field="confidence"><m-badge confidence="high"></m-badge> <m-ticket ref="AMP-3"></m-ticket> pinned the stream; the queue is a sort and a watch.</m-field>
 
 </m-summary>
 
@@ -63,9 +61,9 @@ Pick a policy. Guess who plugs in last. Then press go.
 
 ### The app asks.
 
-<m-code lang="typescript" path="app/src/queue.ts">
+<m-code lang="js" path="app/src/queue.js">
 
-```typescript
+```js
 await volt.queue.join({ flat: "4B", needsKwh: 30 });
 ```
 
@@ -87,7 +85,7 @@ await volt.queue.join({ flat: "4B", needsKwh: 30 });
 
 | Input | Shape (strong-typed) | Produced by |
 | -- | -- | -- |
-| the stream, not a poll | one bidirectional stream per charger | VOLT-3 |
+| the stream, not a poll | one bidirectional stream per charger | AMP-3 |
 
 </m-consumes>
 
@@ -118,19 +116,19 @@ await volt.queue.join({ flat: "4B", needsKwh: 30 });
 
 <m-field data-field="decided-shape" label="When the build is a frontend">
 
-The component is the ticket. Define it in the body, render it where the reader would use it, and give it a docs card with its parts; the cases table says what the reader just did with it. If the whole page is the deliverable, the body *is* the page: `view: mockup` with the widths it must serve, and the shortcode's theme on it so it looks like the product. If the real thing cannot run in the frame, a screenshot of it running — both themes, the widths that matter — and a sentence on what the screenshot cannot show (<m-ticket ref="SKILL-13"></m-ticket>).
+The component is the ticket. Define it in the body, render it where the reader would use it, and give it a docs card with its parts; the cases table says what the reader just did with it. If the whole page is the deliverable, the body *is* the page: `view: mockup` with the widths it must serve, and the shortcode's theme on it so it looks like the product. If the real thing cannot run in the frame, a screenshot of it running — both themes, the widths that matter — and a sentence on what the screenshot cannot show ([showing](../showing/SKILL.md)).
 
 </m-field>
 
 <m-field data-field="detail" label="The timeline">
 
-`status` is a dated `m-status`, appended on every move: `Coding` with the branch, `In Review` with the commits and the gate as an `m-results`, `Complete` with the merge (<m-ticket ref="SKILL-12"></m-ticket>). A dated `m-card` under `intended-usage`'s `m-divergence-notes` records where reality diverged, never edited after.
+`status` is a dated `m-status`, appended on every move: `Coding` with the branch, `In Review` with the commits and the gate as an `m-results`, `Complete` with the merge ([building](../building/SKILL.md)). A dated `m-card` under `intended-usage`'s `m-divergence-notes` records where reality diverged, never edited after.
 
 </m-field>
 
-<m-field data-field="detail" label="The contract, as VOLT-4 writes it">
+<m-field data-field="detail" label="The contract, as the build example writes it">
 
-<m-cite ref="VOLT-4" field="provides"></m-cite>
+Its `provides` and `consumes`, each row naming its consumer or producer: [examples/build.md](examples/build.md).
 
 </m-field>
 

@@ -3,7 +3,7 @@ name: building
 description: Use when implementing a ticket the owner has promoted to Ready. Produces the build carried across menger's lifecycle with its history on the ticket — Coding the moment work starts with the branch on the timeline, In Review in the commit that finishes it with the commits linked and the gate shown as results, Complete set by the pipeline at the merge — in its own worktree, with divergence noted where reality differed, and, for a frontend, the thing itself in the body or a screenshot of it running.
 ---
 
-<m-summary ticket="SKILL-12">
+<m-summary>
 
 <m-answer data-field="answer">**Claim it, build it in its own worktree, show the gate on the ticket, link the commits in the step that flips it to In Review, and let the pipeline land it.**</m-answer>
 
@@ -39,7 +39,7 @@ Can you build it from the body alone? If not, it is a ticketing failure: patch t
 ```markdown
 <m-status data-field="status">
 
-<m-step date="2026-10-13" status="Coding" by="builder">Branch `volt/VOLT-4-queue`, worktree `volt-VOLT-4`.</m-step>
+<m-step date="2026-10-13" status="Coding" by="builder">Branch `volt/AMP-4-queue`, worktree `volt-AMP-4`.</m-step>
 
 </m-status>
 ```
@@ -48,7 +48,7 @@ Can you build it from the body alone? If not, it is a ticketing failure: patch t
 
 A worktree and branch named for the ticket, so no leaf is double-claimed and attribution falls out of the names. Triage the tree first: a dirty file belongs to some body of work — this ticket's, another's, or unknown (stop and ask). Never build on it silently.
 
-A worktree shares one build directory with every other worktree of its repository (MENGER-41, owner 2026-10-15): `export CARGO_TARGET_DIR=~/.cache/cargo-target/<repo>` before the first `cargo` in it — `menger` for menger and its frontend — so a worktree costs megabytes, not the 20 GB its own `target/` would, and the next ticket's build is warm. Cargo serialises two builds in one directory with its lock. The pipeline's `../menger-build` keeps its own.
+A worktree shares one build directory with every other worktree of its repository (owner, 2026-10-15): `export CARGO_TARGET_DIR=~/.cache/cargo-target/<repo>` before the first `cargo` in it — `menger` for menger and its frontend — so a worktree costs megabytes, not the 20 GB its own `target/` would, and the next ticket's build is warm. Cargo serialises two builds in one directory with its lock. The pipeline's `../menger-build` keeps its own.
 
 ### Implement; gate green in this workspace.
 
@@ -59,8 +59,8 @@ The affected workspace builds and tests pass — every acceptance list includes 
 <m-code lang="bash" why="the commit message ends “— in review”; the same step links the commits and sets the status">
 
 ```bash
-synapse -P 4455 menger tickets link_commits --id VOLT-4 --commits 77df9a0 --commits volt@1a2b3c4
-synapse -P 4455 menger tickets set_status --id VOLT-4 --status "In Review"
+synapse -P 4455 menger tickets link_commits --id AMP-4 --commits 77df9a0 --commits volt@1a2b3c4
+synapse -P 4455 menger tickets set_status --id AMP-4 --status "In Review"
 ```
 
 </m-code>
@@ -88,7 +88,7 @@ Gate green.
 
 ### The pipeline lands it; clean up in the same pass.
 
-In menger's own case, `deploy/pipeline build → deploy test → promote`. The worktree goes when the work lands — in the same pass as the merge, `git worktree remove ../<repo>-<TICKET> && git branch -d <branch>`, never later (MENGER-41: 79 of them had gathered, 700 GB) — and say which release when it matters.
+In menger's own case, `deploy/pipeline build → deploy test → promote`. The worktree goes when the work lands — in the same pass as the merge, `git worktree remove ../<repo>-<TICKET> && git branch -d <branch>`, never later (owner, 2026-10-15: 79 of them had gathered, 700 GB) — and say which release when it matters.
 
 </m-walk>
 
@@ -120,8 +120,8 @@ When reality differed from the design — a call site the ticket did not foresee
 
 <m-field data-field="detail" label="The timeline, as a build keeps it">
 
-<m-cite ref="VOLT-4" field="acceptance"></m-cite>
+The build example's `acceptance`, the list the gate is held to: [../ticketing/examples/build.md](../ticketing/examples/build.md).
 
 </m-field>
 
-<m-field data-field="execution">The build's form: <m-ticket ref="SKILL-6" full></m-ticket>. Screenshots and the frontend rule: <m-ticket ref="SKILL-13" full></m-ticket>. The calls: <m-ticket ref="SKILL-17" full></m-ticket>. menger's own pipeline: `../menger/deploy/README.md`.</m-field>
+<m-field data-field="execution">The build's form: <a href="../ticketing/build.md">the build — what does it do, and how do I call it?</a>. Screenshots and the frontend rule: <a href="../showing/SKILL.md">showing — the picture is the body</a>. The calls: <a href="../reaching/SKILL.md">reaching — the synapse calls against menger</a>. menger's own pipeline: `../menger/deploy/README.md`.</m-field>

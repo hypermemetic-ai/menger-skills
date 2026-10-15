@@ -2,3 +2,5 @@
 *.swp
 *.swo
 shots/
+bin/render/Cargo.lock
+bin/render/target/

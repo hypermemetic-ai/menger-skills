@@ -1,10 +1,10 @@
-<m-summary ticket="SKILL-1">
+<m-summary>
 
-<m-answer data-field="answer">**How work is ticketed, planned, asked, built and reported on menger — the methodology written from the ground up for the surface it runs on, in menger's own terms, and shown on that surface: every skill here is a doc on the tracker, and the file in the repository is the same body.**</m-answer>
+<m-answer data-field="answer">**How work is ticketed, planned, asked, built and reported on menger — the methodology written from the ground up for the surface it runs on, in menger's own terms, and shown on that surface: every skill here is a file in this repository, its worked examples built into it and drawn by menger.**</m-answer>
 
 <m-stat value="11">skills</m-stat>
 <m-stat value="6">forms, one per kind</m-stat>
-<m-stat value="5">worked examples, live below</m-stat>
+<m-stat value="4">worked examples, built in</m-stat>
 
 </m-summary>
 
@@ -46,57 +46,49 @@ A request is placed before it is written; a ticket is filed when someone is abou
 
 | skill | produces | use when |
 | -- | -- | -- |
-| SKILL-2 [surface](surface/SKILL.md) | the vocabulary: what a body on menger can show, ask, cite and wear | before writing any body; whenever a component or field is in doubt |
-| SKILL-3 [ticketing](ticketing/SKILL.md) | one ticket a person will look at — the summary, the epitome, the ladder down, what it shows | turning anything into a ticket |
-| SKILL-4 … SKILL-9 | the forms: [scope](ticketing/scope.md), [execution](ticketing/execution.md), [build](ticketing/build.md), [spike](ticketing/spike.md), [gap](ticketing/gap.md), [doc](ticketing/doc.md) | one per kind |
-| SKILL-10 [planning](planning/SKILL.md) | as few tickets as the work needs, placed under what exists, the DAG on the execution, the forks as inputs | a request bigger than one diff |
-| SKILL-11 [asking](asking/SKILL.md) | a question the owner answers in the ticket, and the act that closes it | any fork, bet or reply the agent may not make itself |
-| SKILL-12 [building](building/SKILL.md) | a build carried Ready → Coding → In Review with its branch, gate and commits on the ticket | implementing a promoted ticket |
-| SKILL-13 [showing](showing/SKILL.md) | the right picture: a diagram, a figure, a walk, a playable, the component itself, a screenshot | any body; always for a frontend |
-| SKILL-14 [reporting](reporting/SKILL.md) | a doc that answers first and hides nothing | a spike's result, a survey, a status |
-| SKILL-15 [theming](theming/SKILL.md) | a project's look, as a theme ticket adopted at a reach | a shortcode with a reader of its own |
-| SKILL-16 [systems](systems/SKILL.md) | what a ticket shows for each kind of system — there is no one size | a backend, a frontend, a CLI, a schema, a pipeline, a method |
-| SKILL-17 [reaching](reaching/SKILL.md) | the synapse calls a writer and a builder use against menger | any write to the tracker |
-| SKILL-18 … SKILL-20 | the decisions: [0001](docs/adr/0001-a-ticket-is-only-relevant-if-a-human-looks-at-it.md) a ticket is only relevant if a human looks at it · [0002](docs/adr/0002-the-examples-are-live-tickets.md) the examples are live · [0003](docs/adr/0003-assume-the-menger-surface.md) assume the surface | how this repository works |
+| [surface](surface/SKILL.md) | the vocabulary: what a body on menger can show, ask, cite and wear | before writing any body; whenever a component or field is in doubt |
+| [ticketing](ticketing/SKILL.md) | one ticket a person will look at — the summary, the epitome, the ladder down, what it shows | turning anything into a ticket |
+| the forms |  [scope](ticketing/scope.md), [execution](ticketing/execution.md), [build](ticketing/build.md), [spike](ticketing/spike.md), [gap](ticketing/gap.md), [doc](ticketing/doc.md) | one per kind |
+| [planning](planning/SKILL.md) | as few tickets as the work needs, placed under what exists, the DAG on the execution, the forks as inputs | a request bigger than one diff |
+| [asking](asking/SKILL.md) | a question the owner answers in the ticket, and the act that closes it | any fork, bet or reply the agent may not make itself |
+| [building](building/SKILL.md) | a build carried Ready → Coding → In Review with its branch, gate and commits on the ticket | implementing a promoted ticket |
+| [showing](showing/SKILL.md) | the right picture: a diagram, a figure, a walk, a playable, the component itself, a screenshot | any body; always for a frontend |
+| [reporting](reporting/SKILL.md) | a doc that answers first and hides nothing | a spike's result, a survey, a status |
+| [theming](theming/SKILL.md) | a project's look, as a theme ticket adopted at a reach | a shortcode with a reader of its own |
+| [systems](systems/SKILL.md) | what a ticket shows for each kind of system — there is no one size | a backend, a frontend, a CLI, a schema, a pipeline, a method |
+| [reaching](reaching/SKILL.md) | the synapse calls a writer and a builder use against menger | any write to the tracker |
+| [the decisions](docs/adr/README.md) | [0001](docs/adr/0001-a-ticket-is-only-relevant-if-a-human-looks-at-it.md) a ticket is only relevant if a human looks at it · [0002](docs/adr/0002-the-examples-are-live-tickets.md) the examples were live (superseded) · [0003](docs/adr/0003-assume-the-menger-surface.md) assume the surface · [0004](docs/adr/0004-the-examples-are-built-into-the-skill.md) the examples are built into the skill | how this repository works |
 
 </m-cases>
 
-<m-field data-field="detail" label="The examples are live — each zoomed into from here">
+<m-field data-field="detail" label="The examples are built in">
 
-Unlike a methodology written in the abstract, this one points at real tickets on the tracker, each a worked example of a different way of holding a reader. The windows below are live: a change to a scope changes it here.
+Unlike a methodology written in the abstract, this one shows its rules on worked examples — each a whole ticket body, house components and all, kept as a file in the skill whose rule it illustrates (`<skill>/examples/`). A skill reads nothing from the tracker: an example is opened as a file, and drawn from the file.
 
-<m-cite ref="VOLT-1" field="problem"></m-cite>
+The pictures in the last column are built, not kept: `bin/build` draws each example file through the menger deployed on this machine (prod by default, `MENGER_ENV=test` for the test environment), reading and writing no ticket, and fails if that menger is not online.
 
-<m-cite ref="KILN-1" field="problem"></m-cite>
+| example | demonstrates | the files | drawn |
+| -- | -- | -- | -- |
+| Volt (`AMP`) | a fullstack REST + binary-RPC + Plexus project, one ticket of every kind; a parent that zooms into its children by citing them | [scope](ticketing/examples/scope.md) · [execution](ticketing/examples/execution.md) · [spike](ticketing/examples/spike.md) · [build](ticketing/examples/build.md) · [gap](ticketing/examples/gap.md) · [doc](ticketing/examples/doc.md) · [report](reporting/examples/report.md) · [theme](theming/examples/volt.md) | [scope](shots/scope.png) ([dark](shots/scope.dark.png)) · [execution](shots/execution.png) · [spike](shots/spike.png) · [build](shots/build.png) · [gap](shots/gap.png) · [doc](shots/doc.png) · [report](shots/report.png) |
+| Kiln (`CONE`) | pitch-and-appetite planning as a ticket: the pitch, the appetite, the breadboard, a live hill, a stretch throttle | [pitch](ticketing/examples/pitch.md) · [theme](theming/examples/kiln.md) | [pitch](shots/pitch.png) |
+| Allot (`PLOT`) | a pattern language: every ticket returns to the picture above it before it elaborates | [pattern](ticketing/examples/pattern.md) · [3](ticketing/examples/pattern-person.md) · [4](ticketing/examples/pattern-list.md) · [5](ticketing/examples/pattern-names.md) · [theme](theming/examples/allot.md) | [pattern](shots/pattern.png) |
+| Brew (`ROAST`) | the feed: recency, unread, a streak, an open loop — every number true, and an end | [feed](showing/examples/feed.md) · [theme](theming/examples/brew.md) | [feed, dark](shots/feed.dark.png) |
 
-<m-cite ref="ALLOT-1" field="problem"></m-cite>
-
-<m-cite ref="BREW-1" field="problem"></m-cite>
-
-The pictures in the last column are built, not kept: `bin/build` takes them from the menger running on this machine (prod by default, `MENGER_ENV=test` for the test environment) and fails if it is not online.
-
-| ticket | demonstrates | in the repository |
-| -- | -- | -- |
-| PANTRY-1 | the house style: beats, a walk, a playable ledger, a theme | THEME-6's worked example |
-| VOLT-1 … VOLT-8 | a fullstack REST + binary-RPC + Plexus project, one ticket of every kind; a parent that zooms into its children by citing them | [scope](shots/VOLT-1.scope.png) · [execution](shots/VOLT-2.execution.png) · [spike](shots/VOLT-3.spike.png) · [build](shots/VOLT-4.build.png) · [gap](shots/VOLT-6.gap.png) · [doc](shots/VOLT-7.doc.png) |
-| KILN-1 … KILN-6 | pitch-and-appetite planning as a ticket: the pitch, the appetite, the breadboard, a live hill, a stretch throttle | [pitch](shots/KILN-1.pitch.png) |
-| ALLOT-1 … ALLOT-6 | a pattern language: every ticket returns to the picture above it before it elaborates | [pattern](shots/ALLOT-1.pattern.png) |
-| BREW-1 … BREW-6 | the feed: recency, unread, a streak, an open loop — every number true, and an end | [feed, dark](shots/BREW-1.feed.dark.png) |
-| TICKETING-1 … | this method's own scope, applying its rules to itself | [scope](shots/TICKETING-1.scope.png) |
+The ids in the examples (`AMP-4`, `CONE-1`, …) are the examples' own, made up for them: the shortcodes `AMP`, `CONE`, `PLOT`, `ROAST` and `HOME` are none of the tracker's.
 
 </m-field>
 
-<m-field data-field="decided-shape" label="One file, three surfaces">
+<m-field data-field="decided-shape" label="One file, two readers">
 
-1. **A skill is a doc on menger.** Each `SKILL.md` here is filed, byte for byte, as a doc under `SKILL-1`; the page you are reading is `README.md`. On the tracker the house components render, the cites are live and the inputs work; the frontmatter (`name`, `description`) is hidden by menger and read by a harness.
-2. **The repository is the same bodies.** `bin/sync push` amends every doc from its file; `bin/sync pull` writes every file from its doc; `skills.toml` holds the map. The tracker is the source of truth when they differ.
-3. **A harness loads the file.** A coding agent's harness reads `SKILL.md` as text, HTML included, and ignores the frontmatter keys it does not know; a `<m-cite>` in a skill is a pointer an agent follows with `tickets get`.
-4. **SOURCE opens the file itself.** When <m-ticket ref="SOURCE-1"></m-ticket> lands, a skill is opened by URI and edited where it is read, and the mirror above becomes unnecessary.
+1. **The repository is the source of truth.** Each skill is its `SKILL.md` (and, for ticketing, the forms beside it) and the examples under it; nothing here is mirrored from the tracker, and nothing on the tracker is read to use it.
+2. **An example is a file in its skill.** A rule that is shown is shown on a body kept in `<skill>/examples/`: the frontmatter says who the example is (its made-up id, kind, status, title, theme) and, under `tracker:`, the rows its live components read; another skill links to it, never copies it.
+3. **A harness loads the file.** A coding agent's harness reads `SKILL.md` as text, HTML included, and ignores the frontmatter keys it does not know; a link to an example is a file it opens.
+4. **The surface draws it.** `bin/build` frames each example as menger frames a body — the house components, the cites between examples, the themes they wear — through the menger running here, and `shots/` holds what it drew. When menger opens a file by URI, a skill is opened where it is read.
 
 </m-field>
 
 <m-field data-field="edges" label="Relation to ought">
 
-`../ought` was the methodology in the abstract, with every context stripped out. It is retired (owner, 2026-10-14): this repository is the house methodology, and nothing reads ought any more. What ought got right — the two-stranger test, contracts on the edges, spikes for unknowns, the human ratifying at the forks, the tracker as the source of truth — is kept here, rebuilt around the page a person opens. The synapse invocation contract moved into <m-ticket ref="SKILL-17"></m-ticket> [reaching](reaching/SKILL.md).
+`../ought` was the methodology in the abstract, with every context stripped out. It is retired (owner, 2026-10-14): this repository is the house methodology, and nothing reads ought any more. What ought got right — the two-stranger test, contracts on the edges, spikes for unknowns, the human ratifying at the forks, the tracker as the source of truth — is kept here, rebuilt around the page a person opens. The synapse invocation contract moved into [reaching](reaching/SKILL.md).
 
 </m-field>

@@ -1,4 +1,4 @@
-<m-summary ticket="SKILL-5">
+<m-summary>
 
 <m-answer data-field="answer">**The execution — *what is the order, and where does it stand?* — holds the DAG and owns the work as children. It is a pure container, the one page that shows the whole route: the DAG first, then one real thing walked through every wire with the code at each step, then the exit a person could check.**</m-answer>
 
@@ -11,14 +11,14 @@
 
 The DAG, in an `m-dag`, in the body. Then **one walk through all of it**: one car, one roast, one request — followed from the first wire to the last — so the reader sees the system work before they see the ticket list.
 
-<m-cite ref="VOLT-2" field="dag"></m-cite>
+The execution example's `dag`: [examples/execution.md](examples/execution.md) (`shots/execution.png`).
 
 </m-field>
 
 <m-field data-field="detail" label="Skeleton">
 
 `````markdown
-<m-summary ticket="VOLT-2">
+<m-summary ticket="AMP-2">
 
 <m-field data-field="standing">**One evening: nine cars home at six, every one of them charged by morning.**</m-field>
 
@@ -32,10 +32,10 @@ The DAG, in an `m-dag`, in the body. Then **one walk through all of it**: one ca
 
 ```mermaid
 flowchart LR
-  S3["VOLT-3 · spike<br/>stream or poll ✓"] --> CH["volt.chargers<br/>(not filed)"]
-  CH --> B4["VOLT-4<br/>volt.queue"]
-  B4 --> B5["VOLT-5<br/>the landlord's csv"]
-  CH -. found .-> G6["VOLT-6 · gap<br/>a reboot mid-session"]
+  S3["AMP-3 · spike<br/>stream or poll ✓"] --> CH["volt.chargers<br/>(not filed)"]
+  CH --> B4["AMP-4<br/>volt.queue"]
+  B4 --> B5["AMP-5<br/>the landlord's csv"]
+  CH -. found .-> G6["AMP-6 · gap<br/>a reboot mid-session"]
   B5 --> GATE{{"one real evening,<br/>nine real cars"}}
 ```
 
@@ -65,14 +65,14 @@ flowchart LR
 
 | ticket | kind | one line | provides → consumed by |
 | -- | -- | -- | -- |
-| VOLT-3 | spike | stream or poll? | the stream → VOLT-4 |
-| VOLT-4 | build | `volt.queue` | `Turn`, `Session` → VOLT-5 |
+| AMP-3 | spike | stream or poll? | the stream → AMP-4 |
+| AMP-4 | build | `volt.queue` | `Turn`, `Session` → AMP-5 |
 
 </m-cases>
 
 <m-field data-field="decision-gates">
 
-- *Which policy?* — open, as `policy` on <m-ticket ref="VOLT-1"></m-ticket>; VOLT-4 lets the owner play it first.
+- *Which policy?* — open, as `policy` on AMP-1; AMP-4 lets the owner play it first.
 
 </m-field>
 
@@ -87,7 +87,7 @@ flowchart LR
 
 <m-field data-field="detail" label="Live">
 
-The DAG is live in the sense that it never lags the children: a build added, removed, promoted or re-sequenced is drawn on the parent in the same write that files it. The picture of progress can be live too — a hill over the execution's scopes (<m-ticket ref="KILN-2"></m-ticket>), a dial, a sponge — reading `list` under the execution and following `watch`.
+The DAG is live in the sense that it never lags the children: a build added, removed, promoted or re-sequenced is drawn on the parent in the same write that files it. The picture of progress can be live too — a hill over the execution's scopes (the pitch example's `kiln-hill`, [examples/pitch.md](examples/pitch.md)), a dial, a sponge — reading `list` under the execution and following `watch`.
 
 </m-field>
 
@@ -97,12 +97,10 @@ A node in the DAG that is understood but not yet needed stays a node, labelled *
 
 </m-field>
 
-<m-field data-field="detail" label="The walk, as VOLT-2 does it">
+<m-field data-field="detail" label="The walk, as the execution example does it">
 
-<m-cite ref="VOLT-2" field="exit"></m-cite>
-
-Open <m-ticket ref="VOLT-2" full></m-ticket> for the walk itself: five steps, five wires, the code of each.
+Open [examples/execution.md](examples/execution.md) for the walk itself: five steps, five wires, the code of each — and its `exit`, the one real evening a person could check.
 
 </m-field>
 
-<m-field data-field="exit" label="Done when">Every leaf fed the completion gate; the exit holds; the findings worth keeping are filed as docs under it (<m-ticket ref="SKILL-14"></m-ticket>). The pipeline sets `Complete`.</m-field>
+<m-field data-field="exit" label="Done when">Every leaf fed the completion gate; the exit holds; the findings worth keeping are filed as docs under it (<a href="../reporting/SKILL.md">reporting</a>). The pipeline sets `Complete`.</m-field>

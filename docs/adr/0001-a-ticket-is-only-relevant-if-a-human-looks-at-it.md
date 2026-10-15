@@ -1,4 +1,4 @@
-<m-summary ticket="SKILL-18">
+<m-summary>
 
 <m-badge tone="info">ADR 0001</m-badge> <m-badge tone="pass">accepted · 2026-10-13</m-badge>
 
@@ -10,4 +10,4 @@
 
 <m-field data-field="decided-shape" label="Decision">A ticket shows how the thing should work — a diagram, a walk, a playable, the component itself — before it describes anything. The number of tickets is a cost the owner pays in attention, and the plan keeps it as low as the work allows: nodes on the execution's DAG stay nodes, marked *(not filed)*, until they are live.</m-field>
 
-<m-field data-field="evidence" label="Why">The owner, 2026-10-13 (<m-ticket ref="TICKETING-10"></m-ticket>): *"a ticket is only relevant if a human being looks at it. and the more tickets we construct, the less likely a human is to review them all."* The trade-off is deliberate: a less complete tracker that is read over a complete one that is not.</m-field>
+<m-field data-field="evidence" label="Why">The owner, 2026-10-13: *"a ticket is only relevant if a human being looks at it. and the more tickets we construct, the less likely a human is to review them all."* The trade-off is deliberate: a less complete tracker that is read over a complete one that is not.</m-field>

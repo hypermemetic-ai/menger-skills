@@ -3,7 +3,7 @@ name: reporting
 description: Use when filing what was found — a spike's result, a survey of a system, a status, a close-out, an audit, a diff against a model. Produces a doc on menger (a child of the ticket that produced it) that answers first, shows its measurements as a metric sheet and its gates as results, keeps every claim beside its source, and says what it could not look at as loudly as what it found — so a reader who never opens the source can trust the page.
 ---
 
-<m-summary ticket="SKILL-14">
+<m-summary>
 
 <m-answer data-field="answer">**When the reader is not going to open the source, the report is the artifact — so it gives the answer in one sentence, every number computed, every claim anchored, and nothing silently absent.**</m-answer>
 
@@ -31,7 +31,7 @@ Answer, question, numbers, sources, and what is missing — in that order, so a 
 <m-field data-field="detail" label="Skeleton">
 
 `````markdown
-<m-summary ticket="VOLT-9">
+<m-summary ticket="AMP-9">
 
 <m-answer data-field="answer">No production path closes a session on a new boot_id; two of fourteen simulated nights left a ghost session.</m-answer>
 
@@ -110,12 +110,10 @@ Answer, question, numbers, sources, and what is missing — in that order, so a 
 
 </m-cases>
 
-<m-field data-field="detail" label="Answers first — as TICKETING-2 does it">
+<m-field data-field="detail" label="Answers first — as the report example does it">
 
-The reading of fourteen methods opens with what they say in one paragraph, then the tables, then what was left unread. The opposite — *we looked into the session issue and it seems fine in most cases* — has no number, no source, no left-out; a reader cannot say what was checked.
-
-<m-cite ref="TICKETING-2" field="answer"></m-cite>
+The ghost-session report, [examples/report.md](examples/report.md) (`shots/report.png`), opens with what was found in one sentence, then the question, the metric sheet with its command, the gate as found, each claim with its source, and what was left unlooked at — the skeleton above, filled. The opposite — *we looked into the session issue and it seems fine in most cases* — has no number, no source, no left-out; a reader cannot say what was checked.
 
 </m-field>
 
-<m-field data-field="execution">The doc's form: <m-ticket ref="SKILL-9" full></m-ticket>. Results tiles and metric sheets: <m-ticket ref="SKILL-2" full></m-ticket>.</m-field>
+<m-field data-field="execution">The doc's form: <a href="../ticketing/doc.md">the doc — what is so, and why?</a>. Results tiles and metric sheets: <a href="../surface/SKILL.md">surface — what a body on menger can show, ask, cite and wear</a>.</m-field>

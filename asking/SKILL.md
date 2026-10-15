@@ -3,7 +3,7 @@ name: asking
 description: Use whenever a decision, a bet, a confirmation or a reply is the owner's to make — a fork in a scope, a placement on a hill, a question a spike could not close, a check before a release. Produces an input on the ticket (a decision, a multi or a text), placed where the reader can answer it, filed before it is mentioned in chat, read back as an answer, acted on, and closed. The agent never answers its own input.
 ---
 
-<m-summary ticket="SKILL-11">
+<m-summary>
 
 <m-answer data-field="answer">**A question for the owner is an input on the ticket, asked after the body has shown enough to answer it, and mentioned in chat only with the ticket id.**</m-answer>
 
@@ -39,15 +39,13 @@ Open, answered, closed, removed — every answer kept with its history, queryabl
 
 <m-field data-field="context" label="Where it goes in the body">
 
-After the reader has seen what they need to answer it, and before the contract: the epitome, the shape, the playable — then the question. A bet at the top of a scope the owner has not read yet is answered on the title. <m-ticket ref="VOLT-1"></m-ticket> puts the policy decision after the surface and before the language, and its recommendation points at <m-ticket ref="VOLT-4"></m-ticket>'s playable: *guess, press go, then decide here.* The `id` is what makes it live: unique in the ticket; a duplicate refuses the write. Without an `id` the same markup only displays (a recorded decision in a spike, with its `m-answer`). The window below is that decision, live and display-only here — it is answered in its own ticket:
-
-<m-cite ref="VOLT-1" field="decision"></m-cite>
+After the reader has seen what they need to answer it, and before the contract: the epitome, the shape, the playable — then the question. A bet at the top of a scope the owner has not read yet is answered on the title. The scope example, [../ticketing/examples/scope.md](../ticketing/examples/scope.md), puts the policy decision after the surface and before the language, and its recommendation points at the build example's playable: *guess, press go, then decide here.* The `id` is what makes it live: unique in the ticket; a duplicate refuses the write. Without an `id` the same markup only displays (a recorded decision in a spike, with its `m-answer`). That decision is its `decision` field (`shots/scope.png`); filed, it is answered in its own ticket.
 
 </m-field>
 
 <m-field data-field="decided-shape" label="Rules">
 
-1. **Filed, never only in chat** (the owner, MENGER-12). A question that lives in a transcript is never seen. Put it on the ticket as an input — or, when it is not a choice or a reply, label the ticket `needs-you` with the reason in the body — and only then say so in chat, with the id.
+1. **Filed, never only in chat** (the owner, 2026-10-12). A question that lives in a transcript is never seen. Put it on the ticket as an input — or, when it is not a choice or a reply, label the ticket `needs-you` with the reason in the body — and only then say so in chat, with the id.
 2. **The agent never answers its own input.** It recommends (one option `recommended`, the `m-recommendation` saying why) and waits.
 3. **Every option is a real system.** Each card says what exists if it is picked, in rows the cards share, so costs compare at a glance. Two options that differ only in wording is one option.
 4. **One recommendation, always.** "None — the evidence doesn't pick" is written only when true.
@@ -62,12 +60,12 @@ After the reader has seen what they need to answer it, and before the contract: 
 
 ```bash
 synapse -P 4455 menger tickets inputs --state open                      # everything waiting
-synapse -P 4455 menger tickets inputs --ticket VOLT-1                  # one ticket's, with history
+synapse -P 4455 menger tickets inputs --ticket AMP-1                  # one ticket's, with history
 synapse -P 4455 menger tickets list --filter 'asking or label needs-you' --summary true
-synapse -P 4455 menger tickets close_input --ticket VOLT-1 --input policy
-synapse -P 4455 menger tickets reopen_input --ticket VOLT-1 --input policy
-synapse -P 4455 menger tickets label --id VOLT-6 --add needs-you        # not a choice: the reason is in the body
-synapse -P 4455 menger tickets label --id VOLT-6 --remove needs-you     # once acted on
+synapse -P 4455 menger tickets close_input --ticket AMP-1 --input policy
+synapse -P 4455 menger tickets reopen_input --ticket AMP-1 --input policy
+synapse -P 4455 menger tickets label --id AMP-6 --add needs-you        # not a choice: the reason is in the body
+synapse -P 4455 menger tickets label --id AMP-6 --remove needs-you     # once acted on
 ```
 
 </m-code>
@@ -75,10 +73,10 @@ synapse -P 4455 menger tickets label --id VOLT-6 --remove needs-you     # once a
 <m-code lang="bash" why="the owner answering by shell (source api); a multi goes through -p">
 
 ```bash
-synapse -P 4455 menger tickets answer --ticket VOLT-1 --input policy --value.type choice --value.option fair --rationale "a week is fair"
+synapse -P 4455 menger tickets answer --ticket AMP-1 --input policy --value.type choice --value.option fair --rationale "a week is fair"
 synapse -P 4455 menger tickets answer --ticket T --input notes --value.type text --value.text "ship it"
-synapse -P 4455 -p '{"ticket":"TICKETING-1","input":"house","value":{"type":"multi","options":["stretch","hill"]}}' menger tickets answer
-synapse -P 4455 menger tickets clear_answer --ticket VOLT-1 --input policy
+synapse -P 4455 -p '{"ticket":"CONE-1","input":"house","value":{"type":"multi","options":["stretch","hill"]}}' menger tickets answer
+synapse -P 4455 menger tickets clear_answer --ticket AMP-1 --input policy
 ```
 
 </m-code>
@@ -89,10 +87,10 @@ synapse -P 4455 menger tickets clear_answer --ticket VOLT-1 --input policy
 
 | asked | how |
 | -- | -- |
-| well — KILN-1, `bet` | *Bet on this for the next two weeks?* — two cards, *Bet* and *Shelve it*, rows *what ships · what doesn't · cost*; the recommendation names the spike that already closed the rabbit hole that mattered. The owner answers from the first screen of the pitch |
+| well — the [pitch example](../ticketing/examples/pitch.md), `bet` | *Bet on this for the next two weeks?* — two cards, *Bet* and *Shelve it*, rows *what ships · what doesn't · cost*; the recommendation names the spike that already closed the rabbit hole that mattered. The owner answers from the first screen of the pitch |
 | badly | *Let me know which approach you prefer* at the end of a chat message. Nothing on the tracker; a week later nobody remembers the options |
-| not a choice — THEME-12 | a gap whose fix is one of two selectors: filed as a decision `header` on the gap with both selectors as options, the recommendation naming the one that keeps the app's gutter |
+| not a choice | a gap whose fix is one of two selectors: filed as a decision `header` on the gap with both selectors as options, the recommendation naming the one that keeps the app's gutter |
 
 </m-cases>
 
-<m-field data-field="execution">The components' markup: <m-ticket ref="SKILL-2" full></m-ticket>. Where the question sits in the arc: <m-ticket ref="SKILL-3" full></m-ticket>.</m-field>
+<m-field data-field="execution">The components' markup: <a href="../surface/SKILL.md">surface — what a body on menger can show, ask, cite and wear</a>. Where the question sits in the arc: <a href="../ticketing/SKILL.md">ticketing — one ticket worth a look</a>.</m-field>

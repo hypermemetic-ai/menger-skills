@@ -1,14 +1,25 @@
 #!/usr/bin/env bash
-# bin/build — the screenshots in shots/, taken from the menger deployed on
-# this machine. Nothing in shots/ is committed: a reader off the surface
-# builds them, and a clone without a running menger cannot.
+# bin/build — the screenshots in shots/: each skill's example files, drawn by
+# the menger deployed on this machine. Nothing in shots/ is committed: a
+# reader off the surface builds them, and a clone without a running menger
+# cannot.
 #
-#   bin/build                 every row of shots.tsv, from prod
-#   bin/build VOLT-1 KILN-1   only those tickets' rows
+#   bin/build                     every row of shots.tsv, from prod
+#   bin/build pitch.png gap.png   only those rows (a shot's file, or an
+#                                 example's path, picks its rows)
 #
-# MENGER_ENV   the deployed environment to read: prod or test     [prod]
-# MENGER_DIR   the menger checkout whose scripts/shot.mjs takes them
-#                                                     [../menger beside this]
+# MENGER_ENV   the deployed environment to draw with: prod or test   [prod]
+# MENGER_DIR   the menger checkout beside this one: its tickets-api
+#              (bin/render reads a body by menger's own rules) and
+#              scripts/shot.mjs (which takes the picture)  [../menger]
+#
+# How: bin/render reads every example file as menger's app reads a framed
+# body; bin/page.mjs writes one page per row that frames it as menger does —
+# the frame SDK, token defaults, faces and vendored libraries taken from the
+# deployed shell, the house components from its registry — and answers the
+# frame's reads from the examples themselves; shot.mjs takes it once every
+# frame has settled. No ticket is read or written: the examples are the
+# files in this repository, and nothing else.
 #
 # It fails, naming why, when that menger is not online — it never falls back
 # to another server or to old pictures.
@@ -27,28 +38,64 @@ shell=$(port MENGER_SHELL_PORT)
 ws=$(port MENGER_WS_PORT)
 [ -n "$shell" ] && [ -n "$ws" ] || die "$conf names no MENGER_SHELL_PORT / MENGER_WS_PORT"
 
-# Online: the app answers, and the tracker answers over its own wire.
+# Online: the app answers, and the hub answers over its own wire.
 curl -fsS -o /dev/null --max-time 5 "http://127.0.0.1:$shell/" \
   || die "menger ($env) is not online: nothing answers on http://127.0.0.1:$shell/ — start it (systemctl --user start menger@$env) and run again"
-if command -v synapse >/dev/null; then
-  synapse -P "$ws" menger tickets health >/dev/null 2>&1 \
-    || die "menger ($env) is not online: tickets.health does not answer on :$ws"
-fi
+command -v synapse >/dev/null || die "synapse is not on PATH — it reads the house components from menger's registry"
+synapse -P "$ws" menger tickets health >/dev/null 2>&1 \
+  || die "menger ($env) is not online: tickets.health does not answer on :$ws"
 
 shot=$menger/scripts/shot.mjs
 [ -f "$shot" ] || die "no $shot — set MENGER_DIR to a menger checkout"
-# shot.mjs says so itself when its browser is not set up (cd perf && npm ci).
+[ -d "$menger/tickets-api" ] || die "no $menger/tickets-api — bin/render reads bodies with it"
+# shot.mjs says so itself when its browser is not set up (menger's perf/).
+
+# The rows to take.
+rows=()
+while IFS=$'\t' read -r file example theme; do
+  case $file in '' | '#'*) continue ;; esac
+  if [ $# -gt 0 ]; then
+    hit=
+    for a in "$@"; do [ "$a" = "$file" ] || [ "$a" = "$example" ] && hit=1; done
+    [ -n "$hit" ] || continue
+  fi
+  [ -f "$here/$example" ] || die "shots.tsv: $file names $example, which does not exist"
+  rows+=("$file"$'\t'"$example"$'\t'"$theme")
+done < "$here/shots.tsv"
+[ ${#rows[@]} -gt 0 ] || die "nothing to take: no row of shots.tsv names ${*:-an example}"
+
+# bin/render, built once into the shared target directory.
+export CARGO_TARGET_DIR=${CARGO_TARGET_DIR:-$HOME/.cache/cargo-target/menger-skills}
+work=$(mktemp -d)
+trap 'rm -rf "$work"' EXIT
+cargo build --release --offline --quiet --manifest-path "$here/bin/render/Cargo.toml" 2> "$work/cargo.log" \
+  || { cat "$work/cargo.log" >&2; die "bin/render did not build (above)"; }
+render=$CARGO_TARGET_DIR/release/render
+
+cd "$here"
+# Every example, so a cite between them and the themes they wear resolve.
+mapfile -t examples < <(ls -1 */examples/*.md)
+"$render" "${examples[@]}" > "$work/render.json" || die "bin/render failed (above)"
+synapse -P "$ws" -j menger tickets components > "$work/registry.jsonl" \
+  || die "menger ($env) did not answer tickets.components on :$ws"
+
+jobs=()
+for r in "${rows[@]}"; do
+  IFS=$'\t' read -r file example theme <<< "$r"
+  jobs+=("${file%.png}=$example:$theme")
+done
+node "$here/bin/page.mjs" --shell "http://127.0.0.1:$shell" --render "$work/render.json" \
+  --registry "$work/registry.jsonl" --out "$work/pages" "${jobs[@]}" >/dev/null \
+  || die "the pages could not be written (above)"
 
 mkdir -p "$here/shots"
-only=" $* "
 n=0
-while IFS=$'\t' read -r file ticket theme; do
-  case $file in '' | '#'*) continue ;; esac
-  [ $# -eq 0 ] || [[ $only == *" $ticket "* ]] || continue
-  echo "build: $file ← #/ticket/$ticket ($theme)"
-  node "$shot" "#/ticket/$ticket" --env "$env" --theme "$theme" --width 1100 --out "$here/shots/$file" >/dev/null \
-    || die "$file: menger's screenshot of $ticket failed (above)"
+for r in "${rows[@]}"; do
+  IFS=$'\t' read -r file example theme <<< "$r"
+  echo "build: $file ← $example ($theme)"
+  node "$shot" "$work/pages/${file%.png}.html" --wait-for 'html[data-example="settled"]' \
+    --theme "$theme" --width 1100 --out "$here/shots/$file" >/dev/null \
+    || die "$file: the screenshot of $example failed (above)"
   n=$((n + 1))
-done < "$here/shots.tsv"
-[ "$n" -gt 0 ] || die "nothing to take: no row of shots.tsv names ${*:-a ticket}"
-echo "build: $n screenshot(s) in shots/ from menger $env"
+done
+echo "build: $n screenshot(s) in shots/, drawn by menger $env"

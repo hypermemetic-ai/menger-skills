@@ -1,4 +1,4 @@
-<m-summary ticket="SKILL-7">
+<m-summary>
 
 <m-answer data-field="answer">**The spike — *what did we find?* — resolves one unknown with a binary pass/fail and leaves evidence the build it unlocks conditions on. It is read after it has run, for its answer: the finding as the standing, the measurements as stats, the question, and the lens — the structure of the question — drawn, or better, playable.**</m-answer>
 
@@ -11,16 +11,14 @@
 
 The finding, as the standing: *"The charger streams. Polling it would leave a plug sitting unnoticed for up to the poll interval."* Then the question, then the lens. A spike not yet run opens with the question and the lens, and its standing says what will be measured.
 
-<m-cite ref="VOLT-3" field="standing"></m-cite>
-
-<m-cite ref="VOLT-3" field="lens"></m-cite>
+The spike example opens so — its `standing`, then its `lens`, a playable: [examples/spike.md](examples/spike.md) (`shots/spike.png`).
 
 </m-field>
 
 <m-field data-field="detail" label="Skeleton">
 
 `````markdown
-<m-summary ticket="VOLT-3">
+<m-summary ticket="AMP-3">
 
 <m-field data-field="standing">**The finding, in one sentence, once known — else what will be measured.**</m-field>
 
@@ -83,7 +81,7 @@ The finding, as the standing: *"The charger streams. Polling it would leave a pl
 1. **The lens is the structure of the question**, never the process DAG (the execution draws that): what is in tension, where the unknown sits, which way the knob turns. Where the unknown is quantitative, the lens is a playable with one slider — the reader moves it and sees the finding form. Where it is structural, an `m-diagram data-field="lens"` of the system and the question cluster.
 2. **The metric sheet** is `metric → current (measured) → target → the command that measures it`. The command becomes the unlocked build's acceptance gate; re-running it is the regression test. A finding that cannot be written as a metric with a command is not finished.
 
-<m-cite ref="VOLT-3" field="metric-sheet"></m-cite>
+The spike example's `metric-sheet`, with the command under it: [examples/spike.md](examples/spike.md).
 
 </m-field>
 

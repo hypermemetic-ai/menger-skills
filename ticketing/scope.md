@@ -1,4 +1,4 @@
-<m-summary ticket="SKILL-4">
+<m-summary>
 
 <m-answer data-field="answer">**The scope — *is this worth it, and what will exist when it is done?* — is a shortcode's root and its single entry point: the what/why, the language, the decided shape, the edges, the interface contract, and the children cited. It holds no work and no DAG. It is written as a pitch, so a reader who stops after the first screen can place the bet.**</m-answer>
 
@@ -11,14 +11,14 @@
 
 The epitome — a moment, not a system: *"Tuesday night. The bisque load went in at six. At eleven someone drives back to check the cone."* Then the end state as one diagram. Then the decided shape, in fat marker: three or four decisions, each with its *why* in the owner's words where there are any.
 
-<m-cite ref="KILN-1" field="problem"></m-cite>
+The pitch example opens so: [examples/pitch.md](examples/pitch.md), its `problem` beat (drawn in `shots/pitch.png`).
 
 </m-field>
 
 <m-field data-field="detail" label="Skeleton">
 
 `````markdown
-<m-summary ticket="KILN-1">
+<m-summary ticket="CONE-1">
 
 <m-field data-field="standing">**One sentence that is true the day this is done.**</m-field>
 
@@ -87,13 +87,13 @@ Out of scope: …  Defined elsewhere: … (cite it).  Not in scope but arguably 
 
 </m-decision>
 
-<m-field data-field="execution"><m-ticket ref="KILN-2" full></m-ticket> is the sequence. The look is <m-ticket ref="KILN-6" full></m-ticket>.</m-field>
+<m-field data-field="execution"><m-ticket ref="CONE-2" full></m-ticket> is the sequence. The look is <m-ticket ref="CONE-6" full></m-ticket>.</m-field>
 
 <m-field data-field="detail" label="Zoom in — the children, from inside the parent">
 
-<m-cite ref="KILN-2" field="dag"></m-cite>
+<m-cite ref="CONE-2" field="dag"></m-cite>
 
-<m-cite ref="KILN-4" field="problem"></m-cite>
+<m-cite ref="CONE-4" field="problem"></m-cite>
 
 </m-field>
 `````
@@ -104,9 +104,9 @@ Out of scope: …  Defined elsewhere: … (cite it).  Not in scope but arguably 
 
 <m-field data-field="detail" label="Live">
 
-A scope can carry a live picture of its own progress — a hill (<m-ticket ref="KILN-1"></m-ticket>'s `kiln-hill`), a dial (`<m-dial scope="KILN-1">`), a feed (<m-ticket ref="BREW-1"></m-ticket>) — so the owner sees where it stands without opening the execution. The picture reads the tracker and follows `watch`; its numbers are never typed.
+A scope can carry a live picture of its own progress — a hill (the pitch example's `kiln-hill`, [examples/pitch.md](examples/pitch.md)), a dial (`<m-dial scope="CONE-1">`), a feed (the feed example, [../showing/examples/feed.md](../showing/examples/feed.md)) — so the owner sees where it stands without opening the execution. The picture reads the tracker and follows `watch`; its numbers are never typed.
 
-<m-cite ref="KILN-1" field="status"></m-cite>
+The pitch example's `status` field is that hill; the rows it reads are the example's `tracker:` frontmatter, so it draws without a tracker (`shots/pitch.png`).
 
 </m-field>
 
@@ -114,15 +114,15 @@ A scope can carry a live picture of its own progress — a hill (<m-ticket ref="
 
 | the reader is… | hold them with | demonstrated by |
 | -- | -- | -- |
-| placing a bet | the pitch: appetite, the problem, a breadboard, the solution in fat marker, rabbit holes as folded cards, no-gos, the bet as an input; a stretch throttle lets the owner read the gist, the pitch, or everything | KILN-1 |
-| learning a system | the pattern: *the society knows its plots* — the pattern above, the problem, *therefore*, and the smaller patterns that complete it, each cited; every child returns to this picture before it elaborates | ALLOT-1 |
-| using a product | the moment, the end state, the decided shape, the surface as one code block, the open fork as an input, the children cited | VOLT-1, BREW-1 |
+| placing a bet | the pitch: appetite, the problem, a breadboard, the solution in fat marker, rabbit holes as folded cards, no-gos, the bet as an input; a stretch throttle lets the owner read the gist, the pitch, or everything | [examples/pitch.md](examples/pitch.md) |
+| learning a system | the pattern: *the society knows its plots* — the pattern above, the problem, *therefore*, and the smaller patterns that complete it, each cited; every child returns to this picture before it elaborates | [examples/pattern.md](examples/pattern.md) |
+| using a product | the moment, the end state, the decided shape, the surface as one code block, the open fork as an input, the children cited | [examples/scope.md](examples/scope.md), [../showing/examples/feed.md](../showing/examples/feed.md) |
 
 </m-cases>
 
-<m-field data-field="detail" label="The children, cited — as ALLOT-1 does it">
+<m-field data-field="detail" label="The children, cited — as the pattern example does it">
 
-<m-cite ref="ALLOT-1" field="detail"></m-cite>
+[examples/pattern.md](examples/pattern.md)'s `detail` cites the smaller patterns that complete it — the `problem` of [examples/pattern-person.md](examples/pattern-person.md) and of [examples/pattern-list.md](examples/pattern-list.md), the `question` of [examples/pattern-names.md](examples/pattern-names.md) — and each of them opens by citing the pattern's `end-state` back. Drawn, the windows are in `shots/pattern.png`.
 
 </m-field>
 

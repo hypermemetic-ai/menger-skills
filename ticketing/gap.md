@@ -1,4 +1,4 @@
-<m-summary ticket="SKILL-8">
+<m-summary>
 
 <m-answer data-field="answer">**The gap — *what went wrong, and what should happen?* — is a difference between what the system does and what it should, with a severity. It opens with the evidence as found — the transcript, the number — and shows the fix's shape on one diagram with *today* and *fixed* as notes, then a before/after table whose last row is the one the owner cares about.**</m-answer>
 
@@ -11,16 +11,14 @@
 
 The standing says what happens and what it costs, in one breath. The stats are the damage, measured. Then the evidence as a code block — the log, the request, the row — *as found*.
 
-<m-cite ref="VOLT-6" field="standing"></m-cite>
-
-<m-cite ref="VOLT-6" field="evidence"></m-cite>
+The gap example opens so — its `standing`, then its `evidence`: [examples/gap.md](examples/gap.md) (`shots/gap.png`).
 
 </m-field>
 
 <m-field data-field="detail" label="Skeleton">
 
 `````markdown
-<m-summary ticket="VOLT-6">
+<m-summary ticket="AMP-6">
 
 <m-badge severity="High"></m-badge>
 
@@ -84,9 +82,7 @@ A stream is not a session. The charger forgot; the hub must not.
 1. **The sequence, with *today* and *fixed* as notes** on the same diagram — never a before diagram and an after diagram the reader must overlay.
 2. **The before/after table** (`m-cases` marks the columns ✗ and ✓): each row a fact the fix changes, the last row the one the owner cares about (the bill).
 
-<m-cite ref="VOLT-6" field="shape"></m-cite>
-
-<m-cite ref="VOLT-6" field="problem"></m-cite>
+Both, as the gap example draws them: its `shape` and its `problem`, [examples/gap.md](examples/gap.md).
 
 </m-field>
 

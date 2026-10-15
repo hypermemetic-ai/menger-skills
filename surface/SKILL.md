@@ -3,7 +3,7 @@ name: surface
 description: Use before writing any ticket body on menger, and whenever a component, field or frame rule is in doubt. It is the vocabulary every other skill here speaks — what a body can show (fields, diagrams, beats, walks, playables, the component itself), ask (inputs), cite (live windows into other tickets) and wear (themes) — with the frame's rules, the write-time refusals, the checker, and the screenshot script. Produces no artifact; it is read so the artifacts are right.
 ---
 
-<m-summary ticket="SKILL-2">
+<m-summary>
 
 <m-answer data-field="answer">**A ticket body is a page in a sandboxed frame that draws menger's house components, runs its own, follows the tracker live, asks the owner, cites other tickets and wears a theme — so a body that only has prose has used almost none of it.**</m-answer>
 
@@ -24,7 +24,7 @@ graph TD
   CON --> ZOOM["the children, from inside the parent<br/>m-cite · m-ticket"]
 ```
 
-The order is the reader's arc (<m-ticket ref="SKILL-3"></m-ticket>); the components are below, by what they do. Every one has a docs card at `#/components/<name>`, and `synapse -P 4455 menger tickets components` answers all of them with their attributes, slots, parts and examples.
+The order is the reader's arc ([ticketing](../ticketing/SKILL.md)); the components are below, by what they do. Every one has a docs card at `#/components/<name>`, and `synapse -P 4455 menger tickets components` answers all of them with their attributes, slots, parts and examples.
 
 </m-diagram>
 
@@ -44,7 +44,7 @@ The order is the reader's arc (<m-ticket ref="SKILL-3"></m-ticket>); the compone
 | carry findings | `<m-cards data-field="evidence\|risks">` of `<m-card headline note date fold tone>` | a card folds its detail |
 | keep a timeline | `<m-status data-field="status">` of `<m-step date status label commits by>` | oldest first; appended, never edited |
 | show a gate | `<m-results label>` holding a suite · passed · failed · verdict table | tiles, pass/fail in colour and in words |
-| ask the owner | `<m-decision data-field="decision" id="…" rows="a\|b\|c">` with `<m-question>`, `<m-option name value recommended cost benefit next>`, `<m-recommendation by>`; `<m-input id kind="multi\|text">` with `<m-choice value recommended>` | an `id` makes it live (<m-ticket ref="SKILL-11"></m-ticket>); without one it only displays |
+| ask the owner | `<m-decision data-field="decision" id="…" rows="a\|b\|c">` with `<m-question>`, `<m-option name value recommended cost benefit next>`, `<m-recommendation by>`; `<m-input id kind="multi\|text">` with `<m-choice value recommended>` | an `id` makes it live ([asking](../asking/SKILL.md)); without one it only displays |
 | record an answer | `<m-answer data-field="answer" by date>DECIDED: …</m-answer>` in a decision; a doc's one-sentence answer in its summary | the banner hides the word DECIDED so it is not said twice |
 | point at a ticket | `<m-ticket ref="ID" full>` | live status; `full` adds the title |
 | zoom into a ticket | `<m-cite ref="ID" field="standing\|problem\|dag\|…">` or `<m-cite ref="ID#elementid">` | a live window, drawn by the host in the cited ticket's own frame and theme; inputs in it are display only; two deep at most |
@@ -102,9 +102,7 @@ return () => off();                                    // runs before the next r
 
 The rules the frame enforces, and the write refuses: the name is lowercase with a hyphen and belongs to one ticket (a second definer is refused, naming the owner); a `<docs>` must parse, and every `<part>` it declares must be in the template; the frame opens no connection of its own (`connect-src 'none'`), so a script reads only through `this.menger` and loads nothing from outside; scripts, styles, images and fonts in the body may come from anywhere; a style uses the theme's tokens, never a literal colour. A component that **plays** (a simulation, a lens) calls nothing and records nothing — a guess made in it is not a decision; a component that **reads** (a hill, a feed, a dial) reads the tracker through the bridge and follows `watch`, and every number it shows is the tracker's.
 
-`MENGER_HOUSE_BODIES=a.md:b.md cargo test -p menger-tickets-api house_bodies` (in `../menger`) files bodies on a throwaway store and fails unless every component they define documents its parts — the check a body is held to before it is filed. The playable below is <m-ticket ref="VOLT-4"></m-ticket>'s, cited:
-
-<m-cite ref="VOLT-4" field="intended-usage"></m-cite>
+`MENGER_HOUSE_BODIES=a.md:b.md cargo test -p menger-tickets-api house_bodies` (in `../menger`) files bodies on a throwaway store and fails unless every component they define documents its parts — the check a body is held to before it is filed. A playable written this way is the build example's `volt-queue`: [../ticketing/examples/build.md](../ticketing/examples/build.md), its `intended-usage` (`shots/build.png`).
 
 </m-field>
 
@@ -116,12 +114,12 @@ A body holding HTML renders in a sandboxed frame under menger's SDK: no same-ori
 ---
 view: mockup            # inline (default) | full | mockup
 widths: 390, 768, 1440  # a mockup's devices, each a frame at that viewport
-theme: volt             # the look (SKILL-15)
+theme: volt             # the look (theming)
 reach: ticket           # frame | ticket | site
 ---
 ```
 
-`mockup` draws the body once per device, in device chrome, with Light / Dark and Reduced-motion toggles the framed page sees live. That is how a frontend ticket shows the page it is about: as the page, at the widths it must work at (<m-ticket ref="SKILL-13"></m-ticket>).
+`mockup` draws the body once per device, in device chrome, with Light / Dark and Reduced-motion toggles the framed page sees live. That is how a frontend ticket shows the page it is about: as the page, at the widths it must work at ([showing](../showing/SKILL.md)).
 
 </m-field>
 
@@ -148,4 +146,4 @@ reach: ticket           # frame | ticket | site
 
 </m-field>
 
-<m-field data-field="execution">The arc a body follows is <m-ticket ref="SKILL-3" full></m-ticket>; which picture, <m-ticket ref="SKILL-13" full></m-ticket>; inputs, <m-ticket ref="SKILL-11" full></m-ticket>; themes, <m-ticket ref="SKILL-15" full></m-ticket>; the calls, <m-ticket ref="SKILL-17" full></m-ticket>. The docs cards and the component contract in full: `../menger/README.md` → "Frontend", "Components", "Cites".</m-field>
+<m-field data-field="execution">The arc a body follows is <a href="../ticketing/SKILL.md">ticketing — one ticket worth a look</a>; which picture, <a href="../showing/SKILL.md">showing — the picture is the body</a>; inputs, <a href="../asking/SKILL.md">asking — a question lives on its ticket</a>; themes, <a href="../theming/SKILL.md">theming — a project's look is a ticket</a>; the calls, <a href="../reaching/SKILL.md">reaching — the synapse calls against menger</a>. The docs cards and the component contract in full: `../menger/README.md` → "Frontend", "Components", "Cites".</m-field>

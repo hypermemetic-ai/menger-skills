@@ -3,7 +3,7 @@ name: ticketing
 description: Use when turning anything — a request, a finding, a fork, a bug, a plan — into a ticket on menger. Produces one ticket a person will look at: its summary, its epitome (the simplest concrete picture of the whole, with a figure), the shape as a diagram, the behaviour shown as a walk, a playable or the component itself, the contract the agent reads, and the question the owner answers — created Pending, in the kind's own form (scope, execution, build, spike, gap, doc). Also says when not to file a ticket at all.
 ---
 
-<m-summary ticket="SKILL-3">
+<m-summary>
 
 <m-answer data-field="answer">**Write a ticket for the moment a person opens it — it shows them how the thing should work, in the first screen, with a picture — and write it so an agent can build and check from the same body.**</m-answer>
 
@@ -25,10 +25,10 @@ A ticket is only relevant if a human looks at it. Every ticket you file spends s
 
 <m-field data-field="context" label="The look budget, in rules">
 
-- **Count the looks you are asking for.** A plan that needs nine tickets to be understood is read at the scope and skimmed below it; a plan that needs three is read. The DAG may hold nodes that are not yet tickets (<m-ticket ref="VOLT-2"></m-ticket> draws `volt.chargers (not filed)`); a ticket is filed when it is ready to be looked at, not when it is thought of.
-- **A thought is a note, not a ticket.** `synapse -P 4455 menger notes add --body "…"` keeps it dated; `notes upgrade` makes it a ticket the day it earns one (<m-ticket ref="TICKETING-9"></m-ticket> was note 1).
+- **Count the looks you are asking for.** A plan that needs nine tickets to be understood is read at the scope and skimmed below it; a plan that needs three is read. The DAG may hold nodes that are not yet tickets (the execution example, [examples/execution.md](examples/execution.md), draws `volt.chargers (not filed)`); a ticket is filed when it is ready to be looked at, not when it is thought of.
+- **A thought is a note, not a ticket.** `synapse -P 4455 menger notes add --body "…"` keeps it dated; `notes upgrade` makes it a ticket the day it earns one.
 - **A walk, a playable, the component in place** replace paragraphs — and the paragraphs they replace were the ones nobody read.
-- **No one size fits all.** What a ticket shows depends on what it is about: a backend shows a wire, a frontend shows the page, a schema shows the same fact three ways (<m-ticket ref="SKILL-16"></m-ticket>).
+- **No one size fits all.** What a ticket shows depends on what it is about: a backend shows a wire, a frontend shows the page, a schema shows the same fact three ways ([systems](../systems/SKILL.md)).
 
 </m-field>
 
@@ -56,7 +56,7 @@ The person reads it in this order; the agent reads the `data-field`s in any orde
 | the epitome | `m-beat size="lead"` with a figure | the simplest concrete picture of the whole — a moment, a person, a number — never an abstraction. A reader who stops here has the point |
 | the shape | `m-diagram` / `m-dag` | the picture a stranger could rebuild the design from; one lens per diagram |
 | the behaviour, shown | `m-walk` + `m-code`; a playable; the component itself; `m-compare` or `m-cases before= after=` | a walk down one real path; a playable where there is a mechanism; the component where the ticket is a frontend; a before/after where it is a gap. A cases table pins what the reader just saw |
-| the question | `m-decision id=` / `m-input id=` | after the reader has seen enough to answer it, before the contract (<m-ticket ref="SKILL-11"></m-ticket>) |
+| the question | `m-decision id=` / `m-input id=` | after the reader has seen enough to answer it, before the contract ([asking](../asking/SKILL.md)) |
 | the contract | `m-provides`, `m-consumes`, `m-acceptance`, `must-not-change` | tables, every row checkable |
 | the children | `m-cite` | a scope or execution cites its children's epitomes so the reader descends without leaving the page; it never re-describes them |
 
@@ -64,9 +64,7 @@ The person reads it in this order; the agent reads the `data-field`s in any orde
 
 <m-field data-field="detail" label="The epitome, shown">
 
-The first beat of <m-ticket ref="VOLT-1"></m-ticket>: a moment, a count, a consequence, the claim — and a figure of seven cars and two plugs beside it. Compare *"This scope covers the implementation of a queue management subsystem for electric vehicle charging infrastructure in a multi-tenant residential context"*: nothing to see; the reader must build the picture themselves.
-
-<m-cite ref="VOLT-1" field="problem"></m-cite>
+The first beat of the scope example, [examples/scope.md](examples/scope.md) (its `problem`; drawn in `shots/scope.png`): a moment, a count, a consequence, the claim — and a figure of seven cars and two plugs beside it. Compare *"This scope covers the implementation of a queue management subsystem for electric vehicle charging infrastructure in a multi-tenant residential context"*: nothing to see; the reader must build the picture themselves.
 
 </m-field>
 
@@ -74,12 +72,12 @@ The first beat of <m-ticket ref="VOLT-1"></m-ticket>: a moment, a count, a conse
 
 | kind | the reader's question | opens with | shows | lets the reader do | must not show | form |
 | -- | -- | -- | -- | -- | -- | -- |
-| scope | is this worth it, and what will exist? | the epitome | the end state as a diagram; the decided shape; the language; the children cited | answer the bet or the fork | code, file paths, a DAG | SKILL-4 |
-| execution | what is the order, and where does it stand? | the DAG | one walk through all of it; the exit; the live picture (a hill, a dial) | see what is next; open a child | the rationale (the scope's); work of its own | SKILL-5 |
-| build | what does it do, and how do I call it? | the problem beat | the cases; the walk; a playable if there is a mechanism; the component itself if it is a frontend; provides/consumes | play it; read the call site | design options (that is a spike or a decision) | SKILL-6 |
-| spike | what did we find? | the question | the lens as a figure or a playable; the metric sheet; the DECIDED banner | move the slider; check the command | implementation steps | SKILL-7 |
-| gap | what went wrong, and what should happen? | the evidence (a transcript, a number) | a sequence diagram with *today / fixed* notes; a before/after table | see the fix's shape | speculation about cause without evidence | SKILL-8 |
-| doc | what is so, and why? | the answer, in one sentence | the same thing from several sides; the sources beside the claims; what was left out | — | a lifecycle | SKILL-9 |
+| scope | is this worth it, and what will exist? | the epitome | the end state as a diagram; the decided shape; the language; the children cited | answer the bet or the fork | code, file paths, a DAG | [scope](scope.md) · [example](examples/scope.md) |
+| execution | what is the order, and where does it stand? | the DAG | one walk through all of it; the exit; the live picture (a hill, a dial) | see what is next; open a child | the rationale (the scope's); work of its own | [execution](execution.md) · [example](examples/execution.md) |
+| build | what does it do, and how do I call it? | the problem beat | the cases; the walk; a playable if there is a mechanism; the component itself if it is a frontend; provides/consumes | play it; read the call site | design options (that is a spike or a decision) | [build](build.md) · [example](examples/build.md) |
+| spike | what did we find? | the question | the lens as a figure or a playable; the metric sheet; the DECIDED banner | move the slider; check the command | implementation steps | [spike](spike.md) · [example](examples/spike.md) |
+| gap | what went wrong, and what should happen? | the evidence (a transcript, a number) | a sequence diagram with *today / fixed* notes; a before/after table | see the fix's shape | speculation about cause without evidence | [gap](gap.md) · [example](examples/gap.md) |
+| doc | what is so, and why? | the answer, in one sentence | the same thing from several sides; the sources beside the claims; what was left out | — | a lifecycle | [doc](doc.md) · [example](examples/doc.md) |
 
 </m-cases>
 
@@ -88,7 +86,7 @@ The first beat of <m-ticket ref="VOLT-1"></m-ticket>: a moment, a count, a conse
 1. **The epitome comes first and is concrete.** A moment, a person, a number, a figure beside it. If the first screen is a table of fields, the ticket has not been understood as a picture yet.
 2. **Show how it should work.** Every ticket of work carries at least one of: a walk with the code, a playable, the component in place, a before/after. Prose about behaviour is the fallback for what none of these can carry.
 3. **The shape is a diagram, in the body.** Never behind a link. One lens per diagram; several small diagrams over one that says everything.
-4. **A frontend is rendered, not described.** The component the ticket is about is in the body, or the page is the body in `view: mockup` at its widths; failing that, a screenshot in both themes (<m-ticket ref="SKILL-13"></m-ticket>). A frontend ticket with neither is not finished.
+4. **A frontend is rendered, not described.** The component the ticket is about is in the body, or the page is the body in `view: mockup` at its widths; failing that, a screenshot in both themes ([showing](../showing/SKILL.md)). A frontend ticket with neither is not finished.
 5. **A parent cites its children; it never re-describes them.** `m-cite` the child's `standing`, `problem` or `dag`. A paragraph in a scope that paraphrases a build is a copy that will go stale.
 6. **Every number is the tracker's or a measurement.** A stat restates a field below; a live component reads `list` and follows `watch`; a playable says it records nothing. No number is typed to impress.
 7. **The question is an input, filed on the ticket.** Never only in chat. The agent never answers its own input.
@@ -104,15 +102,13 @@ The first beat of <m-ticket ref="VOLT-1"></m-ticket>: a moment, a count, a conse
 
 <m-field data-field="detail" label="Behaviour shown, not told">
 
-<m-ticket ref="VOLT-4"></m-ticket>: *Pick a policy. Guess who plugs in last. Then press go.* — a component that runs the evening at sixty times its speed, then a cases table pinning the six behaviours the reader just watched. Told, it would be: *The queue supports FIFO, fairness-based and need-based policies, configurable per hub.* True, and unread.
-
-<m-cite ref="VOLT-4" field="required-behavior"></m-cite>
+The build example, [examples/build.md](examples/build.md): *Pick a policy. Guess who plugs in last. Then press go.* — a component that runs the evening at sixty times its speed (`volt-queue`, its `intended-usage`), then a cases table pinning the six behaviours the reader just watched (its `required-behavior`; both drawn in `shots/build.png`). Told, it would be: *The queue supports FIFO, fairness-based and need-based policies, configurable per hub.* True, and unread.
 
 </m-field>
 
 <m-field data-field="detail" label="When the ticket is a frontend">
 
-The surface is the thing. The ticket carries the component (a `component` block, rendered where the reader expects to see it, with its docs card beside it), or the page as a mockup at the devices it must serve, and the cases table pins what the reader just saw. A theme on the shortcode makes the body look like the product (<m-ticket ref="SKILL-15"></m-ticket>). Where the real component cannot run in the frame — it needs a server, a library, a device — the body holds a screenshot of it running, in both themes, and says what the screenshot cannot show.
+The surface is the thing. The ticket carries the component (a `component` block, rendered where the reader expects to see it, with its docs card beside it), or the page as a mockup at the devices it must serve, and the cases table pins what the reader just saw. A theme on the shortcode makes the body look like the product ([theming](../theming/SKILL.md)). Where the real component cannot run in the frame — it needs a server, a library, a device — the body holds a screenshot of it running, in both themes, and says what the screenshot cannot show.
 
 </m-field>
 
@@ -130,4 +126,4 @@ The surface is the thing. The ticket carries the component (a `component` block,
 
 </m-field>
 
-<m-field data-field="execution">The forms: <m-ticket ref="SKILL-4" full></m-ticket> · <m-ticket ref="SKILL-5" full></m-ticket> · <m-ticket ref="SKILL-6" full></m-ticket> · <m-ticket ref="SKILL-7" full></m-ticket> · <m-ticket ref="SKILL-8" full></m-ticket> · <m-ticket ref="SKILL-9" full></m-ticket>. The components and their markup: <m-ticket ref="SKILL-2"></m-ticket>; which picture: <m-ticket ref="SKILL-13"></m-ticket>; fewer tickets, placed right: <m-ticket ref="SKILL-10"></m-ticket>; per system: <m-ticket ref="SKILL-16"></m-ticket>; the calls: <m-ticket ref="SKILL-17"></m-ticket>.</m-field>
+<m-field data-field="execution">The forms: <a href="scope.md">the scope — is this worth it, and what will exist?</a> · <a href="execution.md">the execution — what is the order, and where does it stand?</a> · <a href="build.md">the build — what does it do, and how do I call it?</a> · <a href="spike.md">the spike — what did we find?</a> · <a href="gap.md">the gap — what went wrong, and what should happen?</a> · <a href="doc.md">the doc — what is so, and why?</a>. The components and their markup: <a href="../surface/SKILL.md">surface</a>; which picture: <a href="../showing/SKILL.md">showing</a>; fewer tickets, placed right: <a href="../planning/SKILL.md">planning</a>; per system: <a href="../systems/SKILL.md">systems</a>; the calls: <a href="../reaching/SKILL.md">reaching</a>.</m-field>

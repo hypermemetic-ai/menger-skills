@@ -3,7 +3,7 @@ name: planning
 description: Use when a request is bigger than one diff — a feature, a hardening pass, a new wire, a project. Produces, on menger, as few tickets as the work needs: the request located under what already exists (never a new root), a scope with its forks as inputs, an execution whose DAG is drawn in the body with its unfiled nodes marked, and only the leaves that are about to be looked at — spikes for the unknowns, builds for the diffs — every one created Pending for the owner to promote.
 ---
 
-<m-summary ticket="SKILL-10">
+<m-summary>
 
 <m-answer data-field="answer">**Find where the request lives, write the scope so the owner can place the bet from its first screen, draw the whole route on the execution, and file a leaf only when someone is about to look at it.**</m-answer>
 
@@ -40,9 +40,9 @@ Placement first, scope second, the fork third; the leaves last, and only the liv
 ```bash
 synapse -P 4455 menger tickets search --query 'charger stream' --filter 'not category done'
 synapse -P 4455 menger tickets find --query queue
-synapse -P 4455 menger tickets list --filter 'under MENGER-4 and kind scope' --summary true
-synapse -P 4455 menger tickets tree --epic VOLT --filter 'not category done'
-synapse -P 4455 menger tickets counts --filter 'ready and under PLEXUS-1'
+synapse -P 4455 menger tickets list --filter 'under HOME-1 and kind scope' --summary true
+synapse -P 4455 menger tickets tree --epic AMP --filter 'not category done'
+synapse -P 4455 menger tickets counts --filter 'ready and under HOME-1'
 ```
 
 </m-code>
@@ -51,7 +51,7 @@ Most requests advance a scope that exists and become a child of it. A request th
 
 ### Write the scope as a pitch.
 
-<m-ticket ref="SKILL-4"></m-ticket>: the epitome, the end state as one diagram, the decided shape in fat marker, the language, the edges, the interface contract — and **the fork as an input** (`m-decision id=`), so the owner's first look is also where they place the bet. Iterate the body in place until the four tests pass (the language resolves, the edges are drawn, the contract is stateable, an execution can be written from it). Then stop.
+[the scope](../ticketing/scope.md): the epitome, the end state as one diagram, the decided shape in fat marker, the language, the edges, the interface contract — and **the fork as an input** (`m-decision id=`), so the owner's first look is also where they place the bet. Iterate the body in place until the four tests pass (the language resolves, the edges are drawn, the contract is stateable, an execution can be written from it). Then stop.
 
 ### One diff, or a DAG?
 
@@ -59,7 +59,7 @@ Can one agent make it in one diff from the ticket alone? Yes: one build under th
 
 ### Draw the whole route; file only what is live.
 
-<m-ticket ref="SKILL-5"></m-ticket>: the DAG in `m-dag`, every node drawn — spikes, decision gates, builds, gaps found, the completion gate — and a node not yet worth a look labelled *(not filed)*. File a **spike** for every load-bearing fact nobody has pinned (an unpinned fact is a latent spike; a `low`-confidence build is blocked by one); the **builds at the roots** — the shared contracts siblings consume, extracted first so no two re-mint them; and the builds the owner will look at **this cycle**. The rest stays drawn. When a root lands, the next tranche is filed in the same pass that updates the DAG.
+[the execution](../ticketing/execution.md): the DAG in `m-dag`, every node drawn — spikes, decision gates, builds, gaps found, the completion gate — and a node not yet worth a look labelled *(not filed)*. File a **spike** for every load-bearing fact nobody has pinned (an unpinned fact is a latent spike; a `low`-confidence build is blocked by one); the **builds at the roots** — the shared contracts siblings consume, extracted first so no two re-mint them; and the builds the owner will look at **this cycle**. The rest stays drawn. When a root lands, the next tranche is filed in the same pass that updates the DAG.
 
 ### Contracts on the edges.
 
@@ -67,7 +67,7 @@ Every build's `provides` and `consumes` are tables; every consumed input names t
 
 ### Blockers as edges; status derived.
 
-`--blocked-by A,B` at create, or `update --id X --block Y` later. `Blocked` is derived by the tracker; nobody sets it. The ready set is `ready_set --filter 'kind build and under VOLT-1'`.
+`--blocked-by A,B` at create, or `update --id X --block Y` later. `Blocked` is derived by the tracker; nobody sets it. The ready set is `ready_set --filter 'kind build and under AMP-1'`.
 
 ### The parent is built from the children.
 
@@ -78,10 +78,10 @@ The scope cites the execution's `dag` and each build's `problem` or `intended-us
 <m-code lang="bash" why="the owner promotes; the agent never does">
 
 ```bash
-synapse -P 4455 menger tickets create --epic VOLT --title "Volt — nine flats, two chargers" --kind scope --parent WRAP-9 --body "$(cat scope.md)"
-synapse -P 4455 menger tickets create --epic VOLT --title "One evening, end to end" --kind execution --body "$(cat execution.md)"
-synapse -P 4455 menger tickets create --epic VOLT --title "Spike: stream or poll?" --kind spike --parent VOLT-2 --body "$(cat spike.md)"
-synapse -P 4455 menger tickets create --epic VOLT --title "volt.queue" --kind build --parent VOLT-2 --blocked-by VOLT-3 --body "$(cat build.md)"
+synapse -P 4455 menger tickets create --epic AMP --title "Volt — nine flats, two chargers" --kind scope --parent HOME-1 --body "$(cat scope.md)"
+synapse -P 4455 menger tickets create --epic AMP --title "One evening, end to end" --kind execution --body "$(cat execution.md)"
+synapse -P 4455 menger tickets create --epic AMP --title "Spike: stream or poll?" --kind spike --parent AMP-2 --body "$(cat spike.md)"
+synapse -P 4455 menger tickets create --epic AMP --title "volt.queue" --kind build --parent AMP-2 --blocked-by AMP-3 --body "$(cat build.md)"
 ```
 
 </m-code>
@@ -114,12 +114,10 @@ Then screenshot each ticket and read it as the owner will.
 
 </m-cases>
 
-<m-field data-field="detail" label="Fewer, drawn whole — as VOLT-2 does it">
+<m-field data-field="detail" label="Fewer, drawn whole — as the execution example does it">
 
-Seven nodes drawn, four filed: the spike that unlocks everything, the build at the root, the build the owner will play with this week, and the gap that was found. `volt.chargers` and `the app` are drawn *(not filed)*; they are filed when VOLT-4 lands. The opposite — nine builds filed on day one, each a paragraph, the owner asked to promote all nine — ends with the scope skimmed, builds 6 to 9 never opened, and three superseded before anyone read them.
-
-<m-cite ref="VOLT-2" field="dag"></m-cite>
+Seven nodes drawn, four filed: the spike that unlocks everything, the build at the root, the build the owner will play with this week, and the gap that was found. `volt.chargers` and `the app` are drawn *(not filed)*; they are filed when AMP-4 lands. The opposite — nine builds filed on day one, each a paragraph, the owner asked to promote all nine — ends with the scope skimmed, builds 6 to 9 never opened, and three superseded before anyone read them. The DAG is the execution example's `dag`: [../ticketing/examples/execution.md](../ticketing/examples/execution.md) (`shots/execution.png`).
 
 </m-field>
 
-<m-field data-field="execution">The forms: <m-ticket ref="SKILL-3" full></m-ticket>. Inputs: <m-ticket ref="SKILL-11" full></m-ticket>. The calls: <m-ticket ref="SKILL-17" full></m-ticket>.</m-field>
+<m-field data-field="execution">The forms: <a href="../ticketing/SKILL.md">ticketing — one ticket worth a look</a>. Inputs: <a href="../asking/SKILL.md">asking — a question lives on its ticket</a>. The calls: <a href="../reaching/SKILL.md">reaching — the synapse calls against menger</a>.</m-field>

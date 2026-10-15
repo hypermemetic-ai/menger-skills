@@ -1,4 +1,4 @@
-<m-summary ticket="SKILL-9">
+<m-summary>
 
 <m-answer data-field="answer">**The doc — *what is so, and why?* — is not work: born `Doc`, never blocked, never counted by a roll-up. It gives the answer first, in one sentence, and the reasons after; shows the same thing from more than one side; keeps every claim beside its source; and says what it could not look at as loudly as what it found.**</m-answer>
 
@@ -11,14 +11,14 @@
 
 `m-answer` as the summary's lead — one sentence that *is* the answer. Then the question it answers. Then the same thing from more than one side: an `m-compare` of three forms, a table of why, the detail folded.
 
-<m-cite ref="VOLT-7" field="answer"></m-cite>
+The doc example opens so — its `answer`: [examples/doc.md](examples/doc.md) (`shots/doc.png`).
 
 </m-field>
 
 <m-field data-field="detail" label="Skeleton">
 
 `````markdown
-<m-summary ticket="VOLT-7">
+<m-summary ticket="AMP-7">
 
 <m-badge tone="info">the wire, three ways</m-badge>
 
@@ -71,19 +71,17 @@ The reasoning, with its sources beside the claims.
 
 | doc | opens with | shows | example |
 | -- | -- | -- | -- |
-| a finding (a spike's report, a survey) | the answer | the metric sheet; results as tiles; the `left-out` field | TICKETING-2 |
-| an explanation | the answer | the same thing from several sides; the sources beside the claims | VOLT-7 |
-| a theme | one line on the look | the swatches, the faces, both modes; the theme block | VOLT-8, KILN-6 |
-| a statement (the owner's, dated) | the words | nothing added; filed where they belong | TICKETING-9, TICKETING-10 |
-| a skill | the one-line answer | the rules as tables, the examples cited live | SKILL-3 |
+| a finding (a spike's report, a survey) | the answer | the metric sheet; results as tiles; the `left-out` field | [the report example](../reporting/examples/report.md) |
+| an explanation | the answer | the same thing from several sides; the sources beside the claims | [examples/doc.md](examples/doc.md) |
+| a theme | one line on the look | the swatches, the faces, both modes; the theme block | [volt](../theming/examples/volt.md), [kiln](../theming/examples/kiln.md) |
+| a statement (the owner's, dated) | the words | nothing added; filed where they belong | the premise quoted in [README](../README.md) |
+| a skill | the one-line answer | the rules as tables, the examples built in | [ticketing](SKILL.md) |
 
 </m-cases>
 
-<m-field data-field="detail" label="Three ways, side by side — as VOLT-7 does it">
+<m-field data-field="detail" label="Three ways, side by side — as the doc example does it">
 
-Open <m-ticket ref="VOLT-7" full></m-ticket>: the schema, the JSON and the CSV in one `m-compare`, then the why-table. Cited here, its detail:
-
-<m-cite ref="VOLT-7" field="detail"></m-cite>
+Open [examples/doc.md](examples/doc.md): the schema, the JSON and the CSV in one `m-compare`, then the why-table, then its `detail` — the seam, and the rule the doc exists for.
 
 </m-field>
 
@@ -91,4 +89,4 @@ Open <m-ticket ref="VOLT-7" full></m-ticket>: the schema, the JSON and the CSV i
 
 <m-field data-field="detail" label="Where it lives">A child of the ticket that produced it — a spike's report under the spike, a close-out under the execution — or under a doc collection's root. Never a file in the repository standing in for it; the tracker is the system of record.</m-field>
 
-<m-field data-field="exit" label="Done when">A reader who cannot open the source can say, from the page alone: what is so, what is unverified, what was not looked at, and what can never be derived (<m-ticket ref="SKILL-14"></m-ticket>).</m-field>
+<m-field data-field="exit" label="Done when">A reader who cannot open the source can say, from the page alone: what is so, what is unverified, what was not looked at, and what can never be derived (<a href="../reporting/SKILL.md">reporting</a>).</m-field>

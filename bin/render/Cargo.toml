@@ -1,0 +1,25 @@
+# bin/render — an example body as menger frames it, for bin/build.
+#
+# A body is read the way menger's app reads it (frontend/src/md.rs, framed):
+# the same parser at the same version and options, and menger's own rule for
+# an element that runs over blank lines (`html_runs`, from menger's
+# tickets-api, by sibling path). It prints, as JSON, what bin/build needs to
+# hand a frame its document: the frontmatter, the body's HTML, and the
+# component and theme blocks it defines. It reads no tracker.
+[package]
+name = "menger-skills-render"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[[bin]]
+name = "render"
+path = "src/main.rs"
+
+[dependencies]
+menger-tickets-api = { path = "../../../menger/tickets-api", default-features = false }
+pulldown-cmark = { version = "0.13", default-features = false, features = ["html"] }
+pulldown-cmark-escape = "0.11"
+serde_json = "1"
+
+[workspace]
