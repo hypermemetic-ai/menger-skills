@@ -1,6 +1,6 @@
 ---
 name: asking
-description: Use whenever a decision, a bet, a confirmation or a reply is the owner's to make — a fork in a scope, a placement on a hill, a question a spike could not close, a check before a release. Produces an input on the ticket (a decision, a multi or a text), placed where the reader can answer it, filed before it is mentioned in chat, queued in front of the owner when it is urgent (always, when the work is something the owner told the agent to do), read back as an answer, acted on, and closed. The agent never answers its own input.
+description: Use whenever a decision, a bet, a confirmation or a reply is the owner's to make — a fork in a scope, a placement on a hill, a question a spike could not close, a check before a release. Produces an input on the ticket (a decision, a multi or a text), placed where the reader can answer it, filed before it is mentioned in chat, queued in front of the owner when it is urgent (always, when the work is something the owner told the agent to do) and then waited on with `await_reply`, read back as an answer, acted on, and closed. The agent never answers its own input.
 ---
 
 <m-summary>
@@ -54,6 +54,7 @@ After the reader has seen what they need to answer it, and before the contract: 
 7. **Act, then close.** `close_input` freezes it; the component shows DECIDED. A question that must be asked again is `reopen_input`.
 8. **A playable is not an answer.** A guess made in a simulation records nothing; the decision is the input beside it.
 9. **Work the owner told you to do is urgent.** A question that stops it is queued, not only filed (owner, 2026-10-15). Below.
+10. **Queued, then listen.** After queueing, wait on the ticket with `await_reply` (in the background where the harness allows it), act on what it yields, then close the input or queue again. Never queue and then just stop (owner, 2026-10-15). Below.
 
 </m-field>
 
@@ -73,6 +74,22 @@ Say what you are waiting on in the `--reason`, in a sentence the owner can act o
 
 </m-field>
 
+<m-field data-field="decided-shape" label="After queueing: listen for the reply">
+
+**An agent that queues a question waits on the ticket for the response** (owner, 2026-10-15: *"when queued an agent should then listen to that ticket for a response"*). Right after `queue`, run `tickets await_reply` on the same ticket, in the background where the harness allows it. It yields `waiting` at once, then one `replied` when the owner responds, and ends.
+
+| `reply.kind` | the owner | the agent then |
+| -- | -- | -- |
+| `answered` | answered an input (with `--input`: that one) | read the state, act on the answer, `close_input` |
+| `changes_requested` | pressed *Request changes* in the tray: the comment says what to change, and the ticket is out of the queue | change the ticket (its body, the options, the work), then queue it again |
+| `commented` | left a comment on the ticket | read it; act, answer in a comment, or ask again |
+| `unqueued` | took it out of the queue (`done with it`), or its input was closed (`closed`) | read the ticket: it may be decided, or no longer wanted |
+| `ended` | canceled or deleted the ticket | stop the work |
+
+A snooze is not a response: the wait goes on. If the connection drops, call again with `--since` set to the time you queued, and nothing is lost. `--timeout-minutes` ends the wait with `timed_out`. Then say so in chat and pick it up later. Never queue and then just stop.
+
+</m-field>
+
 <m-code lang="bash" why="queueing: the input first, then the ticket; queueing again only raises the urgency">
 
 ```bash
@@ -80,6 +97,18 @@ synapse -P 4455 menger tickets queue --id AMP-4 --urgency blocking --input polic
 synapse -P 4455 menger tickets queue --id AMP-6 --urgency now --reason "the import runs around it; which file wins is yours"
 synapse -P 4455 menger tickets queued                  # most urgent first
 synapse -P 4455 menger tickets unqueue --id AMP-6      # withdrawn, or done with
+```
+
+</m-code>
+
+<m-code lang="bash" why="after queueing: wait for the owner's response, in the background; one replied, then the end">
+
+```bash
+synapse -P 4455 -j menger tickets await_reply --id AMP-4 --input policy --timeout-minutes 240 | jq -c 'select(.type == "data") | .content'
+# {"type":"waiting","ticket":"AMP-4","queued":{…}}
+# {"type":"replied","ticket":"AMP-4","reply":{"kind":"answered","input":"policy","value":{"type":"choice","option":"fair"},"source":"app","at_unix":…}}
+synapse -P 4455 -j menger tickets await_reply --id AMP-4 --since 1792072000     # after a dropped connection: nothing lost
+synapse -P 4455 menger tickets request_changes --id AMP-4 --body "neither: …"   # the owner, from a shell: what the tray's Request changes sends
 ```
 
 </m-code>
