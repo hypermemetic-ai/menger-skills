@@ -1,6 +1,6 @@
 ---
 name: asking
-description: Use whenever a decision, a bet, a confirmation or a reply is the owner's to make — a fork in a scope, a placement on a hill, a question a spike could not close, a check before a release. Produces an input on the ticket (a decision, a multi or a text), placed where the reader can answer it, filed before it is mentioned in chat, read back as an answer, acted on, and closed. The agent never answers its own input.
+description: Use whenever a decision, a bet, a confirmation or a reply is the owner's to make — a fork in a scope, a placement on a hill, a question a spike could not close, a check before a release. Produces an input on the ticket (a decision, a multi or a text), placed where the reader can answer it, filed before it is mentioned in chat, queued in front of the owner when it is urgent (always, when the work is something the owner told the agent to do), read back as an answer, acted on, and closed. The agent never answers its own input.
 ---
 
 <m-summary>
@@ -53,8 +53,36 @@ After the reader has seen what they need to answer it, and before the contract: 
 6. **Read the state before acting.** An answer may be cleared while the input is open.
 7. **Act, then close.** `close_input` freezes it; the component shows DECIDED. A question that must be asked again is `reopen_input`.
 8. **A playable is not an answer.** A guess made in a simulation records nothing; the decision is the input beside it.
+9. **Work the owner told you to do is urgent.** A question that stops it is queued, not only filed (owner, 2026-10-15). Below.
 
 </m-field>
+
+<m-field data-field="decided-shape" label="When it cannot wait: the queue">
+
+A filed input waits until the owner looks. **Queueing** puts the ticket in front of the owner: a tab in the tray along the bottom edge of every open app, which flashes as it arrives, with an urgency and a reason. The urgencies are `whenever` · `today` · `now` · `blocking`. `blocking` names the `--input` the caller is idle on; closing that input unqueues the ticket.
+
+**When the owner told you to work on it, queueing is urgent** (owner, 2026-10-15). The owner is waiting on that work, so a question that stops it is theirs to answer now, not when they next look at the tracker. File the input first, then queue the ticket at once:
+
+| the work is | the question | queue it at |
+| -- | -- | -- |
+| what the owner told you to do | you are idle until it is answered | `blocking`, with `--input` |
+| what the owner told you to do | you can carry on around it | `now` |
+| your own, or background | it can wait for the owner's next look | `today`, or `whenever`, or don't queue it |
+
+Say what you are waiting on in the `--reason`, in a sentence the owner can act on from the tab. Then say so in chat, with the id. Outside work the owner asked for, keep `now` and `blocking` for what is so (a promote that rolled back, a gap on prod). A queue that is always loud is a queue the owner learns to ignore.
+
+</m-field>
+
+<m-code lang="bash" why="queueing: the input first, then the ticket; queueing again only raises the urgency">
+
+```bash
+synapse -P 4455 menger tickets queue --id AMP-4 --urgency blocking --input policy --reason "the build is idle until the policy is picked"
+synapse -P 4455 menger tickets queue --id AMP-6 --urgency now --reason "the import runs around it; which file wins is yours"
+synapse -P 4455 menger tickets queued                  # most urgent first
+synapse -P 4455 menger tickets unqueue --id AMP-6      # withdrawn, or done with
+```
+
+</m-code>
 
 <m-code lang="bash" why="reading what waits, closing what was acted on">
 
