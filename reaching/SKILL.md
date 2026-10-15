@@ -23,6 +23,7 @@ description: Use for any read or write against menger from a shell or a script �
 | the registered name, not the product name | bare `synapse` prints the registry: every backend, its host:port, `[OK]` or `[UNREACHABLE]`; menger answers to `menger` |
 | navigate the hub by path | `menger tickets list`, not `tickets list`; `'X' at root` means a level was skipped, and `synapse -P 4455 menger` prints the children at that level |
 | let the backend tell you the shape | `synapse -P 4455 -i menger` is every method (IR, `irMethods` keyed by dotted path); `<method> --help` or a bare call prints its parameters; `Unknown parameter` means a wrong name |
+| can't remember the name? | `synapse -P 4455 _find menger <words>` — methods and flags by name or description, typos and abbreviations too (`setpar` → `set_parent`); `… _find menger tickets <words>` narrows, `-j` for a script (synapse ≥ 3.14.7) |
 | `-H` / `-P` bypass the registry | they must reach a port that speaks the Plexus handshake; `_info did not complete` means the wrong port |
 
 </m-cases>
