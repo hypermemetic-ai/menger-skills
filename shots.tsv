@@ -1,0 +1,13 @@
+# The screenshots bin/build takes from a running menger: file, ticket, theme.
+# One row per picture the README links; re-run bin/build after a ticket changes.
+VOLT-1.scope.png	VOLT-1	light
+VOLT-1.scope.dark.png	VOLT-1	dark
+VOLT-2.execution.png	VOLT-2	light
+VOLT-3.spike.png	VOLT-3	light
+VOLT-4.build.png	VOLT-4	light
+VOLT-6.gap.png	VOLT-6	light
+VOLT-7.doc.png	VOLT-7	light
+KILN-1.pitch.png	KILN-1	light
+ALLOT-1.pattern.png	ALLOT-1	light
+BREW-1.feed.dark.png	BREW-1	dark
+TICKETING-1.scope.png	TICKETING-1	light

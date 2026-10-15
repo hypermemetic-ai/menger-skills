@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# bin/build — the screenshots in shots/, taken from the menger deployed on
+# this machine. Nothing in shots/ is committed: a reader off the surface
+# builds them, and a clone without a running menger cannot.
+#
+#   bin/build                 every row of shots.tsv, from prod
+#   bin/build VOLT-1 KILN-1   only those tickets' rows
+#
+# MENGER_ENV   the deployed environment to read: prod or test     [prod]
+# MENGER_DIR   the menger checkout whose scripts/shot.mjs takes them
+#                                                     [../menger beside this]
+#
+# It fails, naming why, when that menger is not online — it never falls back
+# to another server or to old pictures.
+set -euo pipefail
+
+here=$(cd "$(dirname "$0")/.." && pwd)
+env=${MENGER_ENV:-prod}
+menger=${MENGER_DIR:-$here/../menger}
+die() { echo "build: $*" >&2; exit 1; }
+
+case $env in prod | test) ;; *) die "MENGER_ENV=$env: prod or test" ;; esac
+conf=$HOME/.config/menger/$env.env
+[ -f "$conf" ] || die "no $conf — menger's $env environment is not installed on this machine (menger's deploy/README.md)"
+port() { sed -n "s/^$1=//p" "$conf" | tail -n1; }
+shell=$(port MENGER_SHELL_PORT)
+ws=$(port MENGER_WS_PORT)
+[ -n "$shell" ] && [ -n "$ws" ] || die "$conf names no MENGER_SHELL_PORT / MENGER_WS_PORT"
+
+# Online: the app answers, and the tracker answers over its own wire.
+curl -fsS -o /dev/null --max-time 5 "http://127.0.0.1:$shell/" \
+  || die "menger ($env) is not online: nothing answers on http://127.0.0.1:$shell/ — start it (systemctl --user start menger@$env) and run again"
+if command -v synapse >/dev/null; then
+  synapse -P "$ws" menger tickets health >/dev/null 2>&1 \
+    || die "menger ($env) is not online: tickets.health does not answer on :$ws"
+fi
+
+shot=$menger/scripts/shot.mjs
+[ -f "$shot" ] || die "no $shot — set MENGER_DIR to a menger checkout"
+# shot.mjs says so itself when its browser is not set up (cd perf && npm ci).
+
+mkdir -p "$here/shots"
+only=" $* "
+n=0
+while IFS=$'\t' read -r file ticket theme; do
+  case $file in '' | '#'*) continue ;; esac
+  [ $# -eq 0 ] || [[ $only == *" $ticket "* ]] || continue
+  echo "build: $file ← #/ticket/$ticket ($theme)"
+  node "$shot" "#/ticket/$ticket" --env "$env" --theme "$theme" --width 1100 --out "$here/shots/$file" >/dev/null \
+    || die "$file: menger's screenshot of $ticket failed (above)"
+  n=$((n + 1))
+done < "$here/shots.tsv"
+[ "$n" -gt 0 ] || die "nothing to take: no row of shots.tsv names ${*:-a ticket}"
+echo "build: $n screenshot(s) in shots/ from menger $env"
