@@ -126,4 +126,10 @@ The surface is the thing. The ticket carries the component (a `component` block,
 
 </m-field>
 
+<m-field data-field="detail" label="When to archive (ARCHIVE-2)">
+
+A view is for live work. **Archive** a ticket — `tickets archive --ids X` (with `--dry-run true` first when it holds a subtree) — when nothing will read it again in a view: the merge set it Complete and its release is promoted; it was Superseded or Canceled and its successor is named; it is a doc nobody consults; or it is parked work you want out of the way (it keeps its status — parked, not done — and still blocks what waits on it). Archiving a parent takes its whole subtree: read the answer's `live`, and archive live work only on purpose. The archive is one filter away (`archived and under X`), every link and chip still reaches it, and `tickets restore` brings it back with its parents. Never archive to hide a question: an input or a `needs-you` waits for the owner, and archiving takes it off the queue. A mistake is still `delete`; work not done is still `Superseded` / `Canceled` first, then archived when it is out of the way.
+
+</m-field>
+
 <m-field data-field="execution">The forms: <a href="scope.md">the scope — is this worth it, and what will exist?</a> · <a href="execution.md">the execution — what is the order, and where does it stand?</a> · <a href="build.md">the build — what does it do, and how do I call it?</a> · <a href="spike.md">the spike — what did we find?</a> · <a href="gap.md">the gap — what went wrong, and what should happen?</a> · <a href="doc.md">the doc — what is so, and why?</a>. The components and their markup: <a href="../surface/SKILL.md">surface</a>; which picture: <a href="../showing/SKILL.md">showing</a>; fewer tickets, placed right: <a href="../planning/SKILL.md">planning</a>; per system: <a href="../systems/SKILL.md">systems</a>; the calls: <a href="../reaching/SKILL.md">reaching</a>.</m-field>
