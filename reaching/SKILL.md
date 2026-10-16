@@ -5,7 +5,7 @@ description: Use for any read or write against menger from a shell or a script �
 
 <m-summary>
 
-<m-answer data-field="answer">**Everything menger does is a Plexus RPC method on the `menger` hub; `synapse -P 4455 menger <activation> <method> --flag value` is how an agent reads and writes it, and the body goes as `--body "$(cat file.md)"`.**</m-answer>
+<m-answer data-field="answer">**Everything menger does is a Plexus RPC method on the `menger` hub; `synapse -P 4455 menger <activation> <method> --flag value` is how an agent reads and writes it, and the body goes as `--body @file.md`.**</m-answer>
 
 <m-stat value="4455">the tracker, prod</m-stat>
 <m-stat value="-j">the raw stream, for a script</m-stat>
@@ -34,7 +34,8 @@ description: Use for any read or write against menger from a shell or a script �
 | -- | -- |
 | global options before the backend name | `synapse -P 4455 -j menger tickets list …` — after the path they read as a subcommand |
 | params are flags, not JSON | `--blocked-by AMP-3 --severity High`; a list is the flag repeated or comma-separated |
-| a body is a file | a quoted heredoc, then `--body "$(cat body.md)"`; whatever it begins with (frontmatter's `---`) and holds (`$`, backticks) arrives literally |
+| a body is a file | a quoted heredoc, then `--body @body.md` (synapse ≥ 3.14.8, SYNAPSE-10): the file's contents exactly — frontmatter's `---`, `$`, backticks — and no size cap from the shell (`--body "$(cat …)"` fails past 128 KB); `--body -` reads stdin; a value that really begins with `@` is written `@@…` |
+| a whole params object is a file too | `-p @params.json`, or `-p -` from stdin |
 | a multi answer and a theme's maps go through `-p '{…}'` | synapse sends a list inside a nested parameter as one string |
 | `-j` is the raw stream | items are `{ "type": …, "content": { "ticket" \| "summary" \| "node" \| "input" \| "note" \| "component" \| … } }`, then `done`; a unary REST read caps at 10,000 items, the socket does not |
 | the tracker is prod | `-P 4455` reads and writes the live tracker; a throwaway server is `PLEXUS_NO_REGISTRY=1 cargo run -- --port 4460 … --db-path /tmp/x.db` in `../menger`, never bare `cargo run` |
@@ -44,13 +45,13 @@ description: Use for any read or write against menger from a shell or a script �
 <m-code lang="bash" why="writing — the first ticket of a shortcode is a scope or a doc; a root hangs under --parent">
 
 ```bash
-synapse -P 4455 menger tickets create --epic AMP --title "Volt" --kind scope --parent HOME-1 --body "$(cat AMP-1.md)"
-synapse -P 4455 menger tickets create --epic AMP --title "volt.queue" --kind build --parent AMP-2 --blocked-by AMP-3 --body "$(cat AMP-4.md)"
-synapse -P 4455 menger tickets create --epic AMP --title "A reboot mid-session" --kind gap --parent AMP-2 --severity High --body "$(cat AMP-6.md)"
-synapse -P 4455 menger tickets create --epic AMP --title "The wire, three ways" --kind doc --body "$(cat AMP-7.md)"
+synapse -P 4455 menger tickets create --epic AMP --title "Volt" --kind scope --parent HOME-1 --body @AMP-1.md
+synapse -P 4455 menger tickets create --epic AMP --title "volt.queue" --kind build --parent AMP-2 --blocked-by AMP-3 --body @AMP-4.md
+synapse -P 4455 menger tickets create --epic AMP --title "A reboot mid-session" --kind gap --parent AMP-2 --severity High --body @AMP-6.md
+synapse -P 4455 menger tickets create --epic AMP --title "The wire, three ways" --kind doc --body @AMP-7.md
 
 # change — a body is replaced whole; update does any of it in one write
-synapse -P 4455 menger tickets amend --id AMP-1 --body "$(cat AMP-1.md)"
+synapse -P 4455 menger tickets amend --id AMP-1 --body @AMP-1.md
 synapse -P 4455 menger tickets update --id AMP-4 --block AMP-3 --severity none
 synapse -P 4455 menger tickets update --id AMP-6 --kind gap --status Ready --severity High
 synapse -P 4455 menger tickets set_kind --id AMP-5 --kind execution

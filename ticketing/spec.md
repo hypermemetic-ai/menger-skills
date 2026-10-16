@@ -97,4 +97,4 @@ sequenceDiagram
 
 </m-field>
 
-<m-field data-field="exit" label="Done when">Every requirement has a scenario a test can be written from; every diagram parses (`synapse -P 4458 diagrams mermaid check --markdown "$(cat spec.md)"`); every endpoint has its params, answers and grant; the mockup draws every screen the requirements name; and what is still open is an input on the spec. Then the builds are written from it, citing the requirements they cover.</m-field>
+<m-field data-field="exit" label="Done when">Every requirement has a scenario a test can be written from; every diagram parses (`synapse -P 4458 diagrams mermaid check --markdown @spec.md`); every endpoint has its params, answers and grant; the mockup draws every screen the requirements name; and what is still open is an input on the spec. Then the builds are written from it, citing the requirements they cover.</m-field>

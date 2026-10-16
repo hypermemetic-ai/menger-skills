@@ -78,10 +78,10 @@ The scope cites the execution's `dag` and each build's `problem` or `intended-us
 <m-code lang="bash" why="the owner promotes; the agent never does">
 
 ```bash
-synapse -P 4455 menger tickets create --epic AMP --title "Volt — nine flats, two chargers" --kind scope --parent HOME-1 --body "$(cat scope.md)"
-synapse -P 4455 menger tickets create --epic AMP --title "One evening, end to end" --kind execution --body "$(cat execution.md)"
-synapse -P 4455 menger tickets create --epic AMP --title "Spike: stream or poll?" --kind spike --parent AMP-2 --body "$(cat spike.md)"
-synapse -P 4455 menger tickets create --epic AMP --title "volt.queue" --kind build --parent AMP-2 --blocked-by AMP-3 --body "$(cat build.md)"
+synapse -P 4455 menger tickets create --epic AMP --title "Volt — nine flats, two chargers" --kind scope --parent HOME-1 --body @scope.md
+synapse -P 4455 menger tickets create --epic AMP --title "One evening, end to end" --kind execution --body @execution.md
+synapse -P 4455 menger tickets create --epic AMP --title "Spike: stream or poll?" --kind spike --parent AMP-2 --body @spike.md
+synapse -P 4455 menger tickets create --epic AMP --title "volt.queue" --kind build --parent AMP-2 --blocked-by AMP-3 --body @build.md
 ```
 
 </m-code>
