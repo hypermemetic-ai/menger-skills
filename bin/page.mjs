@@ -12,7 +12,7 @@
 // --render    bin/render's JSON for every example file (so a cite between
 //             examples, and the themes they wear, resolve among them)
 // --registry  the house components, as that menger's registry answers them
-//             (`tickets components`, the `m-*` names only)
+//             (`tickets components list`, the `m-*` names only)
 // NAME=EXAMPLE:SCHEME   write DIR/NAME.html: EXAMPLE (a path as given to
 //             bin/render) in SCHEME (light or dark)
 //

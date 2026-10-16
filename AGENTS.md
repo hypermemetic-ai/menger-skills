@@ -35,7 +35,7 @@ vocabulary and **shown on menger**. Read `README.md` first.
   `AMP` (Volt, the nine flats), `CONE` (the kiln), `PLOT` (the
   allotments), `ROAST` (the brewery feed), and `HOME` as the parent their
   roots hang under. A new example invents its own and checks it is none of
-  the tracker's (`synapse -P 4455 menger tickets counts`). Those ids may
+  the tracker's (`synapse -P 4455 menger tickets nav counts`). Those ids may
   appear in examples, skeletons and illustrative commands; no other id may.
 - One example may cite another (`<m-cite ref="AMP-2" field="dag">`): the
   cite resolves among the examples, by `id`.

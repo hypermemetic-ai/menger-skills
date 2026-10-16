@@ -18,7 +18,7 @@ description: Use whenever a decision, a bet, a confirmation or a reply is the ow
 graph LR
   W["written: m-decision id= · m-input id="] --> O["open<br/>in Needs-you"]
   O -->|"the owner picks, in the ticket or by synapse"| A["answered<br/>source app | api"]
-  A -->|"the agent acts, then close_input"| C["closed<br/>DECIDED"]
+  A -->|"the agent acts, then inputs close"| C["closed<br/>DECIDED"]
   A -.->|"the owner clears"| O
   O -.->|"the body drops it"| R["removed<br/>history kept"]
 ```
@@ -51,7 +51,7 @@ After the reader has seen what they need to answer it, and before the contract: 
 4. **One recommendation, always.** "None — the evidence doesn't pick" is written only when true.
 5. **The human keeps the signature.** Appetite, answer, placement on the hill: a number the owner sets is marked as the owner's (a dot *placed by the owner*), never overwritten by a status.
 6. **Read the state before acting.** An answer may be cleared while the input is open.
-7. **Act, then close.** `close_input` freezes it; the component shows DECIDED. A question that must be asked again is `reopen_input`.
+7. **Act, then close.** `inputs close` freezes it; the component shows DECIDED. A question that must be asked again is `inputs reopen`.
 8. **A playable is not an answer.** A guess made in a simulation records nothing; the decision is the input beside it.
 9. **Work the owner told you to do is urgent.** A question that stops it is queued, not only filed (owner, 2026-10-15). Below.
 10. **Queued, then listen.** After queueing, wait on the ticket with `await_reply` (in the background where the harness allows it), act on what it yields, then close the input or queue again. Never queue and then just stop (owner, 2026-10-15). Below.
@@ -80,7 +80,7 @@ Say what you are waiting on in the `--reason`, in a sentence the owner can act o
 
 | `reply.kind` | the owner | the agent then |
 | -- | -- | -- |
-| `answered` | answered an input (with `--input`: that one) | read the state, act on the answer, `close_input` |
+| `answered` | answered an input (with `--input`: that one) | read the state, act on the answer, `inputs close` |
 | `changes_requested` | pressed *Request changes* in the tray: the comment says what to change, and the ticket is out of the queue | change the ticket (its body, the options, the work), then queue it again |
 | `commented` | left a comment on the ticket | read it; act, answer in a comment, or ask again |
 | `unqueued` | took it out of the queue (`done with it`), or its input was closed (`closed`) | read the ticket: it may be decided, or no longer wanted |
@@ -116,11 +116,11 @@ synapse -P 4455 menger tickets request_changes --id AMP-4 --body "neither: …" 
 <m-code lang="bash" why="reading what waits, closing what was acted on">
 
 ```bash
-synapse -P 4455 menger tickets inputs --state open                      # everything waiting
-synapse -P 4455 menger tickets inputs --ticket AMP-1                  # one ticket's, with history
+synapse -P 4455 menger tickets inputs list --state open                      # everything waiting
+synapse -P 4455 menger tickets inputs list --ticket AMP-1                  # one ticket's, with history
 synapse -P 4455 menger tickets list --filter 'asking or label needs-you' --summary true
-synapse -P 4455 menger tickets close_input --ticket AMP-1 --input policy
-synapse -P 4455 menger tickets reopen_input --ticket AMP-1 --input policy
+synapse -P 4455 menger tickets inputs close --ticket AMP-1 --input policy
+synapse -P 4455 menger tickets inputs reopen --ticket AMP-1 --input policy
 synapse -P 4455 menger tickets label --id AMP-6 --add needs-you        # not a choice: the reason is in the body
 synapse -P 4455 menger tickets label --id AMP-6 --remove needs-you     # once acted on
 ```
@@ -130,10 +130,10 @@ synapse -P 4455 menger tickets label --id AMP-6 --remove needs-you     # once ac
 <m-code lang="bash" why="the owner answering by shell (source api); a multi goes through -p">
 
 ```bash
-synapse -P 4455 menger tickets answer --ticket AMP-1 --input policy --value.type choice --value.option fair --rationale "a week is fair"
-synapse -P 4455 menger tickets answer --ticket T --input notes --value.type text --value.text "ship it"
-synapse -P 4455 -p '{"ticket":"CONE-1","input":"house","value":{"type":"multi","options":["stretch","hill"]}}' menger tickets answer
-synapse -P 4455 menger tickets clear_answer --ticket AMP-1 --input policy
+synapse -P 4455 menger tickets inputs answer --ticket AMP-1 --input policy --value.type choice --value.option fair --rationale "a week is fair"
+synapse -P 4455 menger tickets inputs answer --ticket T --input notes --value.type text --value.text "ship it"
+synapse -P 4455 -p '{"ticket":"CONE-1","input":"house","value":{"type":"multi","options":["stretch","hill"]}}' menger tickets inputs answer
+synapse -P 4455 menger tickets inputs clear --ticket AMP-1 --input policy
 ```
 
 </m-code>

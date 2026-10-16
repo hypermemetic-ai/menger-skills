@@ -41,8 +41,8 @@ Placement first, scope second, the fork third; the leaves last, and only the liv
 synapse -P 4455 menger tickets search --query 'charger stream' --filter 'not category done'
 synapse -P 4455 menger tickets find --query queue
 synapse -P 4455 menger tickets list --filter 'under HOME-1 and kind scope' --summary true
-synapse -P 4455 menger tickets tree --epic AMP --filter 'not category done'
-synapse -P 4455 menger tickets counts --filter 'ready and under HOME-1'
+synapse -P 4455 menger tickets nav tree --epic AMP --filter 'not category done'
+synapse -P 4455 menger tickets nav counts --filter 'ready and under HOME-1'
 ```
 
 </m-code>
@@ -67,7 +67,7 @@ Every build's `provides` and `consumes` are tables; every consumed input names t
 
 ### Blockers as edges; status derived.
 
-`--blocked-by A,B` at create, or `update --id X --block Y` later. `Blocked` is derived by the tracker; nobody sets it. The ready set is `ready_set --filter 'kind build and under AMP-1'`.
+`--blocked-by A,B` at create, or `update --id X --block Y` later. `Blocked` is derived by the tracker; nobody sets it. The ready set is `work ready --filter 'kind build and under AMP-1'`.
 
 ### The parent is built from the children.
 

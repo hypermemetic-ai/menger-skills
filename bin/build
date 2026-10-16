@@ -76,8 +76,8 @@ cd "$here"
 # Every example, so a cite between them and the themes they wear resolve.
 mapfile -t examples < <(ls -1 */examples/*.md)
 "$render" "${examples[@]}" > "$work/render.json" || die "bin/render failed (above)"
-synapse -P "$ws" -j menger tickets components > "$work/registry.jsonl" \
-  || die "menger ($env) did not answer tickets.components on :$ws"
+synapse -P "$ws" -j menger tickets components list > "$work/registry.jsonl" \
+  || die "menger ($env) did not answer tickets.components.list on :$ws"
 
 jobs=()
 for r in "${rows[@]}"; do

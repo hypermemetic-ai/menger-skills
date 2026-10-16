@@ -18,7 +18,7 @@ description: Use when implementing a ticket the owner has promoted to Ready. Pro
 graph TD
   R["Ready<br/>(the owner promoted it)"] --> C["Coding<br/>set_status · the branch on the timeline"]
   C --> I["implement · gate green<br/>m-results on the timeline"]
-  I --> V["In Review<br/>in the finishing commit · link_commits"]
+  I --> V["In Review<br/>in the finishing commit · commits link"]
   V -->|"the pipeline: build → test env → promote"| D["Complete<br/>the merge hash"]
 ```
 
@@ -59,7 +59,7 @@ The affected workspace builds and tests pass — every acceptance list includes 
 <m-code lang="bash" why="the commit message ends “— in review”; the same step links the commits and sets the status">
 
 ```bash
-synapse -P 4455 menger tickets link_commits --id AMP-4 --commits 77df9a0 --commits volt@1a2b3c4
+synapse -P 4455 menger tickets commits link --id AMP-4 --commits 77df9a0 --commits volt@1a2b3c4
 synapse -P 4455 menger tickets set_status --id AMP-4 --status "In Review"
 ```
 

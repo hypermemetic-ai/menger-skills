@@ -34,6 +34,7 @@ description: Use for any read or write against menger from a shell or a script �
 | -- | -- |
 | global options before the backend name | `synapse -P 4455 -j menger tickets list …` — after the path they read as a subcommand |
 | params are flags, not JSON | `--blocked-by AMP-3 --severity High`; a list is the flag repeated or comma-separated |
+| a ticket's inputs, commits, nav reads, order of work and components are children of `tickets` | `menger tickets inputs list` · `inputs answer` · `inputs close`, `tickets commits link`, `tickets nav tree` · `nav counts`, `tickets work ready` · `work waves`, `tickets components list` — on a menger whose `synapse -P 4455 menger tickets` lists `inputs`, `commits`, `nav`, `work` and `components` under ACTIVATIONS; a server before that has the old flat names (`inputs`, `answer`, `close_input`, `link_commits`, `tree`, `counts`, `ready_set`, `components`, …) |
 | a body is a file | a quoted heredoc, then `--body @body.md` (synapse ≥ 3.14.8, SYNAPSE-10): the file's contents exactly — frontmatter's `---`, `$`, backticks — and no size cap from the shell (`--body "$(cat …)"` fails past 128 KB); `--body -` reads stdin; a value that really begins with `@` is written `@@…` |
 | a whole params object is a file too | `-p @params.json`, or `-p -` from stdin |
 | a multi answer and a theme's maps go through `-p '{…}'` | synapse sends a list inside a nested parameter as one string |
@@ -59,14 +60,14 @@ synapse -P 4455 menger tickets set_parent --id AMP-9 --parent AMP-2
 
 # move — the owner promotes; the builder claims and finishes
 synapse -P 4455 menger tickets set_status --id AMP-4 --status Coding
-synapse -P 4455 menger tickets link_commits --id AMP-4 --commits 77df9a0 --commits volt@1a2b3c4
+synapse -P 4455 menger tickets commits link --id AMP-4 --commits 77df9a0 --commits volt@1a2b3c4
 synapse -P 4455 menger tickets set_status --id AMP-4 --status "In Review"
 synapse -P 4455 menger tickets set_status --id AMP-9 --status Canceled --message "folded into AMP-4"
 synapse -P 4455 menger tickets update_many --ids AMP-4,AMP-5 --status Ready --message "promoted"
 synapse -P 4455 menger tickets label --id AMP-6 --add needs-you
 
 # ask and close
-synapse -P 4455 menger tickets close_input --ticket AMP-1 --input policy
+synapse -P 4455 menger tickets inputs close --ticket AMP-1 --input policy
 
 # notes
 synapse -P 4455 menger notes add --body "the hill should count the days down"
@@ -74,6 +75,13 @@ synapse -P 4455 menger notes upgrade --id 7 --epic CONE --parent CONE-1 --kind d
 
 # themes
 synapse -P 4455 menger themes set --scope AMP --theme volt --reach ticket
+
+# who may — a grant's scope is *, an org, a shortcode, a ticket alone or `under` a ticket; a team holds grants for its members (admin only)
+synapse -P 4455 menger members grant --principal key:4b… --scope AMP --role editor
+synapse -P 4455 menger members grant --principal key:4b… --scope 'under AMP-2' --role viewer
+synapse -P 4455 menger members teams create --name volt-crew
+synapse -P 4455 menger members teams add --team volt-crew --principal key:4b…
+synapse -P 4455 menger members grant --team volt-crew --scope AMP --role editor
 ```
 
 </m-code>
@@ -85,15 +93,15 @@ synapse -P 4455 menger tickets health
 synapse -P 4455 menger tickets get --id AMP-4                               # the body as written
 synapse -P 4455 menger tickets list --epic AMP --summary true
 synapse -P 4455 menger tickets list --filter 'under HOME-1 and kind scope' --summary true
-synapse -P 4455 menger tickets tree --epic AMP --filter 'not category done'   # tree needs a filter
-synapse -P 4455 menger tickets counts --filter 'ready and kind build'
-synapse -P 4455 menger tickets ready_set --filter 'under AMP-1' --summary true
+synapse -P 4455 menger tickets nav tree --epic AMP --filter 'not category done'   # tree needs a filter
+synapse -P 4455 menger tickets nav counts --filter 'ready and kind build'
+synapse -P 4455 menger tickets work ready --filter 'under AMP-1' --summary true
 synapse -P 4455 menger tickets search --query 'boot_id ghost' --filter 'not category done'
 synapse -P 4455 menger tickets find --query queue
 synapse -P 4455 menger tickets history --id AMP-4
-synapse -P 4455 menger tickets inputs --state open
-synapse -P 4455 menger tickets inputs --ticket AMP-1
-synapse -P 4455 menger tickets components
+synapse -P 4455 menger tickets inputs list --state open
+synapse -P 4455 menger tickets inputs list --ticket AMP-1
+synapse -P 4455 menger tickets components list
 synapse -P 4455 menger themes theme_for --id AMP-4
 synapse -P 4455 menger comments list --under AMP --state open
 synapse -P 4455 menger tickets watch --filter 'under AMP-1'                  # open-ended

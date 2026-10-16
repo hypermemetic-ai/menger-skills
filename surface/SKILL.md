@@ -24,7 +24,7 @@ graph TD
   CON --> ZOOM["the children, from inside the parent<br/>m-cite · m-ticket"]
 ```
 
-The order is the reader's arc ([ticketing](../ticketing/SKILL.md)); the components are below, by what they do. Every one has a docs card at `#/components/<name>`, and `synapse -P 4455 menger tickets components` answers all of them with their attributes, slots, parts and examples.
+The order is the reader's arc ([ticketing](../ticketing/SKILL.md)); the components are below, by what they do. Every one has a docs card at `#/components/<name>`, and `synapse -P 4455 menger tickets components list` answers all of them with their attributes, slots, parts and examples.
 
 </m-diagram>
 
