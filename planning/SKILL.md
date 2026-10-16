@@ -51,7 +51,7 @@ Most requests advance a scope that exists and become a child of it. A request th
 
 ### Write the scope as a pitch.
 
-[the scope](../ticketing/scope.md): the epitome, the end state as one diagram, the decided shape in fat marker, the language, the edges, the interface contract — and **the fork as an input** (`m-decision id=`), so the owner's first look is also where they place the bet. Iterate the body in place until the four tests pass (the language resolves, the edges are drawn, the contract is stateable, an execution can be written from it). Then stop.
+[the scope](../ticketing/scope.md): the epitome, the end state as one diagram, the decided shape in fat marker, the language, the edges, the interface contract — and **the fork as an input** (`m-decision id=`), so the owner's first look is also where they place the bet. When the scope adds a surface people will call and look at, or the owner asks for a spec, write it as [a spec](../ticketing/spec.md): OpenSpec's requirements and scenarios, the state machines, the endpoints, the sequences that matter most, and a mockup as a child doc. Iterate the body in place until the four tests pass (the language resolves, the edges are drawn, the contract is stateable, an execution can be written from it). Then stop.
 
 ### One diff, or a DAG?
 

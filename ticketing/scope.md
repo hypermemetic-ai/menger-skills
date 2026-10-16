@@ -117,6 +117,7 @@ The pitch example's `status` field is that hill; the rows it reads are the examp
 | placing a bet | the pitch: appetite, the problem, a breadboard, the solution in fat marker, rabbit holes as folded cards, no-gos, the bet as an input; a stretch throttle lets the owner read the gist, the pitch, or everything | [examples/pitch.md](examples/pitch.md) |
 | learning a system | the pattern: *the society knows its plots* — the pattern above, the problem, *therefore*, and the smaller patterns that complete it, each cited; every child returns to this picture before it elaborates | [examples/pattern.md](examples/pattern.md) |
 | using a product | the moment, the end state, the decided shape, the surface as one code block, the open fork as an input, the children cited | [examples/scope.md](examples/scope.md), [../showing/examples/feed.md](../showing/examples/feed.md) |
+| building a feature | the spec: requirements as *SHALL*s with *WHEN … THEN* scenarios, the state machines, the endpoints, the sequences, a mockup child doc, the builds as tasks | [spec](spec.md) |
 
 </m-cases>
 
