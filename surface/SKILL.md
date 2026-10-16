@@ -119,7 +119,7 @@ reach: ticket           # frame | ticket | site
 ---
 ```
 
-`mockup` draws the body once per device, in device chrome, with Light / Dark and Reduced-motion toggles the framed page sees live. That is how a frontend ticket shows the page it is about: as the page, at the widths it must work at ([showing](../showing/SKILL.md)).
+`mockup` draws the body once per device, in device chrome, with Light / Dark and Reduced-motion toggles the framed page sees live. That is how a frontend ticket shows the page it is about: as the page, at the widths it must work at ([showing](../showing/SKILL.md)). A mockup is one view, never a scrolling page of several; another view is another `<m-mockup>` in its own section, and what it shows is said outside it — `description:` in the frontmatter, `description="…"` on `<m-mockup>` (APP-42), or the prose above.
 
 </m-field>
 

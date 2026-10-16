@@ -35,7 +35,7 @@ The spec is the scope's body. It is written before its builds are promoted, and 
 
 <m-field data-field="detail" label="The mockup">
 
-A child doc of the spec whose body is a whole document (`<!doctype html>`, `<meta name="menger-view" content="mockup">`): the app's own tokens and fonts, light and dark, every screen the requirements name drawn as a numbered figure with a caption — the action, the warning, the state after, the way back, the view where the new thing is listed. Synthetic ids from the same worked project as the scenarios. It is looked at in a browser, both themes, before the spec cites it.
+A child doc of the spec whose body is a whole document (`<!doctype html>`, `<meta name="menger-view" content="mockup">`): the app's own tokens and fonts, light and dark, every screen the requirements name — the action, the warning, the state after, the way back, the view where the new thing is listed — each **its own mockup** in its own section (`<m-mockup>`, one view each, interactive where the view is), its caption the prose above it or the mockup's `description`, never a heading inside the page ([showing](../showing/SKILL.md): a mockup is one view). Synthetic ids from the same worked project as the scenarios. It is looked at in a browser, both themes, before the spec cites it.
 
 </m-field>
 

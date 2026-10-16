@@ -26,7 +26,7 @@ description: Use for any body a person will look at, and always for a frontend. 
 | one path through the code | numbered steps, each over the lines that prove it | `m-walk` + `m-code path lang why` |
 | a mechanism | a playable: one knob, a go button, a guess | a `component` block in a field |
 | a frontend component | the component itself | its `component` block, rendered in the body |
-| a page | the body as the page, at its widths | `view: mockup` + `widths:` |
+| a page | the body as the page, at its widths; one view per mockup, its description outside it | `view: mockup` + `widths:`, or one `<m-mockup>` per view |
 | progress | a hill, a dial, a ring, a sponge, a feed | `kiln-hill`, `m-dial`, `m-ring`, `m-sponge`, `brew-feed` |
 | a measurement | a metric sheet; results as tiles | `m-cases data-field="metric-sheet"`, `m-results` |
 | what cannot be built in | a screenshot, both themes | an image in the body, with what it cannot show |
@@ -77,6 +77,12 @@ A component that simulates the mechanism in the body: one evening of homecomings
 | the real thing cannot run in the frame (a server, a native library, a device) | **a screenshot**, both themes, the widths that matter, taken with `../menger/scripts/shot.mjs` against the test environment, placed where the component would have been, with one line on what it cannot show (the motion, the live data); an image loads from any URL the reader can reach — keep the file with the work it shows |
 
 </m-cases>
+
+<m-field data-field="detail" label="A mockup is one view (owner, 2026-10-16)">
+
+One mockup, one view: one screen at one state, at the device's viewport. It is not a long page of figures that scrolls through several screens. Its controls work, so the states one view reaches (a menu open, a sheet slid up, a row collapsed) are reached by using it, not drawn again below. Another view is **its own mockup, in its own section of the body**. What the mockup shows and why is **outside it**: the prose above it, or the mockup's own `description` (`<m-mockup description="…">`, APP-42), never a heading or an intro inside the mocked page.
+
+</m-field>
 
 A frontend ticket with none of the three is not finished. The pitch example's stretch throttle and hill, [../ticketing/examples/pitch.md](../ticketing/examples/pitch.md), are the components the ticket is about, running in the scope that asks for them, reading the tracker (drawn by `bin/build`, they read the example's own `tracker:` rows: `shots/pitch.png`).
 
