@@ -21,15 +21,15 @@ The spec is the scope's body. It is written before its builds are promoted, and 
 | section | `data-field` | holds |
 | -- | -- | -- |
 | summary | `standing`, `confidence` | one sentence that is true the day it is done; what is decided and what is open; the builds and the mockup as chips |
-| how to read it | `reading` | one paragraph: the order below, and that a build is done when its scenarios hold |
-| decided | `decided` | the owner's answers as a table: choice · answer · so |
+| how to read it | `context` | one paragraph: the order below, and that a build is done when its scenarios hold |
+| decided | `decided-shape` | the owner's answers as a table: choice · answer · so |
 | why | `problem` | the owner's words, the numbers, what is wrong today |
-| what changes | `changes` | the store, the wire, every read, the app, and what is **not** changed |
-| requirements | `requirements` | `### Requirement: <name>`, one paragraph with *SHALL*, then `#### Scenario: <name>` with **WHEN** / **THEN** bullets; concrete ids from one worked project, never "a ticket" |
-| design | `design` | the state machines (`stateDiagram-v2` in `m-diagram`: each thing that has states, the write itself, and the app's flow), the endpoints (a table: method · params with types and defaults · answers · grant; then the surface as one `m-code` block), and a `sequenceDiagram` for each flow that matters most — the main write from the app, the way back, the read path, the agent's loop |
-| how it is used | `usage` | the mockup cited, and a line per person who will use it: what they do, in what order |
-| tasks | `tasks` | the builds, each with the requirements it covers |
-| open questions | `open` | each edge the spec found, as an `m-decision` with its recommendation |
+| what changes | `detail` | the store, the wire, every read, the app, and what is **not** changed |
+| requirements | `required-behavior` | `### Requirement: <name>`, one paragraph with *SHALL*, then `#### Scenario: <name>` with **WHEN** / **THEN** bullets; concrete ids from one worked project, never "a ticket" |
+| design | `detail` | the state machines (`stateDiagram-v2` in `m-diagram`: each thing that has states, the write itself, and the app's flow), the endpoints (a table: method · params with types and defaults · answers · grant; then the surface as one `m-code` block), and a `sequenceDiagram` for each flow that matters most — the main write from the app, the way back, the read path, the agent's loop |
+| how it is used | `intended-usage` | the mockup cited, and a line per person who will use it: what they do, in what order |
+| tasks | `execution` | the builds, each with the requirements it covers |
+| open questions | `open-questions` | each edge the spec found, as an `m-decision` with its recommendation |
 
 </m-cases>
 
@@ -47,7 +47,7 @@ A child doc of the spec whose body is a whole document (`<!doctype html>`, `<met
 <m-field data-field="confidence">What is decided, what is open. The builds: <m-ticket ref="KILN-2"></m-ticket> … The mockup: <m-ticket ref="KILN-5"></m-ticket>.</m-field>
 </m-summary>
 
-<m-field data-field="requirements" label="Requirements">
+<m-field data-field="required-behavior" label="Requirements">
 
 ### Requirement: A firing can be paused
 
@@ -59,7 +59,7 @@ The kiln SHALL hold its temperature when a firing is paused, and SHALL resume th
 
 </m-field>
 
-<m-field data-field="design" label="Design">
+<m-field data-field="detail" label="Design">
 
 <m-diagram data-field="shape" label="A firing">
 
