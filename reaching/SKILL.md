@@ -39,6 +39,7 @@ description: Use for any read or write against menger from a shell or a script �
 | a whole params object is a file too | `-p @params.json`, or `-p -` from stdin |
 | a multi answer and a theme's maps go through `-p '{…}'` | synapse sends a list inside a nested parameter as one string |
 | `-j` is the raw stream | items are `{ "type": …, "content": { "ticket" \| "summary" \| "node" \| "input" \| "note" \| "component" \| … } }`, then `done`; a unary REST read caps at 10,000 items, the socket does not |
+| an outage is ridden out (synapse ≥ 3.14.9, SYNAPSE-20) | a restart or a promote is retried for 10 minutes (`--reconnect-for 10m`, `0` = never; `SYNAPSE_RECONNECT_FOR`), progress on stderr only. A read is sent again. A write whose request went out is not: exit **75**, it may have happened, so check before sending it again. A stream resumes: `await_reply` with `since` = when it began, so an answer given during the outage still arrives. Under `-j` the stream carries `{"type":"reconnected","outage_secs":…,"attempts":…,"since":…}`, then the resumed call's items (`waiting` again, then `replied`); a script waiting for `replied` ignores both. Past the window: exit **69**. Under login the session is made again from the key after a restart, and parallel calls make it once (≥ 3.14.10, SYNAPSE-15) |
 | the tracker is prod | `-P 4455` reads and writes the live tracker; a throwaway server is `PLEXUS_NO_REGISTRY=1 cargo run -- --port 4460 … --db-path /tmp/x.db` in `../menger`, never bare `cargo run` |
 
 </m-cases>
