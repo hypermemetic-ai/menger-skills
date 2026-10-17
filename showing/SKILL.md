@@ -91,6 +91,18 @@ When the owner is to choose between looks, the decision's options **each hold th
 
 </m-field>
 
+<m-field data-field="detail" label="How to make and use a mockup">
+
+1. **One view, one fence.** Write each view as its own fence in its own section of the body: ` ```mockup widths=390,1440 title="Panel open" description="Two groups joined by or." ` and a whole page inside (`<!doctype html>` …). Put a line of prose above it that says the same as `description`. Nothing explains itself inside the page.
+2. **Make it the product.** Use the app's tokens and fonts (`menger/tickets-api/src/tokens.toml`), light and dark, with synthetic data. Make the controls work, so a reader reaches the view's states by using it.
+3. **Check it before filing.** In headless Chromium at each width and theme, click every control, check that the document height equals the viewport (no page scroll), and check for page errors. Then render the body on a throwaway menger and look at it.
+4. **Ask with it.** For a choice between looks, put one mockup in each `<m-option>` of the decision (asking: a decision between looks). The owner picks with *pick this* on a mockup's bar, or opens *compare these*.
+5. **Read the feedback.** Comments arrive on a mockup (*comment* on its bar) or on an element inside it (the annotation mode). Their anchor is `mockup:<ticket>#<n>@<width> >> <selector>`. `comments list --ticket T` lists them.
+6. **Compare across tickets.** *Compare* (`c`) on any mockup's bar, then the pill's *open*. A `?compare=T#m1,U#m2` link reopens the set.
+7. **Screenshot it** with Playwright (`menger/perf/node_modules`) until `scripts/shot.mjs` can (APP-43). Put the shots in the build's In Review step.
+
+</m-field>
+
 A frontend ticket with none of the three is not finished. The pitch example's stretch throttle and hill, [../ticketing/examples/pitch.md](../ticketing/examples/pitch.md), are the components the ticket is about, running in the scope that asks for them, reading the tracker (drawn by `bin/build`, they read the example's own `tracker:` rows: `shots/pitch.png`).
 
 <m-field data-field="detail" label="Progress, live">A picture of where the work stands reads the tracker and follows `watch`: a dot per build on a hill, placed by status unless the owner placed it (and the hover says which); a dial of a scope; a feed of what changed. Every number is the tracker's; a dot that cannot be placed is a list that wants splitting.</m-field>
