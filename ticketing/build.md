@@ -101,7 +101,7 @@ await volt.queue.join({ flat: "4B", needsKwh: 30 });
 
 <m-status data-field="status">
 
-<m-step date="2026-10-13" status="Pending">Filed.</m-step>
+<m-step date="2026-10-13T08:30Z" status="Pending">Filed.</m-step>
 
 </m-status>
 
@@ -122,7 +122,7 @@ The component is the ticket. Define it in the body, render it where the reader w
 
 <m-field data-field="detail" label="The timeline">
 
-`status` is a dated `m-status`, appended on every move: `Coding` with the branch, `In Review` with the commits and the gate as an `m-results`, `Complete` with the merge ([building](../building/SKILL.md)). A dated `m-card` under `intended-usage`'s `m-divergence-notes` records where reality diverged, never edited after.
+`status` is a dated `m-status`, appended on every move, each step stamped with its moment in UTC (`date="2026-10-13T08:30Z"`, from `date -u +%FT%RZ`; the timeline says the day once and each step's time): `Coding` with the branch, `In Review` with the commits and the gate as an `m-results`, `Complete` with the merge ([building](../building/SKILL.md)). A dated `m-card` under `intended-usage`'s `m-divergence-notes` records where reality diverged, never edited after.
 
 </m-field>
 

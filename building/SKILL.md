@@ -39,12 +39,14 @@ Can you build it from the body alone? If not, it is a ticketing failure: patch t
 ```markdown
 <m-status data-field="status">
 
-<m-step date="2026-10-13" status="Coding" by="builder">Branch `volt/AMP-4-queue`, worktree `volt-AMP-4`.</m-step>
+<m-step date="2026-10-13T09:12Z" status="Coding" by="builder">Branch `volt/AMP-4-queue`, worktree `volt-AMP-4`.</m-step>
 
 </m-status>
 ```
 
 </m-code>
+
+A step's `date` is the moment, in UTC: `date -u +%FT%RZ` writes it (`2026-10-13T09:12Z`). The timeline shows each step's time where the reader is and says the day once, where it changes, as a chat does (ART-12); a date alone still draws, with no time.
 
 A worktree and branch named for the ticket, so no leaf is double-claimed and attribution falls out of the names. Triage the tree first: a dirty file belongs to some body of work — this ticket's, another's, or unknown (stop and ask). Never build on it silently.
 
@@ -68,7 +70,7 @@ synapse -P 4455 menger tickets set_status --id AMP-4 --status "In Review"
 <m-code lang="markdown" why="the In Review step: commits as chips, the gate as tiles">
 
 ```markdown
-<m-step date="2026-10-14" status="In Review" commits="volt@77df9a0" by="builder">
+<m-step date="2026-10-14T16:40Z" status="In Review" commits="volt@77df9a0" by="builder">
 
 Gate green.
 
