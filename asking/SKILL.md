@@ -32,6 +32,7 @@ Open, answered, closed, removed — every answer kept with its history, queryabl
 | ask | write | the answer |
 | -- | -- | -- |
 | pick one | `<m-decision data-field="decision" id="policy" rows="who waits\|cost">` with an `m-question`, two or more `m-option name value recommended …`, an `m-recommendation by` | a choice, with a rationale |
+| pick a look | the same decision, **a mockup in each option** (below) | a choice, picked on its mockup |
 | tick any | `<m-input id="house" kind="multi">` with an `m-question` and `m-choice value recommended` items | the ticked values (none is an answer too) |
 | reply | `<m-input id="notes" kind="text">` with an `m-question` | free text |
 
@@ -40,6 +41,42 @@ Open, answered, closed, removed — every answer kept with its history, queryabl
 <m-field data-field="context" label="Where it goes in the body">
 
 After the reader has seen what they need to answer it, and before the contract: the epitome, the shape, the playable — then the question. A bet at the top of a scope the owner has not read yet is answered on the title. The scope example, [../ticketing/examples/scope.md](../ticketing/examples/scope.md), puts the policy decision after the surface and before the language, and its recommendation points at the build example's playable: *guess, press go, then decide here.* The `id` is what makes it live: unique in the ticket; a duplicate refuses the write. Without an `id` the same markup only displays (a recorded decision in a spike, with its `m-answer`). That decision is its `decision` field (`shots/scope.png`); filed, it is answered in its own ticket.
+
+</m-field>
+
+<m-field data-field="decided-shape" label="A decision between looks (APP-46)">
+
+When the options are looks — a layout, a screen, a component's state — **each option holds its mockup**, so the owner decides on the thing and not on a description of it. Put an `<m-mockup>` (or a ` ```mockup ` fence, blank lines around it) inside each `<m-option>`, one view each (showing: *a mockup is one view*), its `description` saying what the view shows; the option's rows still carry the cost and the benefit. The app draws each option's mockup in its card with **pick this** on the mockup's bar: the owner's click records that option as the decision's answer, exactly as the card's own radio and Submit would (source `app`). The answer's mockup is marked, and once the input is closed (DECIDED) the chosen option is drawn first. **comment** on the same bar leaves feedback on that option's mockup without entering annotation mode — read it with `comments list --under …`, act on it, as for any comment. Nothing inside a mocked page answers an input: the pick is always on the bar.
+
+<m-code lang="markdown" why="three looks, each its own option and its own mockup">
+
+```markdown
+<m-decision data-field="decision" id="look" rows="cost|benefit">
+
+<m-question data-field="question">Which board ships?</m-question>
+
+<m-option data-field="option" name="Dense" value="dense" recommended cost="more to scan" benefit="40 rows on one screen">
+
+<m-mockup widths="390,1440" description="The board at 40 rows, one line each.">
+<!doctype html>…the dense board…
+</m-mockup>
+
+</m-option>
+
+<m-option data-field="option" name="Cards" value="cards" cost="8 rows a screen" benefit="room for a preview">
+
+<m-mockup widths="390,1440" description="The board as cards, a preview each.">
+<!doctype html>…the cards…
+</m-mockup>
+
+</m-option>
+
+<m-recommendation data-field="recommendation">Dense: the owner scans more than reads.</m-recommendation>
+
+</m-decision>
+```
+
+</m-code>
 
 </m-field>
 

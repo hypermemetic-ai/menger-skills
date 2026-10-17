@@ -7,7 +7,7 @@ description: Use for any body a person will look at, and always for a frontend. 
 
 <m-answer data-field="answer">**Lead with the picture a stranger could rebuild the design from, play the mechanism where there is one, render the frontend as itself, and screenshot only what cannot be built in.**</m-answer>
 
-<m-stat value="14">forms, by what they show</m-stat>
+<m-stat value="15">forms, by what they show</m-stat>
 <m-stat value="3">ways to show a frontend</m-stat>
 
 </m-summary>
@@ -27,6 +27,7 @@ description: Use for any body a person will look at, and always for a frontend. 
 | a mechanism | a playable: one knob, a go button, a guess | a `component` block in a field |
 | a frontend component | the component itself | its `component` block, rendered in the body |
 | a page | the body as the page, at its widths; one view per mockup, its description outside it | `view: mockup` + `widths:`, or one `<m-mockup>` per view |
+| a choice between looks | a decision whose options each hold a mockup, picked on the mockup | `<m-mockup>` inside each `<m-option>` of an `<m-decision id>` |
 | progress | a hill, a dial, a ring, a sponge, a feed | `kiln-hill`, `m-dial`, `m-ring`, `m-sponge`, `brew-feed` |
 | a measurement | a metric sheet; results as tiles | `m-cases data-field="metric-sheet"`, `m-results` |
 | what cannot be built in | a screenshot, both themes | an image in the body, with what it cannot show |
@@ -81,6 +82,12 @@ A component that simulates the mechanism in the body: one evening of homecomings
 <m-field data-field="detail" label="A mockup is one view (owner, 2026-10-16)">
 
 One mockup, one view: one screen at one state, at the device's viewport. It is not a long page of figures that scrolls through several screens. Its controls work, so the states one view reaches (a menu open, a sheet slid up, a row collapsed) are reached by using it, not drawn again below. Another view is **its own mockup, in its own section of the body**. What the mockup shows and why is **outside it**: the prose above it, or the mockup's own `description` (`<m-mockup description="…">`, APP-42), never a heading or an intro inside the mocked page.
+
+</m-field>
+
+<m-field data-field="detail" label="A decision between looks: a mockup in each option (APP-46)">
+
+When the owner is to choose between looks, the decision's options **each hold their mockup** — an `<m-mockup>` (or a ` ```mockup ` fence) inside each `<m-option>`, one view apiece, described outside the page. The owner picks with **pick this** on a mockup's bar (recorded as the decision's answer, as its card's own Submit would), sees the answer's mockup marked and, once DECIDED, drawn first; **comment** on any mockup's bar leaves feedback on that mockup (and option) in one click. The markup and the rules of asking are [asking — a decision between looks](../asking/SKILL.md); nothing inside the mocked page answers.
 
 </m-field>
 
