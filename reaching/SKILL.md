@@ -44,6 +44,20 @@ description: Use for any read or write against menger from a shell or a script �
 
 </m-cases>
 
+<m-cases label="Under login — prod requires it (ACCESS-47, 2026-10-17)">
+
+| rule | spelling |
+| -- | -- |
+| an agent is a key, signed in once per machine | `synapse -P 4455 _login menger --key builder --as builder` — the key is `~/.plexus/keys/builder.key` (0600, `synapse _key new NAME --store file`); synapse keeps the session in `~/.plexus/sessions/` and every line on this page then runs as written |
+| exit **77** means *sign in*, not a dead server | run the `_login` above, then the call again; a refused credential shows as `Protocol handshake failed` (a 401) |
+| a restart or the 12 h expiry is handled | synapse re-mints the session from its key by itself, once for parallel calls (≥ 3.14.10, SYNAPSE-15) |
+| another key with `--as` moves the default agent | `_login` builder again **last** (SYNAPSE-16); a subagent sets `SYNAPSE_AS=sub-<TICKET>` before its own `_login … --as sub-<TICKET> --scope editor@<TICKET>` |
+| what a key may do is its grants | `builder` editor on `*`; `pipeline` viewer on `*` + deployer on MENGER; `operator` is `--admin`, by hand only — a refusal is typed (`error_kind: forbidden`, `grant`, `held_on`) |
+| never a secret in argv or the environment | no `-t "$TOKEN"`, no `PLEXUS_KEY=…`: the key's file, or the stored session; a script that cannot run synapse signs in through `../menger/deploy/menger-call.mjs` with `MENGER_DEPLOY_KEY_FILE` |
+| REST is gone on prod | `--no-rest`: :4457 answers nothing; use synapse or the socket |
+
+</m-cases>
+
 <m-code lang="bash" why="writing — the first ticket of a shortcode is a scope or a doc; a root hangs under --parent">
 
 ```bash
