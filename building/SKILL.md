@@ -90,7 +90,20 @@ Gate green.
 
 ### The pipeline lands it; clean up in the same pass.
 
-In menger's own case, `deploy/pipeline build → deploy test → promote`. The worktree goes when the work lands — in the same pass as the merge, `git worktree remove ../<repo>-<TICKET> && git branch -d <branch>`, never later (owner, 2026-10-15: 79 of them had gathered, 700 GB) — and say which release when it matters.
+In menger's own case, `deploy/pipeline build → deploy test → promote`. The worktree goes when the work lands — in the same pass as the merge, never later (owner, 2026-10-15: 79 of them had gathered, 700 GB) — and say which release when it matters.
+
+<m-code lang="bash" why="the one way to remove what a gate left: a dry run unless --yes, and it logs what it removes">
+
+```bash
+../menger/scripts/cleanup-gate.sh <name>                                # what the gate <name> left, and the space it holds
+../menger/scripts/cleanup-gate.sh --yes <name>                          # its worktree + merged branch, ~/.cache/cargo-target/<name>, /tmp/menger-<name>.db*, its session scratch
+../menger/scripts/cleanup-gate.sh --yes --path /tmp/claude-1000/<dir>   # one leftover, by its shape
+../menger/scripts/cleanup-gate.sh --list                                # every leftover it recognises; removes nothing
+```
+
+</m-code>
+
+An agent never hand-writes `rm -r` / `rm -rf` (owner, 2026-10-16: "we need to make sure to not hit spooky rms"; RUN-21). The script removes only the known shapes — a linked worktree through `git worktree remove` (never forced), its branch through `git branch -d`, a cargo target that is not a shared one, a throwaway server's `/tmp/menger-*.db*`, a session's scratch, `/tmp/theme-sweep` — with symlinks resolved, and refuses `/`, `$HOME`, a main checkout, `~/.local/share/menger`, a dirty worktree, anything in use and any path with `..`. A refusal is the answer: leave the path and say so on the ticket, never reach for `rm`.
 
 </m-walk>
 
@@ -116,6 +129,7 @@ When reality differed from the design — a call site the ticket did not foresee
 | the gate before In Review, shown on the ticket | downstream conditions on In Review meaning shippable |
 | every commit linked, `repo@hash` outside the ticket's repository | the diff is one click from the ticket |
 | a contract that can't be built is patched, not worked around | a silent workaround ships an unannounced change every consumer reads as correct |
+| clean up with `scripts/cleanup-gate.sh`, never a hand-written `rm -r` | a removal the script refuses is one nobody should make blind |
 | archive before you delete | un-shipped work is tagged `archive/<name>` and pushed before removal; the ticket is Superseded with the tag, the removal commit and the survivor named |
 
 </m-cases>
