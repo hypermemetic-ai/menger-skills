@@ -1,6 +1,6 @@
 ---
 name: building
-description: Use when implementing a ticket the owner has promoted to Ready. Produces the build carried across menger's lifecycle with its history on the ticket — Coding the moment work starts with the branch on the timeline, In Review in the commit that finishes it with the commits linked and the gate shown as results, Complete set by the pipeline at the merge — in its own worktree, with divergence noted where reality differed, and, for a frontend, the thing itself in the body or a screenshot of it running.
+description: Use when implementing a ticket the owner has promoted to Ready. Produces the build carried across menger's lifecycle with its history on the ticket — Coding the moment work starts with the branch on the timeline, In Review in the commit that finishes it with the commits linked and the gate shown as results, Complete when the work runs on the lowest environment (the merge, where there is none) — in its own worktree, with divergence noted where reality differed, and, for a frontend, the thing itself in the body or a screenshot of it running.
 ---
 
 <m-summary>
@@ -19,10 +19,10 @@ graph TD
   R["Ready<br/>(the owner promoted it)"] --> C["Coding<br/>set_status · the branch on the timeline"]
   C --> I["implement · gate green<br/>m-results on the timeline"]
   I --> V["In Review<br/>in the finishing commit · commits link"]
-  V -->|"the pipeline: build → test env → promote"| D["Complete<br/>the merge hash"]
+  V -->|"merge · then deploy/pipeline deploy test"| D["Complete<br/>on the lowest environment"]
 ```
 
-Merging is not deploying: a ticket is Complete at the merge and reaches users when its release is promoted.
+Merging is not deploying. Where the project has environments, a ticket is Complete when its work runs on the lowest one, the deploy to test that carries it (owner, 2026-10-17: "complete, if there is an environment, should mean that it's deployed to the lowest environment"; DEPLOY-22). Until then it stays In Review with its merge linked. It reaches users when its release is promoted. Work in a repository with no environment is Complete at its merge.
 
 </m-diagram>
 
@@ -90,7 +90,7 @@ Gate green.
 
 ### The pipeline lands it; clean up in the same pass.
 
-In menger's own case, `deploy/pipeline build → deploy test → promote`. The worktree goes when the work lands — in the same pass as the merge, never later (owner, 2026-10-15: 79 of them had gathered, 700 GB) — and say which release when it matters.
+In menger's own case, `deploy/pipeline build → deploy test → promote`. Merge, link the merge commit, leave the ticket In Review; the deploy to test completes it. The worktree goes in the same pass as the merge, never later (owner, 2026-10-15: 79 of them had gathered, 700 GB) — and say which release when it matters.
 
 <m-code lang="bash" why="the one way to remove what a gate left: a dry run unless --yes, and it logs what it removes">
 
