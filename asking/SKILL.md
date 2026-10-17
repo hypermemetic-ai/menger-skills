@@ -99,13 +99,15 @@ When the options are looks — a layout, a screen, a component's state — **eac
 
 A filed input waits until the owner looks. **Queueing** puts the ticket in front of the owner: a tab in the tray along the bottom edge of every open app, which flashes as it arrives, with an urgency and a reason. The urgencies are `whenever` · `today` · `now` · `blocking`. `blocking` names the `--input` the caller is idle on; closing that input unqueues the ticket.
 
+**Every question is queued** (owner, 2026-10-17: *"queue all questions always"*). An input that is filed and not queued is not asked: file it, then queue its ticket with `--input`, at the urgency below — never leave one only filed.
+
 **When the owner told you to work on it, queueing is urgent** (owner, 2026-10-15). The owner is waiting on that work, so a question that stops it is theirs to answer now, not when they next look at the tracker. File the input first, then queue the ticket at once:
 
 | the work is | the question | queue it at |
 | -- | -- | -- |
 | what the owner told you to do | you are idle until it is answered | `blocking`, with `--input` |
 | what the owner told you to do | you can carry on around it | `now` |
-| your own, or background | it can wait for the owner's next look | `today`, or `whenever`, or don't queue it |
+| your own, or background | it can wait for the owner's next look | `today`, or `whenever` |
 
 Say what you are waiting on in the `--reason`, in a sentence the owner can act on from the tab. Then say so in chat, with the id. Outside work the owner asked for, keep `now` and `blocking` for what is so (a promote that rolled back, a gap on prod). A queue that is always loud is a queue the owner learns to ignore.
 
