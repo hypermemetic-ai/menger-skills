@@ -17,7 +17,7 @@ description: Use when implementing a ticket the owner has promoted to Ready. Pro
 ```mermaid
 graph TD
   R["Ready<br/>(the owner promoted it)"] --> C["Coding<br/>set_status · the branch on the timeline"]
-  C --> I["implement · gate green<br/>m-results on the timeline"]
+  C --> I["implement · its tests green<br/>m-results on the timeline"]
   I --> V["In Review<br/>in the finishing commit · commits link"]
   V -->|"merge · then deploy/pipeline deploy test"| D["Complete<br/>on the lowest environment"]
 ```
@@ -52,9 +52,11 @@ A worktree and branch named for the ticket, so no leaf is double-claimed and att
 
 A worktree shares one build directory with every other worktree of its repository (owner, 2026-10-15): `export CARGO_TARGET_DIR=~/.cache/cargo-target/<repo>` before the first `cargo` in it — `menger` for menger and its frontend — so a worktree costs megabytes, not the 20 GB its own `target/` would, and the next ticket's build is warm. Cargo serialises two builds in one directory with its lock. The pipeline's `../menger-build` keeps its own.
 
-### Implement; gate green in this workspace.
+### Implement; its own tests green — a selection, not the suite.
 
-The affected workspace builds and tests pass — every acceptance list includes it. A pre-existing red keeps the ticket `Coding` and files a gap that blocks it.
+Per ticket, run the tests the change adds and the nearest ones it touches — a best-effort selection (`cargo test -p <crate> <filter>`, the one wire test, the frontend's file), never the whole workspace (owner, 2026-10-18: "when performing updates I only want you running the new tests, then we should queue up a bunch of changes all at once, and only then run all tests against everything"; CI-3). The affected crate still builds. A pre-existing red in the selection keeps the ticket `Coding` and files a gap that blocks it.
+
+Changes queue up merged; the full suite runs once against the batch, before deploying — in menger, `deploy/pipeline build` gates every release on the whole workspace and the frontend tests. A red there is the batch's: find the commit (the failing test's area, else bisect the batch), file a gap that blocks its ticket, fix or revert, and build again.
 
 ### Show the gate; flip in the finishing commit.
 
@@ -72,9 +74,9 @@ synapse -P 4455 menger tickets set_status --id AMP-4 --status "In Review"
 ```markdown
 <m-step date="2026-10-14T16:40Z" status="In Review" commits="volt@77df9a0" by="builder">
 
-Gate green.
+Its tests green (a selection; the suite runs at the batch's build).
 
-<m-results label="Gate — volt">
+<m-results label="Selected — volt">
 
 | suite | passed | failed | verdict |
 | -- | -- | -- | -- |
@@ -128,7 +130,7 @@ When reality differed from the design — a call site the ticket did not foresee
 | no work on a Pending ticket | Ready is the owner's word |
 | Coding the moment work starts; In Review in the commit that finishes it | the tracker shows where the work is |
 | one worktree per ticket, named for it | no work outside its ticket goes in its commits |
-| the gate before In Review, shown on the ticket | downstream conditions on In Review meaning shippable |
+| its selected tests before In Review, shown on the ticket; the full suite once per batch, before deploying | a ticket moves fast; nothing ships without every test run against everything queued (CI-3) |
 | every commit linked, `repo@hash` outside the ticket's repository | the diff is one click from the ticket |
 | a contract that can't be built is patched, not worked around | a silent workaround ships an unannounced change every consumer reads as correct |
 | clean up with `scripts/cleanup-gate.sh`, never a hand-written `rm -r` | a removal the script refuses is one nobody should make blind |
