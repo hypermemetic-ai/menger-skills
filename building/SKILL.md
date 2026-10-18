@@ -96,14 +96,16 @@ In menger's own case, `deploy/pipeline build → deploy test → promote`. Merge
 
 ```bash
 ../menger/scripts/cleanup-gate.sh <name>                                # what the gate <name> left, and the space it holds
-../menger/scripts/cleanup-gate.sh --yes <name>                          # its worktree + merged branch, ~/.cache/cargo-target/<name>, /tmp/menger-<name>.db*, its session scratch
+../menger/scripts/cleanup-gate.sh --yes <name>                          # its worktree + merged branch, the worktree's cargo build-dirs, ~/.cache/cargo-target/<name>, /tmp/menger-<name>.db*, its session scratch
 ../menger/scripts/cleanup-gate.sh --yes --path /tmp/claude-1000/<dir>   # one leftover, by its shape
 ../menger/scripts/cleanup-gate.sh --list                                # every leftover it recognises; removes nothing
 ```
 
 </m-code>
 
-An agent never hand-writes `rm -r` / `rm -rf` (owner, 2026-10-16: "we need to make sure to not hit spooky rms"; RUN-21). The script removes only the known shapes — a linked worktree through `git worktree remove` (never forced), its branch through `git branch -d`, a cargo target that is not a shared one, a throwaway server's `/tmp/menger-*.db*`, a session's scratch, `/tmp/theme-sweep` — with symlinks resolved, and refuses `/`, `$HOME`, a main checkout, `~/.local/share/menger`, a dirty worktree, anything in use and any path with `..`. A refusal is the answer: leave the path and say so on the ticket, never reach for `rm`.
+An agent never hand-writes `rm -r` / `rm -rf` (owner, 2026-10-16: "we need to make sure to not hit spooky rms"; RUN-21). The script removes only the known shapes — a linked worktree through `git worktree remove` (never forced) with its cargo build-dirs (`~/.cache/cargo-build/XX/HASH`, as `cargo metadata` names them), its branch through `git branch -d`, a cargo target that is not a shared one, a throwaway server's `/tmp/menger-*.db*`, a session's scratch, `/tmp/theme-sweep` — with symlinks resolved, and refuses `/`, `$HOME`, a main checkout, `~/.local/share/menger`, a dirty worktree, anything in use (a cargo holding its lock too) and any path with `..`. A refusal is the answer: leave the path and say so on the ticket, never reach for `rm`.
+
+Builds clean up after themselves too (owner, 2026-10-18: "our test runner automatically cleans up their builds"; CI-2): the hourly `menger-sweep.timer` runs `cleanup-gate.sh --sweep --yes`, which removes build output nothing has touched for 6 hours (1 hour once the disk is 75% used, 15 minutes at 90%) and nothing holds, and queues the owner a ticket when the disk is still 90% full. Before a long gate, `../menger/scripts/disk-check.sh` says whether there is room (exit 3: there isn't — sweep or ask, don't start).
 
 </m-walk>
 
@@ -130,6 +132,7 @@ When reality differed from the design — a call site the ticket did not foresee
 | every commit linked, `repo@hash` outside the ticket's repository | the diff is one click from the ticket |
 | a contract that can't be built is patched, not worked around | a silent workaround ships an unannounced change every consumer reads as correct |
 | clean up with `scripts/cleanup-gate.sh`, never a hand-written `rm -r` | a removal the script refuses is one nobody should make blind |
+| a gate starts only with room (`scripts/disk-check.sh`) | the disk filled twice with build output (CI-2); a gate that dies half-way proves nothing |
 | archive before you delete | un-shipped work is tagged `archive/<name>` and pushed before removal; the ticket is Superseded with the tag, the removal commit and the survivor named |
 
 </m-cases>
