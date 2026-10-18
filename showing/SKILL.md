@@ -81,7 +81,7 @@ A component that simulates the mechanism in the body: one evening of homecomings
 
 <m-field data-field="detail" label="A mockup is one view (owner, 2026-10-16)">
 
-One mockup, one view: one screen at one state, at the device's viewport. It is not a long page of figures that scrolls through several screens. Its controls work, so the states one view reaches (a menu open, a sheet slid up, a row collapsed) are reached by using it, not drawn again below. Another view is **its own mockup, in its own section of the body**. What the mockup shows and why is **outside it**: the prose above it, or the mockup's own `description` (`<m-mockup description="…">`, APP-42), never a heading or an intro inside the mocked page.
+One mockup, one view: one screen at one state, at the device's viewport. It is not a long page of figures that scrolls through several screens. Its controls work, so the states one view reaches (a menu open, a sheet slid up, a row collapsed) are reached by using it, not drawn again below. Another view is **its own mockup, in its own section of the body**. What the mockup shows and why is **outside it**: the prose above it, or the mockup's own `description` (`<m-mockup description="…">`, APP-42), never a heading or an intro inside the mocked page — and said once: the prose and the `description` never repeat each other (APP-60). On a phone a mockup opens on its narrowest device at about 100%, its other widths a tap away (APP-60), so a 390 width is what most readers see first.
 
 </m-field>
 
@@ -93,7 +93,7 @@ When the owner is to choose between looks, the decision's options **each hold th
 
 <m-field data-field="detail" label="How to make and use a mockup">
 
-1. **One view, one fence.** Write each view as its own fence in its own section of the body: ` ```mockup widths=390,1440 title="Panel open" description="Two groups joined by or." ` and a whole page inside (`<!doctype html>` …). Put a line of prose above it that says the same as `description`. Nothing explains itself inside the page.
+1. **One view, one fence.** Write each view as its own fence in its own section of the body: ` ```mockup widths=390,1440 title="Panel open" description="Two groups joined by or." ` and a whole page inside (`<!doctype html>` …). Put a line of prose above it that says why the view is here (what to look at, what it decides), and let `description` say what it shows: **the two never repeat each other** (APP-60: on a phone the reader got the same sentence twice). Saying it once is enough — a `title` and the prose, with no `description`. Nothing explains itself inside the page.
 2. **Make it the product.** Use the app's tokens and fonts (`menger/tickets-api/src/tokens.toml`), light and dark, with synthetic data. Make the controls work, so a reader reaches the view's states by using it.
 3. **Check it before filing.** In headless Chromium at each width and theme, click every control, check that the document height equals the viewport (no page scroll), and check for page errors. Then render the body on a throwaway menger and look at it.
 4. **Ask with it.** For a choice between looks, put one mockup in each `<m-option>` of the decision (asking: a decision between looks). The owner picks with *pick this* on a mockup's bar, or opens *compare these*.
