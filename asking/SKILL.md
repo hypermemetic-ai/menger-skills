@@ -113,6 +113,8 @@ Say what you are waiting on in the `--reason`, in a sentence the owner can act o
 
 **Several questions on one ticket go in one entry** (APP-86; owner: *"and multiple questions"*). Repeat `--input`, in the order the owner should answer them, and name the one you are idle on with `--blocking` (required at `blocking` when there are several). The tray steps the owner through them (*1 of 3 answered*, Submit moves to the next). The entry leaves the queue when every input it names is closed: close each as you act on it; one closed is progress. Queueing again adds inputs to the entry and never lowers the urgency.
 
+**A decision between looks queues its mockups too** (APP-85; owner: *"you should be able to queue a view of the mockup"*). Name each view with `--mockup` (repeat it): `T#mN` for ticket T's Nth mockup, `T` for a whole-page body, or APP-45's `mockup:T#N@W` for a view at a width. The owner answers looking at them: thumbnails above the question, a viewer at 390 / 1440, compare, and *pick this* on a look that sits in an option of the decision. A view the body does not hold is refused, naming it.
+
 </m-field>
 
 <m-field data-field="decided-shape" label="After queueing: listen for the reply">
@@ -137,6 +139,7 @@ A snooze is not a response: the wait goes on. If the connection drops, call agai
 synapse -P 4455 menger tickets queue --id AMP-4 --urgency blocking --input policy --reason "the build is idle until the policy is picked"
 synapse -P 4455 menger tickets queue --id AMP-6 --urgency now --reason "the import runs around it; which file wins is yours"
 synapse -P 4455 menger tickets queue --id AMP-9 --urgency blocking --input format --input fields --input naming --blocking naming --reason "the import is idle until the template has a name"
+synapse -P 4455 menger tickets queue --id AMP-7 --urgency now --input layout --mockup AMP-7#m1 --mockup AMP-7#m2 --reason "the diagram is built on the layout you pick"
 synapse -P 4455 menger tickets queued                  # most urgent first
 synapse -P 4455 menger tickets unqueue --id AMP-6      # withdrawn, or done with
 ```
