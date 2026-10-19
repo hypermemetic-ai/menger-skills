@@ -111,6 +111,8 @@ A filed input waits until the owner looks. **Queueing** puts the ticket in front
 
 Say what you are waiting on in the `--reason`, in a sentence the owner can act on from the tab. Then say so in chat, with the id. Outside work the owner asked for, keep `now` and `blocking` for what is so (a promote that rolled back, a gap on prod). A queue that is always loud is a queue the owner learns to ignore.
 
+**Several questions on one ticket go in one entry** (APP-86; owner: *"and multiple questions"*). Repeat `--input`, in the order the owner should answer them, and name the one you are idle on with `--blocking` (required at `blocking` when there are several). The tray steps the owner through them (*1 of 3 answered*, Submit moves to the next). The entry leaves the queue when every input it names is closed: close each as you act on it; one closed is progress. Queueing again adds inputs to the entry and never lowers the urgency.
+
 </m-field>
 
 <m-field data-field="decided-shape" label="After queueing: listen for the reply">
@@ -119,21 +121,22 @@ Say what you are waiting on in the `--reason`, in a sentence the owner can act o
 
 | `reply.kind` | the owner | the agent then |
 | -- | -- | -- |
-| `answered` | answered an input (with `--input`: that one) | read the state, act on the answer, `inputs close` |
+| `answered` | answered an input (with `--input`: that one; without it, any of the entry's — each answer is its own reply) | read the state, act on the answer, `inputs close`; with more open, `await_reply` again with `--since` |
 | `changes_requested` | pressed *Request changes* in the tray: the comment says what to change, and the ticket is out of the queue | change the ticket (its body, the options, the work), then queue it again |
 | `commented` | left a comment on the ticket | read it; act, answer in a comment, or ask again |
-| `unqueued` | took it out of the queue (`done with it`), or its input was closed (`closed`) | read the ticket: it may be decided, or no longer wanted |
+| `unqueued` | took it out of the queue (`done with it`), or its input was closed (`closed` — of several, the last one) | read the ticket: it may be decided, or no longer wanted |
 | `ended` | canceled or deleted the ticket | stop the work |
 
 A snooze is not a response: the wait goes on. If the connection drops, call again with `--since` set to the time you queued, and nothing is lost. `--timeout-minutes` ends the wait with `timed_out`. Then say so in chat and pick it up later. Never queue and then just stop.
 
 </m-field>
 
-<m-code lang="bash" why="queueing: the input first, then the ticket; queueing again only raises the urgency">
+<m-code lang="bash" why="queueing: the input first, then the ticket; queueing again only raises the urgency (and adds inputs)">
 
 ```bash
 synapse -P 4455 menger tickets queue --id AMP-4 --urgency blocking --input policy --reason "the build is idle until the policy is picked"
 synapse -P 4455 menger tickets queue --id AMP-6 --urgency now --reason "the import runs around it; which file wins is yours"
+synapse -P 4455 menger tickets queue --id AMP-9 --urgency blocking --input format --input fields --input naming --blocking naming --reason "the import is idle until the template has a name"
 synapse -P 4455 menger tickets queued                  # most urgent first
 synapse -P 4455 menger tickets unqueue --id AMP-6      # withdrawn, or done with
 ```
