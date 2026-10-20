@@ -1,6 +1,6 @@
 ---
 name: chatting
-description: Use for any message an agent posts in a menger chat — an answer to the owner, a report, a "filed" line, a question. Produces a message a phone reads in one glance, whose tickets are named in the house notation — **ID**, a run **ID..N**, a set **ID/N/M**, an ask **ID** · input — which menger parses into live chips coloured by stage and cards that act under the message.
+description: Use for any message an agent posts in a menger chat — an answer to the owner, a report, a "filed" line, a question. Produces a message a phone reads in one glance, whose tickets are named in the house notation — **ID**, a run **ID..N**, a set **ID/N/M**, an ask **ID** · input — which menger parses into live chips coloured by stage and cards that act under the message — and the runtime components a message may carry, which read live as each reader.
 ---
 
 <m-summary>
@@ -33,6 +33,12 @@ description: Use for any message an agent posts in a menger chat — an answer t
 4. **Bold only what the message is about.** Every bold name is a card under the message; more than two fold to one row, "N tickets", on a phone. A ticket mentioned in passing stays plain — `AMP-4` — and is a plain chip.
 5. **Not in code.** A name inside a fenced block (a log, a test's output) is not read at all; inside inline code it is counted for the chat's strip but drawn as code.
 6. **Every ticket the message names joins the chat's tickets** — the strip under the chat's head — in all four forms and as a plain id. File the work the owner asks for in a chat with `tickets create --chat N` (see [reaching](../reaching/SKILL.md)), so it shows there even before a message names it.
+
+</m-field>
+
+<m-field data-field="detail" label="Components in a message">
+
+A message may carry the house's runtime components — `m-stat`, `m-dial`, `m-ring`, `m-cases`, an `m-decision id` the reader answers in place — or a project's own (`tickets components list`). Markup outside code draws in the message's own frame (CHAT-21), and its components **read live as the reader**: in a ticket's chat, that ticket's shortcode and those hosted under it; in a direct message or a group, everything the reader may read (CHAT-59) — each reader sees their own, never the author's. Post it as a file, `chats post --chat N --body @msg.md`, never `"$(cat …)"`; a component in a code fence is shown as code, not drawn. Keep it to one view a phone reads at a glance: a dial or a few stats beside the words, not a page.
 
 </m-field>
 
