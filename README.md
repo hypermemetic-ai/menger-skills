@@ -57,6 +57,7 @@ A request is placed before it is written; a ticket is filed when someone is abou
 | [theming](theming/SKILL.md) | a project's look, as a theme ticket adopted at a reach | a shortcode with a reader of its own |
 | [systems](systems/SKILL.md) | what a ticket shows for each kind of system — there is no one size | a backend, a frontend, a CLI, a schema, a pipeline, a method |
 | [reaching](reaching/SKILL.md) | the synapse calls a writer and a builder use against menger | any write to the tracker |
+| [chatting](chatting/SKILL.md) | a chat message whose tickets are named in the notation — `**ID**`, `**ID..N**`, `**ID/N/M**`, `**ID** · input` — drawn as live chips and cards | any message an agent posts in a chat |
 | [the decisions](docs/adr/README.md) | [0001](docs/adr/0001-a-ticket-is-only-relevant-if-a-human-looks-at-it.md) a ticket is only relevant if a human looks at it · [0002](docs/adr/0002-the-examples-are-live-tickets.md) the examples were live (superseded) · [0003](docs/adr/0003-assume-the-menger-surface.md) assume the surface · [0004](docs/adr/0004-the-examples-are-built-into-the-skill.md) the examples are built into the skill | how this repository works |
 
 </m-cases>
