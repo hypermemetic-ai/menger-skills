@@ -19,7 +19,7 @@ graph TD
   R["Ready<br/>(the owner promoted it)"] --> C["Coding<br/>set_status · the branch on the timeline"]
   C --> I["implement · its tests green<br/>m-results on the timeline"]
   I --> V["In Review<br/>in the finishing commit · commits link"]
-  V -->|"merge · then deploy/pipeline deploy test"| D["Complete<br/>on the lowest environment"]
+  V -->|"merge · test deploys by itself"| D["Complete<br/>on the lowest environment"]
 ```
 
 Merging is not deploying. Where the project has environments, a ticket is Complete when its work runs on the lowest one, the deploy to test that carries it (owner, 2026-10-17: "complete, if there is an environment, should mean that it's deployed to the lowest environment"; DEPLOY-22). Until then it stays In Review with its merge linked. It reaches users when its release is promoted. Work in a repository with no environment is Complete at its merge.
@@ -92,7 +92,7 @@ Its tests green (a selection; the suite runs at the batch's build).
 
 ### The pipeline lands it; clean up in the same pass.
 
-In menger's own case, `deploy/pipeline build → deploy test → promote`. Merge, link the merge commit, leave the ticket In Review; the deploy to test completes it. The worktree goes in the same pass as the merge, never later (owner, 2026-10-15: 79 of them had gathered, 700 GB) — and say which release when it matters.
+In menger's own case, **a ticket entering In Review is deployed to test automatically; prod is the owner's** (owner, 2026-10-19: "we always instantly deploy everything to test. we tolerate rollback"; DEPLOY-48). The deploy runner watches the tracker and, a quiet minute after a ticket enters In Review or a commit is linked to one there, deploys main's tip to test — one run at a time, a burst of merges folded into one. So: merge `--no-ff` (never squash or rebase: the branch's commits are how "is it on test" is answered), link the merge commit, leave the ticket In Review — and run no deploy yourself. The deploy to test completes it; a red one is posted to the ticket's chat with a gap blocking it. The worktree goes in the same pass as the merge, never later (owner, 2026-10-15: 79 of them had gathered, 700 GB) — and say which release when it matters.
 
 <m-code lang="bash" why="the one way to remove what a gate left: a dry run unless --yes, and it logs what it removes">
 
@@ -128,6 +128,7 @@ When reality differed from the design — a call site the ticket did not foresee
 | rule | why |
 | -- | -- |
 | no work on a Pending ticket | Ready is the owner's word |
+| no manual deploys: entering In Review deploys test; prod is the owner's | the owner tolerates a rollback on test, never a pile of unshipped review (DEPLOY-48) |
 | Coding the moment work starts; In Review in the commit that finishes it | the tracker shows where the work is |
 | one worktree per ticket, named for it | no work outside its ticket goes in its commits |
 | its selected tests before In Review, shown on the ticket; the full suite once per batch, before deploying | a ticket moves fast; nothing ships without every test run against everything queued (CI-3) |
