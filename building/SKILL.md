@@ -113,6 +113,8 @@ Builds clean up after themselves too (owner, 2026-10-18: "our test runner automa
 
 <m-field data-field="decided-shape" label="When the build is a frontend">
 
+**Every ticket that changes the frontend has a mockup before and screenshots after** (owner, 2026-10-22: "for any ticket that updates the fe I want screenshots after and a mockup before"). Before Coding, the body holds a mockup of the page as it will be (`showing`), and if the ticket has none, the builder draws it first. At In Review, the step holds screenshots of the built page from test or a throwaway server (`scripts/shot.mjs`), at 390 and 1440, light and dark. Once APP-110 lands, a `live` block of the route on test goes beside the mockup.
+
 The owner will look at the ticket, not the branch. So the In Review step shows the thing: the component block in the body updated to the built source (its docs card re-renders in place); or the page as a mockup at its widths; or screenshots from the test environment (`scripts/shot.mjs '#/…' --env test --theme both --width 1440,400`) in the step, with a line on what they cannot show. A theme change runs the sweep (`scripts/theme-sweep.mjs`) on a throwaway server. The house's own bodies pass `MENGER_HOUSE_BODIES` before they are filed.
 
 </m-field>
