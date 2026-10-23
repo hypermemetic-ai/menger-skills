@@ -1,6 +1,6 @@
 ---
 name: ticketing
-description: Use when turning anything — a request, a finding, a fork, a bug, a plan — into a ticket on menger. Produces one ticket a person will look at: its summary, its epitome (the simplest concrete picture of the whole, with a figure), the shape as a diagram, the behaviour shown as a walk, a playable or the component itself, the contract the agent reads, and the question the owner answers — created Pending, in the kind's own form (scope, execution, build, spike, gap, doc). Also says when not to file a ticket at all.
+description: Use when turning anything — a request, a finding, a fork, a bug, a plan — into a ticket on menger. Produces one ticket a person will look at: its summary, its epitome (the simplest concrete picture of the whole, with a figure), the shape as a diagram, the behaviour shown as a walk, a playable or the component itself, the contract the agent reads, and the question the owner answers — created Draft, in the kind's own form (scope, execution, build, spike, gap, doc). Also says when not to file a ticket at all.
 ---
 
 <m-summary>
@@ -93,7 +93,7 @@ The first beat of the scope example, [examples/scope.md](examples/scope.md) (its
 8. **The contract is tables the agent can check.** Provides and consumes name strong types and the ticket that produces each; acceptance is numbered and checkable by running, reading or counting; what must not change is listed.
 9. **Specify behaviour, not code** — except in a walk, where the code *is* the behaviour shown, only the lines that prove the step.
 10. **Confidence is stated**; `low` means a spike blocks the build.
-11. **Created Pending.** The owner promotes to Ready; work does not start on a Pending ticket. A doc is born `Doc` and has no lifecycle.
+11. **Created Draft.** Every ticket but a doc is born `Draft` (owner, 2026-10-23; it was `Idea`); the owner promotes a Draft or Pending ticket to Ready, and work does not start on either. A doc is born `Doc` and has no lifecycle.
 12. **Look at it before you say it is done.** Screenshot the ticket in both themes and read it as the owner will; a diagram that failed to draw, a figure in a literal colour, a duplicated badge, a wall of prose above the fold — fix them before the look is spent.
 13. **One ticket, one decision.** Two open options is a spike or a decision input, not a build.
 14. **A ticket that cannot be built as written is patched, not worked around.** Add the finding to `evidence`, state the options, return it to Pending for the owner.
@@ -122,7 +122,7 @@ The surface is the thing. The ticket carries the component (a `component` block,
 6. Provides, consumes and acceptance are tables; each consumed input names its producer.
 7. No literal colours; no number not from the tracker or a measurement.
 8. The screenshot, both themes, read as the owner.
-9. Created `Pending` (a doc: `Doc`), under the right parent, with its blockers.
+9. Created `Draft` (a doc: `Doc`), under the right parent, with its blockers.
 
 </m-field>
 
