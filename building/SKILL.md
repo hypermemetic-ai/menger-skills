@@ -129,7 +129,7 @@ When reality differed from the design — a call site the ticket did not foresee
 
 | rule | why |
 | -- | -- |
-| no work on a Pending ticket | Ready is the owner's word |
+| no work on a Draft or Pending ticket — tickets are born Draft | Ready is the owner's word |
 | no manual deploys: entering In Review deploys test; prod is the owner's | the owner tolerates a rollback on test, never a pile of unshipped review (DEPLOY-48) |
 | Coding the moment work starts; In Review in the commit that finishes it | the tracker shows where the work is |
 | one worktree per ticket, named for it | no work outside its ticket goes in its commits |

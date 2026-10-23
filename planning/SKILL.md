@@ -1,6 +1,6 @@
 ---
 name: planning
-description: Use when a request is bigger than one diff — a feature, a hardening pass, a new wire, a project. Produces, on menger, as few tickets as the work needs: the request located under what already exists (never a new root), a scope with its forks as inputs, an execution whose DAG is drawn in the body with its unfiled nodes marked, and only the leaves that are about to be looked at — spikes for the unknowns, builds for the diffs — every one created Pending for the owner to promote.
+description: Use when a request is bigger than one diff — a feature, a hardening pass, a new wire, a project. Produces, on menger, as few tickets as the work needs: the request located under what already exists (never a new root), a scope with its forks as inputs, an execution whose DAG is drawn in the body with its unfiled nodes marked, and only the leaves that are about to be looked at — spikes for the unknowns, builds for the diffs — every one created Draft for the owner to promote.
 ---
 
 <m-summary>
@@ -73,7 +73,9 @@ Every build's `provides` and `consumes` are tables; every consumed input names t
 
 The scope cites the execution's `dag` and each build's `problem` or `intended-usage` (`m-cite`); the execution's walk shows the code each child owns. A reader descends from the scope without leaving it; nothing is described twice.
 
-### Everything Pending.
+### Everything Draft.
+
+Every ticket is born `Draft` (owner, 2026-10-23); the owner promotes a Draft or Pending ticket to Ready.
 
 <m-code lang="bash" why="the owner promotes; the agent never does">
 
