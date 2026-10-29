@@ -52,7 +52,7 @@ sequenceDiagram
   Note over H: fixed — a new boot_id closes every session the old stream owned
 ```
 
-A stream is not a session. The charger forgot; the hub must not.
+A stream is not a session. The charger forgot; the service must not.
 
 </m-diagram>
 

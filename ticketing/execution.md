@@ -55,7 +55,7 @@ flowchart LR
 
 </m-code>
 
-### The hub asks the queue whose turn it is.
+### The service asks the queue whose turn it is.
 
 …one step per wire, to the end…
 
@@ -78,7 +78,7 @@ flowchart LR
 
 <m-field data-field="exit">Done when one real evening goes through it: nine cars home, every one charged by six, no plug swapped by hand, and the month's CSV adds up to the meter.</m-field>
 
-<m-field data-field="completion-gate">The evening above, replayed against the built hub; every `consumes` resolved to a `provides`; no structure produced twice.</m-field>
+<m-field data-field="completion-gate">The evening above, replayed against the built service; every `consumes` resolved to a `provides`; no structure produced twice.</m-field>
 `````
 
 </m-field>

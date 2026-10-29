@@ -8,7 +8,7 @@ theme: kiln
 reach: frame
 tracker:
   - CONE-2 · execution · Pending · The cycle · two weeks, three scopes, the circuit breaker on day 14
-  - CONE-3 · spike · Complete · Spike: does the controller stream, or must the hub poll it?
+  - CONE-3 · spike · Complete · Spike: does the controller stream, or must the service poll it?
   - CONE-4 · build · Coding · kiln.firings — the curve as it happens, the cone, and the minute the lid may open
   - CONE-5 · build · Pending · kiln.shelf — a calendar of loads, not of people
   - CONE-6 · doc · Doc · The kiln theme
@@ -73,9 +73,9 @@ A breadboard has no layout: places (the boxes), what you can do there (the words
 
 <m-field data-field="decided-shape" label="Solution, in fat marker" data-stretch="2">
 
-1. **The controller streams; the hub listens.** The kiln's controller speaks the vendor's binary RPC (`Firing.Stream`) and dials the hub. We never poll a kiln.
+1. **The controller streams; the service listens.** The kiln's controller speaks the vendor's binary RPC (`Firing.Stream`) and dials the service. We never poll a kiln.
 2. **The shelf is a calendar of loads**, not of people: a load has an owner and a programme (bisque, glaze), and the kiln fires loads.
-3. **One studio per hub.** Members are the studio's; there is no sign-up.
+3. **One studio per service.** Members are the studio's; there is no sign-up.
 
 </m-field>
 

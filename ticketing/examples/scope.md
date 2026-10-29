@@ -14,7 +14,7 @@ tracker:
 
 <m-field data-field="standing">**Nine flats share two chargers, and nobody sits in the car park waiting for a plug.**</m-field>
 
-<m-stat value="3">wires, one hub</m-stat>
+<m-stat value="3">wires, one service</m-stat>
 <m-stat value="2 / 9">chargers for flats</m-stat>
 <m-stat value="1" tone="warn">decision open</m-stat>
 
@@ -34,7 +34,7 @@ The other seven park, and someone goes down at eleven to swap the plug — or do
 
 ```mermaid
 flowchart LR
-  subgraph H["volt hub (Rust)"]
+  subgraph H["volt service (Rust)"]
     CH["volt.chargers"] --> Q["volt.queue"]
     Q --> S["volt.sessions"]
     S --> INV["volt.invoices"]
@@ -52,9 +52,9 @@ Three wires, each the native tongue of whoever is on the other end: the chargers
 
 <m-field data-field="decided-shape">
 
-1. **The chargers dial in.** They speak the vendor's `Charger` schema over its binary RPC; the hub is the RPC *server* and never polls. Owner: *"we don't own the firmware; we own the socket it connects to."*
+1. **The chargers dial in.** They speak the vendor's `Charger` schema over its binary RPC; the service is the RPC *server* and never polls. Owner: *"we don't own the firmware; we own the socket it connects to."*
 2. **The queue is the product.** A charger is a resource; `volt.queue` decides who gets it, and the app only ever watches and asks.
-3. **One building per hub.** No tenants in v1; the hub is the building.
+3. **One building per service.** No tenants in v1; the service is the building.
 4. **The landlord's surface is read-only, and it is the bridge.** Invoices are pulled, never pushed — one CSV a month — and it is the Plexus REST bridge wearing a content type, not a second server (<m-ticket ref="AMP-5"></m-ticket>).
 
 </m-field>

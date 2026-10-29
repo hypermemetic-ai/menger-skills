@@ -102,7 +102,7 @@ The first beat of the scope example, [examples/scope.md](examples/scope.md) (its
 
 <m-field data-field="detail" label="Behaviour shown, not told">
 
-The build example, [examples/build.md](examples/build.md): *Pick a policy. Guess who plugs in last. Then press go.* — a component that runs the evening at sixty times its speed (`volt-queue`, its `intended-usage`), then a cases table pinning the six behaviours the reader just watched (its `required-behavior`; both drawn in `shots/build.png`). Told, it would be: *The queue supports FIFO, fairness-based and need-based policies, configurable per hub.* True, and unread.
+The build example, [examples/build.md](examples/build.md): *Pick a policy. Guess who plugs in last. Then press go.* — a component that runs the evening at sixty times its speed (`volt-queue`, its `intended-usage`), then a cases table pinning the six behaviours the reader just watched (its `required-behavior`; both drawn in `shots/build.png`). Told, it would be: *The queue supports FIFO, fairness-based and need-based policies, configurable per service.* True, and unread.
 
 </m-field>
 

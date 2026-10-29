@@ -8,7 +8,7 @@ theme: volt
 reach: ticket
 tracker:
   - AMP-5 · build · Ready · volt.invoices — the landlord's CSV over the Plexus bridge
-  - AMP-3 · spike · Complete · Spike: does the charger stream, or must the hub poll it?
+  - AMP-3 · spike · Complete · Spike: does the charger stream, or must the service poll it?
 ---
 
 <m-summary ticket="AMP-2">
@@ -53,7 +53,7 @@ service Charger { Stream(stream Event) -> stream Command }
 
 </m-code>
 
-### The hub asks the queue whose turn it is.
+### The service asks the queue whose turn it is.
 
 <m-code lang="rust" path="volt/src/chargers.rs" why="the vendor's RPC in, a queue decision out">
 

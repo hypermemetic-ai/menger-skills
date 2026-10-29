@@ -22,7 +22,7 @@ The doc example opens so — its `answer`: [examples/doc.md](examples/doc.md) (`
 
 <m-badge tone="info">the wire, three ways</m-badge>
 
-<m-answer data-field="answer">The same fact crosses three wires in Volt: the vendor's binary RPC stream in, the Plexus stream out to every phone, and a REST row the landlord pulls a month later. One declaration; the hub never writes a second shape.</m-answer>
+<m-answer data-field="answer">The same fact crosses three wires in Volt: the vendor's binary RPC stream in, the Plexus stream out to every phone, and a REST row the landlord pulls a month later. One declaration; the service never writes a second shape.</m-answer>
 
 </m-summary>
 

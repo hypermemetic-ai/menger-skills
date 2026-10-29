@@ -1,6 +1,6 @@
 ---
 id: AMP-3
-title: Spike: does the charger stream, or must the hub poll it?
+title: Spike: does the charger stream, or must the service poll it?
 kind: spike
 status: Complete
 parent: AMP-2
@@ -20,7 +20,7 @@ tracker:
 
 </m-summary>
 
-<m-question data-field="question">Does the charger stream, or must the hub poll it?</m-question>
+<m-question data-field="question">Does the charger stream, or must the service poll it?</m-question>
 
 <m-field data-field="lens" label="One plug-out, ten minutes around it: drag the poll interval">
 
@@ -51,9 +51,9 @@ charger-sim stream sim:9090 < events.ndjson \
 
 <m-decision data-field="decision">
 
-<m-question data-field="question">How does the hub learn what a charger is doing?</m-question>
+<m-question data-field="question">How does the service learn what a charger is doing?</m-question>
 
-<m-option data-field="option" name="The vendor's bidirectional stream" value="stream" picked cost="one open stream per charger, and a reconnect to get right" benefit="a plug-out in under a second, and the hub can authorize and refuse on the same wire"></m-option>
+<m-option data-field="option" name="The vendor's bidirectional stream" value="stream" picked cost="one open stream per charger, and a reconnect to get right" benefit="a plug-out in under a second, and the service can authorize and refuse on the same wire"></m-option>
 <m-option data-field="option" name="Poll GetStatus" value="poll" cost="a plug unnoticed for up to the interval, a car waiting every time" benefit="stateless, and a dead charger is just a timeout"></m-option>
 
 <m-answer data-field="answer" by="owner" date="2026-10-02"><strong>DECIDED:</strong> the stream. "Nobody is going to stand there for five minutes because we were saving messages." The reconnect is <m-ticket ref="AMP-6"></m-ticket>'s problem.</m-answer>
