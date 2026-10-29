@@ -3,7 +3,7 @@
 # *hub* (owner, 2026-10-29: "we don't call them hubs anymore. we call them
 # services."). Exits 1 and names each file:line that still says one.
 #
-#   scripts/no-hub.sh            every tracked file but this one
+#   scripts/no-hub.sh            every tracked file but the two gates
 #   scripts/no-hub.sh FILE...    those files
 #
 # Word-aware: `hub` / `hubs` as a word or a word's part (`hub-codegen`,
@@ -15,9 +15,8 @@
 # name here is itself out of place and the gate is right to show it.
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
-self="scripts/no-hub.sh"
 if [ "$#" -eq 0 ]; then
-  mapfile -t files < <(git ls-files | grep -vxF "$self")
+  mapfile -t files < <(git ls-files | grep -vxE 'scripts/(no-hub|tracker-no-hub)\.sh')
 else
   files=("$@")
 fi
