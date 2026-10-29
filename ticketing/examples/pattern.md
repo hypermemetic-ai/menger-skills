@@ -59,7 +59,7 @@ The society keeps a ledger in a shed, a list in the treasurer's drawer, and a wh
 
 ```mermaid
 flowchart LR
-  subgraph H["allot hub (Rust)"]
+  subgraph H["allot service (Rust)"]
     P["allot.plots"] --> W["allot.waiting"]
     P --> R["allot.register"]
   end

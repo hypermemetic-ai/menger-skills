@@ -45,7 +45,7 @@ tracker:
 ```mermaid
 flowchart LR
   RO["the roaster<br/>(serial, bridged beside it)"] -->|"Reading, 1/s"| RS
-  subgraph H["brew hub (Rust)"]
+  subgraph H["brew service (Rust)"]
     RS["brew.roasts"] --> EX["brew.export"]
   end
   RS <-->|"Plexus RPC · ws"| APP["the app<br/>generated client"]
@@ -53,14 +53,14 @@ flowchart LR
   RS --> DB[("sqlite")]
 ```
 
-The roaster's serial line is wrapped once in an RPC bridge on a small box beside it; the hub never sees a serial port. The app holds one stream open per roast; the café pulls last week as CSV on Monday.
+The roaster's serial line is wrapped once in an RPC bridge on a small box beside it; the service never sees a serial port. The app holds one stream open per roast; the café pulls last week as CSV on Monday.
 
 </m-diagram>
 
 <m-field data-field="decided-shape">
 
 1. **One roast is one stream.** `brew.roasts.watch { roast }` replays the curve so far, then live.
-2. **Events are heard, not detected.** The roaster reports first crack when the probe's rate of rise drops; the hub trusts it and records the second — which is where <m-ticket ref="ROAST-4"></m-ticket> comes from.
+2. **Events are heard, not detected.** The roaster reports first crack when the probe's rate of rise drops; the service trusts it and records the second — which is where <m-ticket ref="ROAST-4"></m-ticket> comes from.
 3. **The café gets a file.** No login, no dashboard: `GET /rest/brew/export/week?w=2026-W41`, CSV.
 
 </m-field>

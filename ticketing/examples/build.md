@@ -68,7 +68,7 @@ await volt.queue.join({ flat: "4B", needsKwh: 30 });
 
 </m-code>
 
-### The hub sorts the queue by the policy.
+### The service sorts the queue by the policy.
 
 <m-code lang="rust" path="volt-api/src/store/queue.rs" why="the only write">
 
@@ -108,7 +108,7 @@ tx.send(Command::authorize(turn.flat)).await?;
 | -- | -- | -- |
 | `volt.queue.join` / `leave` / `watch` | `Flat`, `Turn { flat, position, needs_kwh }`, `QueueEvent` | the app (not filed) |
 | `Session` | flat · charger · started · stopped · kWh from the last meter | AMP-5 |
-| `Policy` | `Fifo \| Fair \| Need`, one per hub, set at start | the owner's answer on AMP-1 |
+| `Policy` | `Fifo \| Fair \| Need`, one per service, set at start | the owner's answer on AMP-1 |
 
 </m-provides>
 
@@ -124,7 +124,7 @@ tx.send(Command::authorize(turn.flat)).await?;
 <m-acceptance data-field="acceptance">
 
 1. Every row of the table holds over synapse, with two simulated chargers.
-2. The evening above, replayed against the hub under each policy, ends as the playable says it does: last plug 4B, 3B, 5A.
+2. The evening above, replayed against the service under each policy, ends as the playable says it does: last plug 4B, 3B, 5A.
 3. `cargo test` and the app's tests are green.
 
 </m-acceptance>

@@ -94,7 +94,7 @@ await volt.queue.join({ flat: "4B", needsKwh: 30 });
 <m-acceptance data-field="acceptance">
 
 1. Every row of the table holds over synapse, with two simulated chargers.
-2. The evening above, replayed against the hub, ends as the playable says.
+2. The evening above, replayed against the service, ends as the playable says.
 3. `cargo test` and the app's tests are green.
 
 </m-acceptance>

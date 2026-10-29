@@ -49,7 +49,7 @@ sequenceDiagram
   H->>S: Started s_312 for the same flat
 ```
 
-A stream is not a session. The charger forgot; the hub must not.
+A stream is not a session. The charger forgot; the service must not.
 
 </m-diagram>
 

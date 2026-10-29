@@ -27,7 +27,7 @@ The spike example opens so — its `standing`, then its `lens`, a playable: [exa
 
 </m-summary>
 
-<m-question data-field="question">Does the charger stream, or must the hub poll it?</m-question>
+<m-question data-field="question">Does the charger stream, or must the service poll it?</m-question>
 
 <m-field data-field="lens" label="One plug-out, ten minutes around it: drag the poll interval">
 
@@ -60,7 +60,7 @@ The spike example opens so — its `standing`, then its `lens`, a playable: [exa
 
 <m-decision data-field="decision">
 
-<m-question data-field="question">How does the hub learn what a charger is doing?</m-question>
+<m-question data-field="question">How does the service learn what a charger is doing?</m-question>
 
 <m-option data-field="option" name="The vendor's stream" value="stream" picked cost="…" benefit="…"></m-option>
 <m-option data-field="option" name="Poll GetStatus" value="poll" cost="…" benefit="…"></m-option>
