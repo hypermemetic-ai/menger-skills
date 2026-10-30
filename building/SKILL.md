@@ -56,6 +56,8 @@ A worktree shares one build directory with every other worktree of its repositor
 
 Per ticket, run the tests the change adds and the nearest ones it touches — a best-effort selection (`cargo test -p <crate> <filter>`, the one wire test, the frontend's file), never the whole workspace (owner, 2026-10-18: "when performing updates I only want you running the new tests, then we should queue up a bunch of changes all at once, and only then run all tests against everything"; CI-3). The affected crate still builds. A pre-existing red in the selection keeps the ticket `Coding` and files a gap that blocks it.
 
+A PERF ticket's gate is its scenario's golden, before and after (PERF-6): `plexus-bench check --targets` red on the before, the after blessed (`plexus-bench bless SCENARIO`) in the build's commit, and the ticket's `perf` field quoting both; `plexus-bench check` holds every other golden within 10 %.
+
 Changes queue up merged; the full suite runs once against the batch, before deploying — in menger, `deploy/pipeline build` gates every release on the whole workspace and the frontend tests. A red there is the batch's: find the commit (the failing test's area, else bisect the batch), file a gap that blocks its ticket, fix or revert, and build again.
 
 ### Show the gate; flip in the finishing commit.
