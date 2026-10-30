@@ -103,6 +103,17 @@ When the owner is to choose between looks, the decision's options **each hold th
 
 </m-field>
 
+<m-field data-field="detail" label="Showing the owner a page, in their studio (owner, 2026-10-30)">
+
+*"I can talk to you, and you can drive the ui to nav me to particular pages so that you can show me, for instance, a new component we are working on."* When the thing to show is running on a menger with the studio (test, or a throwaway), take the owner there instead of describing it: `ui show` moves every studio session that follows you — the owner turns **follow** on for your agent's name in the studio's top bar, off by default — to `--to` (a studio route: `#/c/<component>?<prop>=<value>` places that component on the canvas with those props, `#/page/<route>`, `#/gallery?q=…`, `#/pages`; or an app route, `/app/#/ticket/…`, opened as a page), puts `--say` up as a note bar with *back* and *dismiss*, and haloes `--point` (a component's name, or a selector within it). It answers `shown { sessions }`, or `refused nobody_follows` when no open session follows you — then ask the owner to turn follow on: a session that does not follow is only knocked, and the show waits an hour for them to follow, then plays. `ui sessions` says who follows you and on which route each is, so you can say where to look. A show is an editor's; it moves a page, never writes one.
+
+```bash
+synapse --url wss://app-test.menger.sh/ws --as builder menger ui show --to '#/c/ticket-chip?id=AMP-4' --say 'the chip with its new hover' --point ticket-chip
+synapse --url wss://app-test.menger.sh/ws --as builder menger ui sessions
+```
+
+</m-field>
+
 A frontend ticket with none of the three is not finished. The pitch example's stretch throttle and hill, [../ticketing/examples/pitch.md](../ticketing/examples/pitch.md), are the components the ticket is about, running in the scope that asks for them, reading the tracker (drawn by `bin/build`, they read the example's own `tracker:` rows: `shots/pitch.png`).
 
 <m-field data-field="detail" label="Progress, live">A picture of where the work stands reads the tracker and follows `watch`: a dot per build on a hill, placed by status unless the owner placed it (and the hover says which); a dial of a scope; a feed of what changed. Every number is the tracker's; a dot that cannot be placed is a list that wants splitting.</m-field>
