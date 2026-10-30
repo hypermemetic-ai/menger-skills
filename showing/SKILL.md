@@ -112,6 +112,13 @@ synapse --url wss://app-test.menger.sh/ws --as builder menger ui show --to '#/c/
 synapse --url wss://app-test.menger.sh/ws --as builder menger ui sessions
 ```
 
+What you put live you can name and take back (FRAME-52): `ui tag --version <hash, 6+ of its hex, or a label> --label "…" --tags demo` names a version (every version flag then takes the label), and `ui undo` moves the live pointer back to where your last move found it — an `author` of anyone's is an editor's to undo, a push or a rollback the admin's — with `ui redo` and `ui history` beside it; the owner's open pages swap at once.
+
+```bash
+synapse --url wss://app-test.menger.sh/ws --as builder menger ui tag --version a8bb0885 --label 'the loud chip' --tags demo,chip
+synapse --url wss://app-test.menger.sh/ws --as builder menger ui undo
+```
+
 </m-field>
 
 A frontend ticket with none of the three is not finished. The pitch example's stretch throttle and hill, [../ticketing/examples/pitch.md](../ticketing/examples/pitch.md), are the components the ticket is about, running in the scope that asks for them, reading the tracker (drawn by `bin/build`, they read the example's own `tracker:` rows: `shots/pitch.png`).
