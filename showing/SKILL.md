@@ -112,7 +112,7 @@ synapse --url wss://app-test.menger.sh/ws --as builder menger ui show --to '#/c/
 synapse --url wss://app-test.menger.sh/ws --as builder menger ui sessions
 ```
 
-What you put live you can name and take back (FRAME-52): `ui tag --version <hash, 6+ of its hex, or a label> --label "…" --tags demo` names a version (every version flag then takes the label), and `ui undo` moves the live pointer back to where your last move found it — an `author` of anyone's is an editor's to undo, a push or a rollback the admin's — with `ui redo` and `ui history` beside it; the owner's open pages swap at once.
+What you put live you can name and take back (FRAME-52): `ui tag --version <hash, 6+ of its hex, or a label> --label "…" --tags demo` names a version (every version flag then takes the label), and `ui undo` reverses the service's last move of the live pointer, whoever made it — yours, the owner's, another agent's — so read `ui history` first and pass the move you mean, `ui undo --seq N` (refused `not_the_top` when something moved since); an `author` is an editor's to undo, a push or a rollback the admin's (`may` on the marked row says which), with `ui redo` beside it; the owner's open pages swap at once.
 
 ```bash
 synapse --url wss://app-test.menger.sh/ws --as builder menger ui tag --version a8bb0885 --label 'the loud chip' --tags demo,chip
