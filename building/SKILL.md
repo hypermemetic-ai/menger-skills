@@ -1,6 +1,6 @@
 ---
 name: building
-description: Use when implementing a ticket the owner has promoted to Ready. Produces the build carried across menger's lifecycle with its history on the ticket — Coding the moment work starts with the branch on the timeline, In Review in the commit that finishes it with the commits linked and the gate shown as results, Complete when the work runs on the lowest environment (the merge, where there is none) — in its own worktree, with divergence noted where reality differed, and, for a frontend, the thing itself in the body or a screenshot of it running.
+description: Use when implementing a ticket the owner has promoted to Ready; a work request from the owner is that promotion. Produces the build carried across menger's lifecycle with its history on the ticket — Coding the moment work starts with the branch on the timeline, In Review in the commit that finishes it with the commits linked and the gate shown as results, Complete when the work runs on the lowest environment (the merge, where there is none) — in its own worktree, with divergence noted where reality differed, and, for a frontend, the thing itself in the body or a screenshot of it running.
 ---
 
 <m-summary>
@@ -131,7 +131,7 @@ When reality differed from the design — a call site the ticket did not foresee
 
 | rule | why |
 | -- | -- |
-| no work on a Draft or Pending ticket — tickets are born Draft | Ready is the owner's word |
+| no work on a Draft or Pending ticket — tickets are born Draft | Ready is the owner's word, and a work request is that word |
 | no manual deploys: entering In Review deploys test; prod is the owner's | the owner tolerates a rollback on test, never a pile of unshipped review (DEPLOY-48) |
 | Coding the moment work starts; In Review in the commit that finishes it | the tracker shows where the work is |
 | one worktree per ticket, named for it | no work outside its ticket goes in its commits |

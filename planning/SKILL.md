@@ -75,7 +75,7 @@ The scope cites the execution's `dag` and each build's `problem` or `intended-us
 
 ### Everything Draft.
 
-Every ticket is born `Draft` (owner, 2026-10-23); the owner promotes a Draft or Pending ticket to Ready.
+Every ticket is born `Draft` (owner, 2026-10-23); the owner promotes a Draft or Pending ticket to Ready. A work request from the owner is that promotion, so the agent sets what it filed Ready and builds; in a deep planning session, with no diff requested, tickets stay Draft.
 
 <m-code lang="bash" why="the owner promotes; the agent never does">
 
