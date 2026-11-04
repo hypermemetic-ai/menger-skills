@@ -93,7 +93,7 @@ The first beat of the scope example, [examples/scope.md](examples/scope.md) (its
 8. **The contract is tables the agent can check.** Provides and consumes name strong types and the ticket that produces each; acceptance is numbered and checkable by running, reading or counting; what must not change is listed.
 9. **Specify behaviour, not code** — except in a walk, where the code *is* the behaviour shown, only the lines that prove the step.
 10. **Confidence is stated**; `low` means a spike blocks the build.
-11. **Created Draft.** Every ticket but a doc is born `Draft` (owner, 2026-10-23; it was `Idea`); the owner promotes a Draft or Pending ticket to Ready, and work does not start on either. A doc is born `Doc` and has no lifecycle.
+11. **Created Draft.** Every ticket but a doc is born `Draft` (owner, 2026-10-23; it was `Idea`); the owner promotes a Draft or Pending ticket to Ready, and work does not start on either. A work request from the owner is that promotion: the agent files the tickets, sets them Ready and builds, with no second go-ahead. In a deep planning session, with no diff requested, tickets stay Draft. A doc is born `Doc` and has no lifecycle.
 12. **Look at it before you say it is done.** Screenshot the ticket in both themes and read it as the owner will; a diagram that failed to draw, a figure in a literal colour, a duplicated badge, a wall of prose above the fold — fix them before the look is spent.
 13. **One ticket, one decision.** Two open options is a spike or a decision input, not a build.
 14. **A ticket that cannot be built as written is patched, not worked around.** Add the finding to `evidence`, state the options, return it to Pending for the owner.
