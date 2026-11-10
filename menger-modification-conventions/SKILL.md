@@ -25,13 +25,16 @@ menger's whole interface is components the plexus-ui engine draws at run time. A
 
 A change to the theme's tokens, the routes or the sections' defaults is part of the bundle and counts.
 
+**A component, not a route.** The owner, 2026-11-10, of a builder that had been given a page of its own: *"why is it a whole route and not just a component?"* What is asked for is the component. It goes where the work already is: a tag in the ticket or document it belongs to, or a section of an existing page. A route, and the thin page component that only places it, is added when the thing has no ticket, document or page to sit in, or when it must be reached by an address; the reason is said in the reply and on the ticket. Never add a route because the component was easier to test or to open that way.
+
 </m-field>
 
 <m-cases data-field="decided-shape" label="Is it one?">
 
 | the change | a runtime component? | so |
 | -- | -- | -- |
-| a new page, panel, control or view | yes: a component and a route or a section | build it |
+| a new panel, control, view or tool | yes: a component, placed by a tag in a body or in a section of a page that exists | build it; no route |
+| a new page with an address of its own | yes, but a route is not the default | say why a tag or a section will not do, then build it |
 | a change to how an existing page looks or behaves | yes: an edit to that page's component | build it |
 | something shown inside a ticket's or a document's body | yes: a bundle component placed by its tag (native), or an authored one (framed, reads only) | build it; say which of the two it is |
 | a new method a component needs from a service | the component is; the method is a backend change of its own | build both, say so, and ship the service before the push that uses it |
@@ -59,6 +62,7 @@ A mixed change is split: the component part proceeds, the rest waits. Never fold
 <m-field data-field="edges" label="Must not do">
 
 - Build a frontend change as anything but a component because it is quicker.
+- Give a component a route, or a page that only wraps it, when a tag or a section would place it.
 - Edit the framework's checkout to make a component possible; that is a framework change, raised and released as one.
 - Reach a service from the page by any path but the host's (`bus`, `live`), or call a method the component's `uses` does not name.
 - Describe an exception only in the final summary, or only in a commit message.
@@ -70,6 +74,7 @@ A mixed change is split: the component part proceeds, the rest waits. Never fold
 
 - Every file the change touched for the interface is a component's source, the routes, the sections or the theme.
 - Each new or changed component names its `uses`, and the push took them.
+- No route or wrapper page was added without its reason said to the owner.
 - It was seen drawn by the engine: a browser case, or the page on the test environment.
 - Anything else in the change was raised before it was built, is on its ticket for the owner, and the reply to the owner names it.
 
