@@ -97,6 +97,7 @@ The first beat of the scope example, [examples/scope.md](examples/scope.md) (its
 12. **Look at it before you say it is done.** Screenshot the ticket in both themes and read it as the owner will; a diagram that failed to draw, a figure in a literal colour, a duplicated badge, a wall of prose above the fold — fix them before the look is spent.
 13. **One ticket, one decision.** Two open options is a spike or a decision input, not a build.
 14. **A ticket that cannot be built as written is patched, not worked around.** Add the finding to `evidence`, state the options, return it to Pending for the owner.
+15. **Lead with the sentence, fold the rest.** A long body — a plan's lines of work, a map, a status — is a list of `<m-details summary="One short sentence.">`, each line one sentence a reader can stop at (with its `status` and its `ticket`), its detail folded under it ([surface](../surface/SKILL.md)). The owner, 2026-11-10: "I really don't like how you've written so much. makes it hard to follow".
 
 </m-field>
 
