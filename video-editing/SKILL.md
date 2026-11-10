@@ -47,7 +47,7 @@ A film is a pure function from time to a frame, plus a score derived from the sa
 
 | | the canvas pipeline | fframes |
 | -- | -- | -- |
-| where | `~/.cache/plexus-film/src/` — copy it to a new directory, never edit it in place | `~/.cache/plexus-film/fframes-spike/sample/` is the working start |
+| where | `~/.cache/plexus-film/src/` — copy it to a new directory, never edit it in place | `~/.cache/plexus-film/craft/` is the working start: `build.sh`, the house helpers in `base/src/house.rs`, the tools in `tools/` |
 | a frame is | `render(ctx, t)` on an HTML canvas (`scene.js`) | an SVG tree returned by a Rust function (`svgr!`, `timeline!`) |
 | rendered by | headless Chromium screenshots, in parallel segments, ffmpeg (`render.mjs`) | Skia on the GPU, or its CPU renderer; ffmpeg's libraries linked in |
 | speed measured here | about 36 frames/s (a 108 s film in 181 s) | about 236 frames/s on the GPU for a simple scene |
@@ -55,9 +55,33 @@ A film is a pure function from time to a frame, plus a score derived from the sa
 | edit loop | reload | about 4 s from an edit to a frame (a debug rebuild) |
 | what it lacks | speed | the 3D camera of the reference; an additive blend (use `screen`) |
 
-**fframes is the way for a new film** (the owner, 2026-11-10: "I would like to not build all the rendering components"). It does not work as published on this machine; four workarounds, none needing root, are in the spike and belong in one build script: the clang resource directory for bindgen; no `fframes_native_player` (it needs `alsa-devel`); every fframes crate pinned with `=` to one version (1.4.0 is broken by its own 1.4.1 helpers) and `Cargo.lock` kept; no built-in H.264 (the prebuilt ffmpeg wants a libx264 this system does not ship) — render lossless, then encode with the system ffmpeg (`-crf 19 -preset slow -tune grain`).
+**fframes is the way for a new film** (the owner, 2026-11-10: "I would like to not build all the rendering components"). It does not work as published on this machine; four workarounds, none needing root, are in one build script (`~/.cache/plexus-film/craft/build.sh`: `build`, `render CLIP VAR`, `sheet`, `pair`): the clang resource directory for bindgen; no `fframes_native_player` (it needs `alsa-devel`); every fframes crate pinned with `=` to one version (1.4.0 is broken by its own 1.4.1 helpers) and `Cargo.lock` kept; no built-in H.264 (the prebuilt ffmpeg wants a libx264 this system does not ship) — render lossless, then encode with the system ffmpeg (`-crf 19 -preset slow -tune grain`). **Renumber the frames when encoding** (`-vf "setpts=N/(60*TB)" -r 60 -fps_mode cfr`): the lossless file's time base is a millisecond, and without it ffmpeg silently drops frames — a 7.00 s clip came out 6.75 s, everything after a drop early and the sound out of step. Count the frames of the final file.
+
+What fframes lacks is faked: an additive glow is `mix-blend-mode:screen` with radial-gradient sprites; depth is a group's `feGaussianBlur` (no visible render cost on the GPU) with a parallax factor per layer; the 3D camera is a group's translate and scale; a synthesiser is `tools/synth.py` writing the WAV. There is no live preview: `frame`, `strip`, `onion` and the sheets are the look.
 
 Fonts are the house's Inter and JetBrains Mono when installed; do not download fonts or anything else while rendering.
+
+</m-field>
+
+<m-field data-field="craft" label="Craft">
+
+Each rule was tested as a pair of clips, the same beat with and without it (`~/.cache/plexus-film/craft/<rule>/sheet.jpg`, A above B; 2026-11-10). They are in the order of how much they changed what a frame says at a glance. `craft/headline/sheet.jpg` is the moment "a peer answers as you" both ways: read it before writing a beat.
+
+- **The picture carries the claim.** Whatever the caption claims is visible in a frame 480 px wide: in the subject's colour, its shape, or a line the eye can follow. A small label or a ring alone is not there at that size. Colour is identity: the caller's colour travels with the caller's token, and what it reaches takes that colour.
+- **One story, one subject.** While a beat tells one story, everything else drops to 30% or less within 0.7 s, and what the last chapter left on screen (findings, counters) leaves within 0.4 s.
+- **One new motion at a time.** At most one motion starts every 500 ms; a caption settles 400 ms before anything else starts. Spread a beat's events over the beat — never all at once and then a hold.
+- **The camera follows something.** A pan follows a pulse or a line the eye is already on; no frame of a move is empty. Otherwise cut.
+- **Chapters hand over.** One element stays on screen across a chapter change and moves, eased, in about 0.9 s to its new place. Never a fade through black.
+- **Type.** Nothing under 24 px at 1080p: names 30, sub-lines 22–24, the chapter mark 24, the caption 52–56, all inside the middle 90% of the frame. Cut a sub-line before shrinking it.
+- **A caption arrives whole** — a fade with a 14 px rise, 400 ms at most — never word by word, and is fully legible for at least 2.5 s plus 0.06 s a character.
+- **Easing.** Entering: ease out, 300–500 ms (cubic-bezier 0, 0, 0.3, 1). Leaving: ease in, 200–300 ms (0.2, 0, 1, 0.9). Moving in place: ease in and out. Never linear, never a second for everything. Most of the gain is the shorter time.
+- **Stagger in causal order**, about a sixth of the entrance apart — 300 ms or more for a neuron that takes 2 s to grow. 120 ms does not read.
+- **Rest.** 0.8–1.2 s with nothing new between beats.
+- **End on the motif at full strength**, the takeaway held to the last frame.
+- **Sound lands with its picture.** An event's sound starts on the frame its picture lands, within a frame; never more than 45 ms early. A sound is for the arrival, not the launch. Both come from one list of events. Master by one linear gain.
+- **The check:** a contact sheet at 480 px a frame beside the cut before. A frame you cannot say what happened in fails.
+
+Tried and of little use in stills: a blur for depth (handsome, small), a 120 ms stagger. Not yet tried: springs, ducking a score under an event, a person listening for the sound's timing.
 
 </m-field>
 
