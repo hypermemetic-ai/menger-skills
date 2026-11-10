@@ -1,6 +1,6 @@
 ---
 name: video-editing
-description: Use when a ticket or a document should carry a film — a rendered video with a score that tells what happened or how something works. Says when a film is worth its cost against a diagram or an in-page component, how one is made here (the canvas pipeline, and fframes), how it is checked by looking, how it is kept true, and how it is put in a body.
+description: Use when a ticket or a document should carry a film — a rendered video with a score that tells what happened or how something works. Says when a film is worth its cost against a diagram or an in-page component, how one is made here (the canvas pipeline, and fframes), how it is checked by looking, how it is kept true, and how it is put in a body. Also the second kind of film: an argument for people outside, cut upright for a phone's feed as a thread of videos and saved as a draft, never posted.
 ---
 
 <m-summary>
@@ -21,6 +21,7 @@ description: Use when a ticket or a document should carry a film — a rendered 
 | counts that change round by round; one mechanism with a knob | an in-page `component`, fed by a small data table | 1.5–3k once, a few numbers per update | cheap to update; draws from the theme |
 | a milestone: what happened, why it mattered, what is next | a rendered film, 60–100 s, with a score | 200–300k and 15–25 minutes | watched once, remembered; the only form with sound and pacing |
 | a small change to a film that exists | edit its scene, render again | a few thousand tokens and the render | the scene is code |
+| an argument for people outside: why something is hard, what we think of it | an argument film, cut for a phone's feed (below) | a film's cost, then 30–60 minutes for the cuts | it is watched on a phone, by a stranger, with the sound off as often as on |
 
 A film is never the only place a fact lives: the document under it says the same in words and tables.
 
@@ -37,7 +38,7 @@ The reference is *Plexus RPC, the vision* (PLEXUS-40) and *Plexus — the work* 
 - Colour means something and is used sparingly: cyan and white for healthy, violet for your own service, red for wrong or refused, green for closed or fits, amber for someone else's.
 - Slow and sure: things ease in and out, nothing flashes, a caption stays long enough to read — at least 2.5 s plus 0.06 s a character.
 
-Other looks of the same story exist (`~/.cache/plexus-film/styles/`: keynote, blueprint, crt, math, biolum). Use the main look unless the owner names another.
+Other looks of the same story exist (`~/.cache/plexus-film/styles/`: keynote, blueprint, crt, math, biolum). Use the main look unless the owner names another. This look is *neurons* in [video-styles](../video-styles/SKILL.md), which has the argument film's look, *paper*, beside it.
 
 </m-field>
 
@@ -85,6 +86,29 @@ Tried and of little use in stills: a blur for depth (handsome, small), a 120 ms 
 
 </m-field>
 
+<m-field data-field="decided-shape" label="An argument for a feed">
+
+The second kind of film (the owner, 2026-11-09 and -10). A milestone film reports what happened; an argument film makes one claim to people who do not know us, and is watched on a phone. The first was "Why these tools suck": eleven scenes, each a step that works when it is small and then the same step at the size it really runs at, a counter in the corner, and a question at the end with our mark. Its working directory is `~/.cache/showreel-work/phone/`. What it looks like is its own page: [video-styles](../video-styles/SKILL.md), the look called paper.
+
+1. **Nothing real on screen but the claim.** The interfaces are made up and belong to no product; the headlines say the argument in plain words, one line a beat; nothing explains how our own thing works. It ends on a question, our mark and the handle.
+2. **Upright, 1080×1350.** Measured in a signed-in feed at a phone's width (2026-11-10): a 16:9 video is shown 173 high, a square one 307, a 4:5 one 385, at the same width and uncropped. The composer and the drafts list show any video as a small tile: judge a cut in the feed's shape, never there. A wide cut (`all-wide.sh`) is kept for a desk.
+3. **Type a phone can read.** In a frame 1080 wide a pixel is about a third of a point on a phone: body text 30 px or more, a headline 70–80 px on one or two lines, a counter 34 px. The wide film's 18 px text is 4 pt there and cannot be read.
+4. **Reframe, do not rewrite.** A scene of the wide film is mounted as it is, at its own size, under a camera: keyframes of zoom and place (`cam.mjs`). The camera stays close on what the beat is about, follows the action across, and pulls back only for the beat where it overflows. The scene's headlines and counter are hidden in the picture and drawn again by the frame, large. Only a scene whose subject is text (a chat, a list) is laid out again by hand.
+5. **Pace for a reader.** Leave a pause, with something that waits (three dots), between an ask and its answer; type the first answers at reading speed and hold a thing that is to be read (a haiku: four seconds to type, three more held). Speed is shown by a ramp the eye can follow: each pause shorter and each answer faster than the last (1.2 s and 18 characters a second, down to 0.15 s and 800). A move that brings the subject in is one eased motion, finished before there is anything to read.
+6. **Thirty seconds a video, three to a thread.** Scenes are joined until each video runs 30 s or more (the owner: "at least 30 seconds per video"); a film of two minutes is three posts, the first standing alone. Each post's text says what its picture does not, in two or three sentences, in the owner's own words where there are any.
+7. **The sound follows the cut.** A scene that is retimed gets its score written again on the new timeline by the film's own score code (`score-wide.mjs`); sound cut from the wide film no longer lands on anything.
+8. **Encode for a feed.** H.264 high, 60 fps, AAC, `+faststart`, and the standard colour range: frames taken as screenshots are full range, which a phone shows with grey blacks (`scale=in_range=full:out_range=tv`, bt709).
+9. **It is saved as a draft and never posted.** The thread is a YAML file (`account`, then `posts`: `text` and `video`); `xdraft.mjs thread.yaml` writes it into the site's own composer, in a browser the owner signed into by hand, and answers its "Save post?" with Save. `--dry` says what it would write. Posting is the owner's, from his drafts. No password, cookie or key is read or kept.
+
+```sh
+cd ~/.cache/showreel-work/phone
+node render.mjs chat --stills 3,8,13,20     # a scene's frames, to read before rendering
+./all-tall.sh                               # every scene upright, the three videos, the whole film (./all-tall.sh chat: one scene again)
+node xdraft.mjs out/post-tall/thread.yaml   # the thread, into the drafts
+```
+
+</m-field>
+
 <m-walk label="The steps">
 
 1. **Write the story first, as a table**: chapter, the beats in it, each beat's caption and sub-line, and what is on screen. Seven chapters at most; one idea a beat. Take every fact from the tracker and name the ticket it comes from.
@@ -103,6 +127,7 @@ Tried and of little use in stills: a blur for depth (handsome, small), a 120 ms 
 - Every number is a ticket's. Nothing is invented to fill a frame; an illustrative line (a made-up `GET /user` on a page glyph) is plainly decoration, never a claim.
 - If the picture simplifies, the simplification is not a different fact: check each beat against the ticket it names (in *the work*, the same curl answers 403 with a loopback `Host` and 421 with a foreign one — the film shows the request that was really sent).
 - Nothing is rendered from the network but the two house fonts, and nothing about the machine leaves it.
+- An argument film may show interfaces and counts that are made up, drawn so that they are no real product's. A number said as our own, in the picture or in a post's text, is still the real one, with its date.
 
 </m-field>
 
@@ -125,6 +150,6 @@ synapse --url wss://app.menger.sh/ws --as builder -o out.txt -p @p.json menger u
 
 </m-field>
 
-<m-callout type="warning" headline="Must not do">A film in place of the words under it. A film for something that changes weekly. A renderer of our own. A command typed on screen that was never run. A render that fetches anything but the fonts. An in-page component left unauthored, or authored into the live bundle.</m-callout>
+<m-callout type="warning" headline="Must not do">A film in place of the words under it. A film for something that changes weekly. A renderer of our own. A command typed on screen that was never run. A render that fetches anything but the fonts. An in-page component left unauthored, or authored into the live bundle. A cut for a feed judged in the composer's tile. A thread posted for the owner.</m-callout>
 
-<m-field data-field="exit" label="Done when">The file plays in the body with sound; its contact sheet reads beside the reference's; `ffprobe` says 1080p, 60 fps, a sound stream; every command and number on screen has a ticket behind it; and the report says the length, the size, the loudness, what it cost, and what its maker would redo.</m-field>
+<m-field data-field="exit" label="Done when">The file plays in the body with sound; its contact sheet reads beside the reference's; `ffprobe` says 1080p, 60 fps, a sound stream; every command and number on screen has a ticket behind it; and the report says the length, the size, the loudness, what it cost, and what its maker would redo. A cut for a feed is done when its videos are upright, 30 s or more each, read at a phone's size in their stills, and sit in the owner's drafts unposted.</m-field>
