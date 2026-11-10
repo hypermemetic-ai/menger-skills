@@ -2,7 +2,7 @@
 
 <m-answer data-field="answer">**How work is ticketed, planned, asked, built and reported on menger — the methodology written from the ground up for the surface it runs on, in menger's own terms, and shown on that surface: every skill here is a file in this repository, its worked examples built into it and drawn by menger.**</m-answer>
 
-<m-stat value="11">skills</m-stat>
+<m-stat value="12">skills</m-stat>
 <m-stat value="6">forms, one per kind</m-stat>
 <m-stat value="4">worked examples, built in</m-stat>
 
@@ -54,6 +54,7 @@ A request is placed before it is written; a ticket is filed when someone is abou
 | [building](building/SKILL.md) | a build carried Ready → Coding → In Review with its branch, gate and commits on the ticket | implementing a promoted ticket |
 | [showing](showing/SKILL.md) | the right picture: a diagram, a figure, a walk, a playable, the component itself, a screenshot | any body; always for a frontend |
 | [reporting](reporting/SKILL.md) | a doc that answers first and hides nothing | a spike's result, a survey, a status |
+| [video-editing](video-editing/SKILL.md) | a film: when it is worth its cost, how it is made, checked, kept true and put in a body | a milestone a person should watch once |
 | [theming](theming/SKILL.md) | a project's look, as a theme ticket adopted at a reach | a shortcode with a reader of its own |
 | [systems](systems/SKILL.md) | what a ticket shows for each kind of system — there is no one size | a backend, a frontend, a CLI, a schema, a pipeline, a method |
 | [reaching](reaching/SKILL.md) | the synapse calls a writer and a builder use against menger | any write to the tracker |
