@@ -48,7 +48,8 @@ The order is the reader's arc ([ticketing](../ticketing/SKILL.md)); the componen
 | record an answer | `<m-answer data-field="answer" by date>DECIDED: …</m-answer>` in a decision; a doc's one-sentence answer in its summary | the banner hides the word DECIDED so it is not said twice |
 | point at a ticket | `<m-ticket ref="ID" full>` | live status; `full` adds the title |
 | zoom into a ticket | `<m-cite ref="ID" field="standing\|problem\|dag\|…">` or `<m-cite ref="ID#elementid">` | a live window, drawn by the host in the cited ticket's own frame and theme; inputs in it are display only; two deep at most |
-| set something off | `<m-callout type="note\|warning\|risk" headline>`; `<m-details summary open>` | a callout is for what must not be missed; details fold what may be skipped |
+| set something off | `<m-callout type="note\|warning\|risk" headline>` | a callout is for what must not be missed |
+| fold what may be skipped | `<m-details summary="One short sentence." status="done\|running\|next\|blocked\|needs-you" ticket="ID" open>` on a line of its own, a blank line, what it opens to, a blank line, `</m-details>` | drawn as one line: a disclosure mark, the status's dot, the sentence — inline markdown, so an id in it is a pill and `code` is code — and `ticket`'s pill at the line's end; closed unless `open`; several in a row read as a list. Inside is anything a body holds. Lead with the sentence, fold the rest: a line of work is one sentence a reader can stop at |
 | label a fact | `<m-badge status\|kind\|confidence\|severity\|tone>` | the word is always written |
 | name a commit | `<m-commit ref="repo@hash">`, or a code span holding only `repo@hash` | drawn as a pill |
 | show progress live | `<m-ring id>`, `<m-dial scope\|filter size>`, `<m-sponge scope\|filter depth size compact>` | read the tracker once per frame and follow `watch` |

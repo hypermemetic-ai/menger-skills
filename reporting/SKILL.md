@@ -98,6 +98,7 @@ Answer, question, numbers, sources, and what is missing — in that order, so a 
 5. **Keep rejected guesses** — *heuristic proposed X · inspection rejected it · why* — so the next pass does not re-derive them.
 6. **Say what would change it.** The commands that re-measure; the spike that would close a BLIND.
 7. **File it where it came from.** A child doc of the spike, the execution, the survey's scope. Not a file in the repository.
+8. **Lead with the sentence, fold the rest.** Each finding, line of work or step is one short sentence a reader can stop at; its evidence and detail are folded under it, `<m-details summary="…" status ticket>` ([surface](../surface/SKILL.md)). A report that must be read whole to be followed is too long.
 
 </m-field>
 
